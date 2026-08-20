@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #7d8460;
+    color: #ffffff;
+}
+
+.pagina {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.card {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 70px 50px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.20);
+
+    animation: aparecer 1s ease;
+}
+
+.icone {
+    font-size: 55px;
+
+    margin-bottom: 25px;
+
+    animation: flutuar 2.5s ease-in-out infinite;
+}
+
+h1 {
+    font-size: 38px;
+
+    font-weight: normal;
+
+    margin-bottom: 25px;
+}
+
+.principal {
+    font-size: 22px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.secundaria {
+    font-size: 17px;
+
+    opacity: 0.9;
+}
+
+.linha {
+    width: 80px;
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.6);
+
+    margin: 35px auto 20px;
+}
+
+.assinatura {
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.9;
+}
+
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes flutuar {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 50px 25px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .principal {
+        font-size: 19px;
+    }
+
+}

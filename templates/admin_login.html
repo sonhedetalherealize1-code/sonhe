@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área Administrativa | Sonhe.Detalhe.Realize</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #969d78 0%,
+                    #7d8460 45%,
+                    #646b4d 100%
+                );
+
+            color: #ffffff;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+            max-width: 440px;
+
+            animation: aparecer 1s ease;
+
+        }
+
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .logo h1 {
+
+            font-size: 27px;
+
+            font-weight: normal;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .logo p {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.8;
+
+        }
+
+
+        .card {
+
+            padding: 45px 40px;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.13);
+
+            border: 1px solid rgba(255, 255, 255, 0.30);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.22);
+
+        }
+
+
+        .icone {
+
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            font-size: 27px;
+
+        }
+
+
+        h2 {
+
+            text-align: center;
+
+            font-size: 27px;
+
+            font-weight: normal;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .descricao {
+
+            text-align: center;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            opacity: 0.85;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .campo {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border: none;
+
+            outline: none;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            color: #4f543c;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            transition: 0.3s;
+
+        }
+
+
+        .campo input:focus {
+
+            box-shadow:
+                0 0 0 3px rgba(255, 255, 255, 0.22);
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .botao {
+
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            color: #596043;
+
+            background: #f4f0e6;
+
+            transition: 0.3s;
+
+        }
+
+
+        .botao:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.20);
+
+            background: #ffffff;
+
+        }
+
+
+        .erro {
+
+            margin-bottom: 20px;
+
+            padding: 12px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            background: rgba(150, 40, 40, 0.25);
+
+            border: 1px solid rgba(255, 180, 180, 0.35);
+
+            font-size: 14px;
+
+        }
+
+
+        .rodape {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            opacity: 0.65;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .card {
+
+                padding: 35px 25px;
+
+            }
+
+            .logo h1 {
+
+                font-size: 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <div class="logo">
+
+            <h1>SONHE.DETALHE.REALIZE</h1>
+
+            <p>ÁREA ADMINISTRATIVA</p>
+
+        </div>
+
+
+        <div class="card">
+
+
+            <div class="icone">
+                🔐
+            </div>
+
+
+            <h2>Bem-vinda</h2>
+
+
+            <p class="descricao">
+
+                Acesse o painel para acompanhar
+                os sonhos e solicitações recebidas.
+
+            </p>
+
+
+            {% if erro %}
+
+                <div class="erro">
+
+                    {{ erro }}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Digite seu usuário"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao"
+                >
+
+                    Entrar no painel
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+        <div class="rodape">
+
+            Sonhe.Detalhe.Realize © 2026
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

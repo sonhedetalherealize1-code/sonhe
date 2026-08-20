@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ cliente.nome }} | Sonhe.Detalhe.Realize
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f0e6;
+
+            color: #4d523b;
+
+        }
+
+
+        /* ==================================
+           CABEÇALHO
+        ================================== */
+
+        .topo {
+
+            min-height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            color: white;
+
+            background: #737a57;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.10);
+
+        }
+
+
+        .marca h1 {
+
+            font-family: Georgia, serif;
+
+            font-weight: normal;
+
+            font-size: 22px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        .marca span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            opacity: 0.75;
+
+        }
+
+
+        .voltar {
+
+            padding: 9px 18px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            color: white;
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            font-size: 13px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .voltar:hover {
+
+            background: rgba(255,255,255,0.15);
+
+        }
+
+
+        /* ==================================
+           CONTEÚDO
+        ================================== */
+
+        .conteudo {
+
+            width: 90%;
+
+            max-width: 1000px;
+
+            margin: 50px auto;
+
+        }
+
+
+        .titulo {
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .titulo h2 {
+
+            font-family: Georgia, serif;
+
+            font-weight: normal;
+
+            font-size: 35px;
+
+            color: #5f6547;
+
+        }
+
+
+        .titulo p {
+
+            margin-top: 8px;
+
+            color: #858979;
+
+        }
+
+
+        /* ==================================
+           CARD PRINCIPAL
+        ================================== */
+
+        .card {
+
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 35px rgba(65,70,45,0.08);
+
+            border: 1px solid #e6e1d5;
+
+        }
+
+
+        .card-topo {
+
+            padding: 30px;
+
+            background: #f9f8f3;
+
+            border-bottom: 1px solid #e9e6dc;
+
+        }
+
+
+        .cliente-nome {
+
+            font-family: Georgia, serif;
+
+            font-size: 30px;
+
+            font-weight: normal;
+
+            color: #626a49;
+
+        }
+
+
+        .cliente-evento {
+
+            margin-top: 8px;
+
+            color: #858979;
+
+        }
+
+
+        .status {
+
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            color: #657043;
+
+            background: #e8ecd9;
+
+        }
+
+
+        /* ==================================
+           INFORMAÇÕES
+        ================================== */
+
+        .informacoes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+        }
+
+
+        .campo {
+
+            padding: 25px 30px;
+
+            border-bottom: 1px solid #eeeae1;
+
+        }
+
+
+        .campo:nth-child(odd) {
+
+            border-right: 1px solid #eeeae1;
+
+        }
+
+
+        .campo-titulo {
+
+            margin-bottom: 8px;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: #949787;
+
+        }
+
+
+        .campo-valor {
+
+            font-size: 16px;
+
+            color: #4f553c;
+
+            line-height: 1.5;
+
+            word-break: break-word;
+
+        }
+
+
+        .campo-sonho {
+
+            grid-column: span 2;
+
+        }
+
+
+        .sonho {
+
+            padding: 25px 30px;
+
+            background: #faf9f5;
+
+            border-top: 1px solid #eeeae1;
+
+        }
+
+
+        .sonho-texto {
+
+            margin-top: 12px;
+
+            font-family: Georgia, serif;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            color: #656a53;
+
+        }
+
+
+        /* ==================================
+           AÇÕES
+        ================================== */
+
+        .acoes {
+
+            display: flex;
+
+            gap: 15px;
+
+            padding: 30px;
+
+            border-top: 1px solid #eeeae1;
+
+        }
+
+
+        .botao {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 13px 22px;
+
+            border-radius: 25px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .botao-voltar {
+
+            color: #636a4c;
+
+            background: #eeeadd;
+
+        }
+
+
+        .botao-voltar:hover {
+
+            background: #e2dfd1;
+
+        }
+
+
+        .botao-whatsapp {
+
+            color: white;
+
+            background: #78805b;
+
+        }
+
+
+        .botao-whatsapp:hover {
+
+            background: #616947;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        /* ==================================
+           RESPONSIVO
+        ================================== */
+
+        @media (max-width: 700px) {
+
+            .informacoes {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .campo:nth-child(odd) {
+
+                border-right: none;
+
+            }
+
+
+            .campo-sonho {
+
+                grid-column: span 1;
+
+            }
+
+
+            .acoes {
+
+                flex-direction: column;
+
+            }
+
+
+            .botao {
+
+                width: 100%;
+
+            }
+
+
+            .titulo h2 {
+
+                font-size: 28px;
+
+            }
+
+
+            .cliente-nome {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================
+         CABEÇALHO
+    ================================== -->
+
+    <header class="topo">
+
+
+        <div class="marca">
+
+            <h1>
+                SONHE.DETALHE.REALIZE
+            </h1>
+
+            <span>
+                PAINEL ADMINISTRATIVO
+            </span>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('admin_painel') }}"
+            class="voltar"
+        >
+
+            ← Voltar para clientes
+
+        </a>
+
+
+    </header>
+
+
+
+    <!-- ==================================
+         CONTEÚDO
+    ================================== -->
+
+    <main class="conteudo">
+
+
+        <div class="titulo">
+
+            <h2>
+                Detalhes da cliente
+            </h2>
+
+            <p>
+                Informações enviadas através do formulário.
+            </p>
+
+        </div>
+
+
+
+        <section class="card">
+
+
+            <!-- ==================================
+                 CABEÇALHO DO CLIENTE
+            ================================== -->
+
+            <div class="card-topo">
+
+                <h1 class="cliente-nome">
+
+                    {{ cliente.nome }}
+
+                </h1>
+
+
+                <p class="cliente-evento">
+
+                    {{ cliente.evento }}
+
+                </p>
+
+
+                <span class="status">
+
+                    {{ cliente.status or "Novo" }}
+
+                </span>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 INFORMAÇÕES
+            ================================== -->
+
+            <div class="informacoes">
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        WhatsApp
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.whatsapp }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        Data do evento
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {% if cliente.data_evento %}
+
+                            {{ cliente.data_evento.strftime("%d/%m/%Y") }}
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        Cidade
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.cidade }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        Local do evento
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.local_evento or "Ainda não definido" }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        Convidados
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.convidados or "Não informado" }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <div class="campo-titulo">
+                        Serviço desejado
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.servico }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="campo campo-sonho">
+
+                    <div class="campo-titulo">
+                        Como conheceu a SDR?
+                    </div>
+
+                    <div class="campo-valor">
+
+                        {{ cliente.conheceu or "Não informado" }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================
+                 SONHO DA CLIENTE
+            ================================== -->
+
+            <div class="sonho">
+
+                <div class="campo-titulo">
+                    Conte um pouco sobre seu sonho
+                </div>
+
+                <div class="sonho-texto">
+
+                    {% if cliente.sonho %}
+
+                        "{{ cliente.sonho }}"
+
+                    {% else %}
+
+                        Nenhuma informação foi enviada.
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 AÇÕES
+            ================================== -->
+
+            <div class="acoes">
+
+
+                <a
+                    href="{{ url_for('admin_painel') }}"
+                    class="botao botao-voltar"
+                >
+
+                    ← Voltar
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/{{ cliente.whatsapp|replace('(', '')|replace(')', '')|replace(' ', '')|replace('-', '') }}"
+                    target="_blank"
+                    class="botao botao-whatsapp"
+                >
+
+                    💬 Conversar pelo WhatsApp
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
