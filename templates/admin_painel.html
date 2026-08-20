@@ -5,12 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Painel Administrativo</title>
+    <title>Painel Administrativo | SDR</title>
 
     <style>
 
@@ -21,470 +18,575 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f2;
-            color: #30352d;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f0e8;
+            color: #3f4738;
         }
 
-        /* =====================================================
-           LAYOUT
-        ===================================================== */
-
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px;
-        }
-
-        /* =====================================================
+        /* ==========================================
            CABEÇALHO
-        ===================================================== */
+        ========================================== */
 
-        .topo {
+        header {
+            background: #59634b;
+            color: white;
+            padding: 22px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            gap: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
-        .titulo-area h1 {
-            font-size: 30px;
-            font-weight: 600;
-            color: #3f4938;
+        .logo-area h1 {
+            font-size: 25px;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
-        .titulo-area p {
-            margin-top: 6px;
-            color: #777;
-            font-size: 14px;
+        .logo-area span {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            opacity: 0.75;
+            letter-spacing: 2px;
         }
 
         .logout {
-            text-decoration: none;
-            background: #59664f;
             color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 9px 16px;
+            border-radius: 30px;
+            transition: 0.3s;
             font-size: 14px;
-            transition: 0.2s;
         }
 
         .logout:hover {
-            background: #424d3b;
+            background: white;
+            color: #59634b;
         }
 
-        /* =====================================================
-           RESUMO
-        ===================================================== */
 
-        .resumo {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 35px auto;
+        }
+
+
+        /* ==========================================
+           TÍTULO
+        ========================================== */
+
+        .titulo {
             margin-bottom: 25px;
         }
 
-        .card-resumo {
-            background: white;
-            border-radius: 12px;
-            padding: 22px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .card-resumo .numero {
+        .titulo h2 {
             font-size: 30px;
-            font-weight: bold;
-            color: #56634d;
+            font-weight: 400;
+            color: #4e5943;
         }
 
-        .card-resumo .texto {
-            margin-top: 6px;
-            font-size: 13px;
-            color: #777;
+        .titulo p {
+            margin-top: 7px;
+            color: #7a806f;
+            font-size: 14px;
         }
 
-        /* =====================================================
-           FILTROS
-        ===================================================== */
+
+        /* ==========================================
+           BARRA DE PESQUISA
+        ========================================== */
 
         .filtros {
             background: white;
             padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-        }
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(62, 67, 52, 0.08);
 
-        .form-filtros {
             display: flex;
             gap: 12px;
+            align-items: center;
             flex-wrap: wrap;
+
+            margin-bottom: 25px;
         }
 
-        .campo-busca {
+        .campo-pesquisa {
             flex: 1;
-            min-width: 250px;
+            min-width: 230px;
         }
 
-        .campo-busca input,
+        .campo-pesquisa input,
         .campo-ordem select {
+
             width: 100%;
-            height: 44px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 0 14px;
-            font-size: 14px;
+
+            border: 1px solid #d9d5c9;
+
+            background: #faf9f5;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
             outline: none;
-            background: white;
+
+            color: #4b5144;
+
+            font-size: 14px;
+
+            transition: 0.3s;
         }
 
-        .campo-busca input:focus,
+        .campo-pesquisa input:focus,
         .campo-ordem select:focus {
-            border-color: #758267;
+            border-color: #7a866a;
+            box-shadow: 0 0 0 3px rgba(122,134,106,0.12);
         }
 
         .campo-ordem {
-            width: 220px;
+            width: 230px;
         }
 
         .btn-filtrar {
-            height: 44px;
+
             border: none;
-            background: #59664f;
+
+            background: #59634b;
+
             color: white;
-            border-radius: 8px;
-            padding: 0 22px;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
             cursor: pointer;
+
             font-size: 14px;
-            transition: 0.2s;
+
+            transition: 0.3s;
         }
 
         .btn-filtrar:hover {
-            background: #424d3b;
+            background: #46503b;
+            transform: translateY(-1px);
         }
 
-        .btn-limpar {
-            height: 44px;
+
+        /* ==========================================
+           RESUMO
+        ========================================== */
+
+        .resumo {
             display: flex;
-            align-items: center;
-            padding: 0 18px;
-            background: #eeeeeb;
-            color: #555;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .btn-limpar:hover {
-            background: #e2e2de;
-        }
+        .resumo-card {
 
-        /* =====================================================
-           TABELA
-        ===================================================== */
-
-        .tabela-container {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
+
+            padding: 17px 22px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 4px 20px rgba(62,67,52,0.06);
+
+            min-width: 150px;
         }
 
-        .tabela-topo {
-            padding: 20px 22px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .tabela-topo h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .tabela-wrapper {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 1050px;
-        }
-
-        th {
-            background: #f7f7f4;
-            color: #666;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            text-align: left;
-            padding: 15px;
-            border-bottom: 1px solid #e8e8e5;
-        }
-
-        td {
-            padding: 16px 15px;
-            border-bottom: 1px solid #eeeeeb;
-            font-size: 14px;
-            vertical-align: middle;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: #fafaf8;
-        }
-
-        /* =====================================================
-           CLIENTE
-        ===================================================== */
-
-        .cliente-nome {
-            font-weight: 600;
-            color: #41483c;
-        }
-
-        .cliente-id {
+        .resumo-card strong {
             display: block;
-            margin-top: 4px;
-            font-size: 11px;
-            color: #999;
+            font-size: 24px;
+            font-weight: 500;
+            color: #59634b;
         }
 
-        .whatsapp {
-            color: #59664f;
-            text-decoration: none;
+        .resumo-card span {
+            color: #858979;
+            font-size: 12px;
         }
 
-        .whatsapp:hover {
-            text-decoration: underline;
+
+        /* ==========================================
+           CLIENTES
+        ========================================== */
+
+        .clientes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(320px, 1fr));
+
+            gap: 20px;
         }
 
-        /* =====================================================
+
+        /* ==========================================
+           CARD
+        ========================================== */
+
+        .cliente-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 7px 30px rgba(62,67,52,0.08);
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: 0.3s;
+
+            animation: aparecer 0.45s ease;
+        }
+
+        .cliente-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 35px rgba(62,67,52,0.13);
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ==========================================
            STATUS
-        ===================================================== */
+        ========================================== */
 
         .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 12px;
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 20px;
+
+            padding: 6px 11px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+
             font-weight: 600;
-            white-space: nowrap;
+
+            letter-spacing: 0.3px;
         }
 
-        .status::before {
-            content: "";
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: currentColor;
+        .status.pendente {
+
+            background: #edf0e8;
+
+            color: #647055;
         }
 
-        .status.agendado {
-            background: #edf1e9;
-            color: #657259;
-        }
+        .status.atencao {
 
-        .status.proximo {
-            background: #f5f0df;
-            color: #9a8142;
+            background: #fff3d8;
+
+            color: #a87a22;
         }
 
         .status.urgente {
-            background: #f9e8e5;
-            color: #b65c4d;
-        }
 
-        .status.hoje {
-            background: #e9f1e8;
-            color: #4d774d;
+            background: #fbe2df;
+
+            color: #b65046;
         }
 
         .status.concluido {
-            background: #eeeeee;
+
+            background: #e8e8e8;
+
             color: #777;
         }
 
-        .status.sem-data {
-            background: #f0f0f0;
-            color: #888;
+        .status.erro {
+
+            background: #f5dddd;
+
+            color: #a33d3d;
         }
 
-        /* =====================================================
-           DATA DO EVENTO
-        ===================================================== */
 
-        .data-evento {
-            font-weight: 600;
-            color: #444;
+        /* ==========================================
+           NOME
+        ========================================== */
+
+        .cliente-nome {
+
+            font-size: 22px;
+
+            font-weight: 500;
+
+            color: #4d5843;
+
+            padding-right: 90px;
+
+            margin-bottom: 5px;
         }
 
-        .dias {
-            display: block;
-            margin-top: 4px;
-            font-size: 12px;
-            color: #888;
+        .cliente-evento {
+
+            font-size: 13px;
+
+            color: #888d80;
+
+            margin-bottom: 20px;
         }
 
-        .dias.urgente {
-            color: #b65c4d;
-            font-weight: 600;
+
+        /* ==========================================
+           INFORMAÇÕES
+        ========================================== */
+
+        .info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin: 11px 0;
+
+            font-size: 14px;
+
+            color: #62695b;
         }
 
-        .dias.hoje {
-            color: #4d774d;
-            font-weight: 600;
+        .info-icon {
+
+            width: 28px;
+
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f1eee6;
+
+            border-radius: 50%;
+
+            font-size: 13px;
         }
 
-        .dias.concluido {
-            color: #888;
+
+        /* ==========================================
+           CONTADOR
+        ========================================== */
+
+        .contador {
+
+            margin-top: 20px;
+
+            padding: 13px;
+
+            background: #f7f5ef;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: #727868;
         }
 
-        /* =====================================================
-           SERVIÇO
-        ===================================================== */
+        .contador strong {
 
-        .servico {
-            max-width: 180px;
-            color: #555;
+            color: #59634b;
+
+            font-size: 16px;
         }
 
-        /* =====================================================
-           AÇÕES
-        ===================================================== */
+        .contador.urgente {
+
+            background: #fff0ee;
+
+            color: #a34d44;
+        }
+
+        .contador.urgente strong {
+
+            color: #b65046;
+        }
+
+        .contador.concluido {
+
+            background: #eeeeee;
+
+            color: #777;
+        }
+
+
+        /* ==========================================
+           BOTÕES
+        ========================================== */
 
         .acoes {
+
             display: flex;
-            gap: 8px;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .btn {
+
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            padding: 11px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
         }
 
         .btn-ver {
-            text-decoration: none;
-            background: #59664f;
+
+            background: #59634b;
+
             color: white;
-            padding: 8px 13px;
-            border-radius: 7px;
-            font-size: 12px;
-            white-space: nowrap;
-            transition: 0.2s;
         }
 
         .btn-ver:hover {
-            background: #424d3b;
+
+            background: #46503b;
         }
 
         .btn-excluir {
+
+            background: #f8ecea;
+
+            color: #a45148;
+
             border: none;
-            background: #f2e6e3;
-            color: #a45145;
-            padding: 8px 13px;
-            border-radius: 7px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s;
         }
 
         .btn-excluir:hover {
-            background: #ead4d0;
+
+            background: #f3d9d5;
         }
 
-        /* =====================================================
-           SEM CLIENTES
-        ===================================================== */
 
-        .sem-clientes {
+        /* ==========================================
+           SEM RESULTADOS
+        ========================================== */
+
+        .sem-resultados {
+
+            background: white;
+
+            border-radius: 20px;
+
             padding: 60px 20px;
+
             text-align: center;
+
+            color: #858979;
+
+            box-shadow: 0 5px 25px rgba(62,67,52,0.06);
         }
 
-        .sem-clientes h3 {
-            color: #555;
-            font-size: 18px;
+        .sem-resultados .icone {
+
+            font-size: 40px;
+
+            margin-bottom: 15px;
+        }
+
+        .sem-resultados h3 {
+
+            font-weight: 400;
+
+            color: #59634b;
+
             margin-bottom: 8px;
         }
 
-        .sem-clientes p {
-            color: #999;
-            font-size: 14px;
-        }
 
-        /* =====================================================
-           RODAPÉ
-        ===================================================== */
-
-        .rodape {
-            text-align: center;
-            padding: 25px 0 10px;
-            color: #999;
-            font-size: 12px;
-        }
-
-        /* =====================================================
+        /* ==========================================
            RESPONSIVO
-        ===================================================== */
+        ========================================== */
 
-        @media (max-width: 900px) {
+        @media (max-width: 650px) {
 
-            .resumo {
-                grid-template-columns: repeat(2, 1fr);
+            header {
+                padding: 18px 5%;
             }
 
-            .topo {
-                align-items: flex-start;
+            .logo-area h1 {
+                font-size: 20px;
             }
-
-        }
-
-
-        @media (max-width: 600px) {
 
             .container {
-                padding: 18px;
+                width: 94%;
+                margin-top: 25px;
             }
 
-            .topo {
-                flex-direction: column;
+            .titulo h2 {
+                font-size: 25px;
             }
 
-            .logout {
-                width: 100%;
-                text-align: center;
+            .filtros {
+                padding: 15px;
             }
 
-            .resumo {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .card-resumo {
-                padding: 16px;
-            }
-
-            .card-resumo .numero {
-                font-size: 24px;
-            }
-
-            .form-filtros {
-                flex-direction: column;
-            }
-
-            .campo-busca,
             .campo-ordem {
                 width: 100%;
             }
 
-            .btn-filtrar,
-            .btn-limpar {
+            .btn-filtrar {
                 width: 100%;
-                justify-content: center;
+            }
+
+            .clientes {
+                grid-template-columns: 1fr;
+            }
+
+            .cliente-card {
+                padding: 20px;
             }
 
         }
@@ -497,555 +599,401 @@
 <body>
 
 
-<div class="container">
+<!-- ==================================================
+     CABEÇALHO
+================================================== -->
+
+<header>
+
+    <div class="logo-area">
+
+        <h1>Sonhe.Detalhe.Realize</h1>
+
+        <span>PAINEL ADMINISTRATIVO</span>
+
+    </div>
+
+    <a
+        href="{{ url_for('admin_logout') }}"
+        class="logout"
+    >
+        Sair
+    </a>
+
+</header>
 
 
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
+<!-- ==================================================
+     CONTEÚDO
+================================================== -->
 
-    <div class="topo">
+<main class="container">
 
-        <div class="titulo-area">
 
-            <h1>Painel Administrativo</h1>
+    <!-- TÍTULO -->
+
+    <div class="titulo">
+
+        <h2>Orçamentos recebidos</h2>
+
+        <p>
+            Acompanhe os sonhos e eventos das suas clientes.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         FILTROS
+    ================================================== -->
+
+    <form
+        method="GET"
+        action="{{ url_for('admin_painel') }}"
+        class="filtros"
+    >
+
+        <div class="campo-pesquisa">
+
+            <input
+                type="text"
+                name="pesquisa"
+                placeholder="🔎 Pesquisar por nome..."
+                value="{{ pesquisa }}"
+            >
+
+        </div>
+
+
+        <div class="campo-ordem">
+
+            <select name="ordem">
+
+                <option
+                    value="proximos"
+                    {% if ordem == "proximos" %}selected{% endif %}
+                >
+                    📅 Eventos mais próximos
+                </option>
+
+                <option
+                    value="antigos"
+                    {% if ordem == "antigos" %}selected{% endif %}
+                >
+                    📅 Eventos mais distantes
+                </option>
+
+                <option
+                    value="envio_recente"
+                    {% if ordem == "envio_recente" %}selected{% endif %}
+                >
+                    📨 Mais recentes recebidos
+                </option>
+
+                <option
+                    value="envio_antigo"
+                    {% if ordem == "envio_antigo" %}selected{% endif %}
+                >
+                    📨 Mais antigos recebidos
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn-filtrar"
+        >
+            Filtrar
+        </button>
+
+    </form>
+
+
+    <!-- ==================================================
+         RESUMO
+    ================================================== -->
+
+    <div class="resumo">
+
+        <div class="resumo-card">
+
+            <strong>
+                {{ clientes|length }}
+            </strong>
+
+            <span>
+                Orçamentos encontrados
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         CLIENTES
+    ================================================== -->
+
+    {% if clientes %}
+
+        <div class="clientes">
+
+
+            {% for cliente in clientes %}
+
+
+                <div class="cliente-card">
+
+
+                    <!-- STATUS -->
+
+                    <div class="status {{ cliente.status_classe }}">
+
+                        {{ cliente.status }}
+
+                    </div>
+
+
+                    <!-- NOME -->
+
+                    <div class="cliente-nome">
+
+                        {{ cliente.nome }}
+
+                    </div>
+
+
+                    <!-- EVENTO -->
+
+                    <div class="cliente-evento">
+
+                        {{ cliente.evento }}
+
+                    </div>
+
+
+                    <!-- DATA -->
+
+                    <div class="info">
+
+                        <div class="info-icon">
+                            📅
+                        </div>
+
+                        <span>
+
+                            {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- CIDADE -->
+
+                    <div class="info">
+
+                        <div class="info-icon">
+                            📍
+                        </div>
+
+                        <span>
+
+                            {{ cliente.cidade }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- WHATSAPP -->
+
+                    <div class="info">
+
+                        <div class="info-icon">
+                            📱
+                        </div>
+
+                        <span>
+
+                            {{ cliente.whatsapp }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- SERVIÇO -->
+
+                    <div class="info">
+
+                        <div class="info-icon">
+                            ✨
+                        </div>
+
+                        <span>
+
+                            {{ cliente.servico }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- CONTADOR -->
+
+                    {% if cliente.status == "Concluído" %}
+
+                        <div class="contador concluido">
+
+                            Evento já realizado.
+
+                        </div>
+
+                    {% elif cliente.dias_restantes == 0 %}
+
+                        <div class="contador urgente">
+
+                            <strong>
+                                É hoje!
+                            </strong>
+
+                        </div>
+
+                    {% elif cliente.dias_restantes|default(999) <= 7 %}
+
+                        <div class="contador urgente">
+
+                            <strong>
+                                {{ cliente.dias_restantes }}
+                            </strong>
+
+                            dias para o evento
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="contador">
+
+                            Faltam
+
+                            <strong>
+                                {{ cliente.dias_restantes }}
+                            </strong>
+
+                            dias
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- AÇÕES -->
+
+                    <div class="acoes">
+
+
+                        <!-- VER -->
+
+                        <a
+                            href="{{ url_for('admin_cliente', id=cliente.id) }}"
+                            class="btn btn-ver"
+                        >
+                            Ver detalhes
+                        </a>
+
+
+                        <!-- EXCLUIR -->
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('admin_excluir', id=cliente.id) }}"
+                            style="flex: 1;"
+                            onsubmit="return confirmarExclusao('{{ cliente.nome }}');"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn btn-excluir"
+                                style="width: 100%;"
+                            >
+                                🗑 Excluir
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- ==================================================
+             SEM RESULTADOS
+        ================================================== -->
+
+        <div class="sem-resultados">
+
+            <div class="icone">
+                💌
+            </div>
+
+            <h3>
+                Nenhum orçamento encontrado
+            </h3>
 
             <p>
-                Gerencie os pedidos de orçamento recebidos.
+                {% if pesquisa %}
+
+                    Não encontramos nenhum cliente com o nome
+                    "{{ pesquisa }}".
+
+                {% else %}
+
+                    Quando uma cliente enviar um orçamento,
+                    ele aparecerá aqui.
+
+                {% endif %}
             </p>
 
         </div>
 
 
-        <a
-            href="{{ url_for('admin_logout') }}"
-            class="logout"
-        >
-            Sair
-        </a>
+    {% endif %}
 
-    </div>
 
+</main>
 
-    <!-- =====================================================
-         RESUMO
-    ====================================================== -->
 
-    <div class="resumo">
-
-
-        <div class="card-resumo">
-
-            <div class="numero">
-                {{ clientes|length }}
-            </div>
-
-            <div class="texto">
-                Total de clientes
-            </div>
-
-        </div>
-
-
-        <div class="card-resumo">
-
-            <div class="numero">
-
-                {{
-                    clientes
-                    |selectattr("classe_evento", "equalto", "hoje")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-            <div class="texto">
-                Eventos hoje
-            </div>
-
-        </div>
-
-
-        <div class="card-resumo">
-
-            <div class="numero">
-
-                {{
-                    clientes
-                    |selectattr("classe_evento", "equalto", "urgente")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-            <div class="texto">
-                Eventos urgentes
-            </div>
-
-        </div>
-
-
-        <div class="card-resumo">
-
-            <div class="numero">
-
-                {{
-                    clientes
-                    |selectattr("classe_evento", "equalto", "proximo")
-                    |list
-                    |length
-                }}
-
-            </div>
-
-            <div class="texto">
-                Próximos eventos
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         FILTROS
-    ====================================================== -->
-
-    <div class="filtros">
-
-        <form
-            method="GET"
-            action="{{ url_for('admin_painel') }}"
-            class="form-filtros"
-        >
-
-
-            <div class="campo-busca">
-
-                <input
-                    type="text"
-                    name="busca"
-                    placeholder="Pesquisar cliente pelo nome..."
-                    value="{{ busca }}"
-                >
-
-            </div>
-
-
-            <div class="campo-ordem">
-
-                <select name="ordem">
-
-                    <option
-                        value="recentes"
-                        {% if ordem == "recentes" %}selected{% endif %}
-                    >
-                        Mais recentes
-                    </option>
-
-
-                    <option
-                        value="antigos"
-                        {% if ordem == "antigos" %}selected{% endif %}
-                    >
-                        Mais antigos
-                    </option>
-
-
-                    <option
-                        value="evento_proximo"
-                        {% if ordem == "evento_proximo" %}selected{% endif %}
-                    >
-                        Evento mais próximo
-                    </option>
-
-
-                    <option
-                        value="evento_longe"
-                        {% if ordem == "evento_longe" %}selected{% endif %}
-                    >
-                        Evento mais distante
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="btn-filtrar"
-            >
-                Filtrar
-            </button>
-
-
-            <a
-                href="{{ url_for('admin_painel') }}"
-                class="btn-limpar"
-            >
-                Limpar
-            </a>
-
-
-        </form>
-
-    </div>
-
-
-    <!-- =====================================================
-         TABELA
-    ====================================================== -->
-
-    <div class="tabela-container">
-
-
-        <div class="tabela-topo">
-
-            <h2>
-                Clientes
-            </h2>
-
-        </div>
-
-
-        {% if clientes %}
-
-
-        <div class="tabela-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Cliente
-                        </th>
-
-                        <th>
-                            WhatsApp
-                        </th>
-
-                        <th>
-                            Evento
-                        </th>
-
-                        <th>
-                            Data do evento
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                        <th>
-                            Cidade
-                        </th>
-
-                        <th>
-                            Serviço
-                        </th>
-
-                        <th>
-                            Ações
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                {% for cliente in clientes %}
-
-
-                    <tr>
-
-
-                        <!-- CLIENTE -->
-
-                        <td>
-
-                            <div class="cliente-nome">
-
-                                {{ cliente.nome }}
-
-                            </div>
-
-                            <span class="cliente-id">
-
-                                #{{ cliente.id }}
-
-                            </span>
-
-                        </td>
-
-
-                        <!-- WHATSAPP -->
-
-                        <td>
-
-                            {% if cliente.whatsapp %}
-
-                                <a
-                                    href="https://wa.me/{{ cliente.whatsapp|replace(' ', '')|replace('(', '')|replace(')', '')|replace('-', '')|replace('+', '') }}"
-                                    target="_blank"
-                                    class="whatsapp"
-                                >
-
-                                    {{ cliente.whatsapp }}
-
-                                </a>
-
-                            {% else %}
-
-                                —
-
-                            {% endif %}
-
-                        </td>
-
-
-                        <!-- EVENTO -->
-
-                        <td>
-
-                            {{ cliente.evento or "Não informado" }}
-
-                        </td>
-
-
-                        <!-- DATA -->
-
-                        <td>
-
-                            {% if cliente.data_evento %}
-
-                                <div class="data-evento">
-
-                                    {% if cliente.data_evento.strftime is defined %}
-
-                                        {{ cliente.data_evento.strftime("%d/%m/%Y") }}
-
-                                    {% else %}
-
-                                        {{ cliente.data_evento }}
-
-                                    {% endif %}
-
-                                </div>
-
-
-                                {% if cliente.classe_evento == "urgente" %}
-
-                                    <span class="dias urgente">
-
-                                        {{ cliente.dias_evento }} dia(s) restante(s)
-
-                                    </span>
-
-
-                                {% elif cliente.classe_evento == "hoje" %}
-
-                                    <span class="dias hoje">
-
-                                        O evento é hoje!
-
-                                    </span>
-
-
-                                {% elif cliente.classe_evento == "proximo" %}
-
-                                    <span class="dias">
-
-                                        {{ cliente.dias_evento }} dia(s) restante(s)
-
-                                    </span>
-
-
-                                {% elif cliente.classe_evento == "agendado" %}
-
-                                    <span class="dias">
-
-                                        {{ cliente.dias_evento }} dia(s) restante(s)
-
-                                    </span>
-
-
-                                {% elif cliente.classe_evento == "concluido" %}
-
-                                    <span class="dias concluido">
-
-                                        Evento concluído
-
-                                    </span>
-
-
-                                {% endif %}
-
-
-                            {% else %}
-
-                                —
-
-                            {% endif %}
-
-                        </td>
-
-
-                        <!-- STATUS -->
-
-                        <td>
-
-                            <span
-                                class="status {{ cliente.classe_evento }}"
-                            >
-
-                                {{ cliente.status_evento }}
-
-                            </span>
-
-                        </td>
-
-
-                        <!-- CIDADE -->
-
-                        <td>
-
-                            {{ cliente.cidade or "Não informado" }}
-
-                        </td>
-
-
-                        <!-- SERVIÇO -->
-
-                        <td>
-
-                            <div class="servico">
-
-                                {{ cliente.servico or "Não informado" }}
-
-                            </div>
-
-                        </td>
-
-
-                        <!-- AÇÕES -->
-
-                        <td>
-
-                            <div class="acoes">
-
-
-                                <a
-                                    href="{{ url_for('admin_cliente', id=cliente.id) }}"
-                                    class="btn-ver"
-                                >
-                                    Ver
-                                </a>
-
-
-                                <form
-                                    method="POST"
-                                    action="{{ url_for('admin_excluir_cliente', id=cliente.id) }}"
-                                    onsubmit="return confirmarExclusao();"
-                                >
-
-                                    <button
-                                        type="submit"
-                                        class="btn-excluir"
-                                    >
-                                        Excluir
-                                    </button>
-
-                                </form>
-
-
-                            </div>
-
-                        </td>
-
-
-                    </tr>
-
-
-                {% endfor %}
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        {% else %}
-
-
-        <!-- =================================================
-             SEM CLIENTES
-        ================================================== -->
-
-        <div class="sem-clientes">
-
-            <h3>
-                Nenhum cliente encontrado
-            </h3>
-
-            {% if busca %}
-
-                <p>
-                    Não encontramos nenhum cliente com o nome
-                    "{{ busca }}".
-                </p>
-
-            {% else %}
-
-                <p>
-                    Ainda não existem pedidos de orçamento cadastrados.
-                </p>
-
-            {% endif %}
-
-        </div>
-
-
-        {% endif %}
-
-
-    </div>
-
-
-    <!-- =====================================================
-         RODAPÉ
-    ====================================================== -->
-
-    <div class="rodape">
-
-        Painel administrativo • Sonhe.Detalhe.Realize
-
-    </div>
-
-
-</div>
-
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
 
 <script>
 
-    function confirmarExclusao() {
+function confirmarExclusao(nome) {
 
-        return confirm(
-            "Tem certeza que deseja excluir este cliente?"
-        );
+    return confirm(
+        "Tem certeza que deseja excluir o orçamento de " +
+        nome +
+        "?\n\nEssa ação não poderá ser desfeita."
+    );
 
-    }
+}
 
 </script>
 
