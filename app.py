@@ -62,6 +62,7 @@ def admin_required(func):
 def classificar_evento(data_evento):
 
     if not data_evento:
+
         return {
             "status": "Sem data",
             "classe": "sem-data",
@@ -70,26 +71,85 @@ def classificar_evento(data_evento):
 
     try:
 
-        # Caso venha como datetime
+        # ==================================================
+        # SE FOR DATETIME
+        # ==================================================
+
         if isinstance(data_evento, datetime):
+
             data_evento = data_evento.date()
 
-        # Caso venha como string
+
+        # ==================================================
+        # SE FOR DATE
+        # ==================================================
+
+        elif isinstance(data_evento, date):
+
+            pass
+
+
+        # ==================================================
+        # SE FOR STRING
+        # ==================================================
+
         elif isinstance(data_evento, str):
 
-            data_evento = datetime.strptime(
-                data_evento,
-                "%Y-%m-%d"
-            ).date()
+            formatos = [
+                "%Y-%m-%d",
+                "%Y-%m-%d %H:%M:%S",
+                "%Y-%m-%d %H:%M"
+            ]
+
+            convertido = None
+
+            for formato in formatos:
+
+                try:
+
+                    convertido = datetime.strptime(
+                        data_evento,
+                        formato
+                    ).date()
+
+                    break
+
+                except ValueError:
+
+                    continue
+
+
+            if convertido is None:
+
+                return {
+                    "status": "Data inválida",
+                    "classe": "sem-data",
+                    "dias": None
+                }
+
+
+            data_evento = convertido
+
+
+        # ==================================================
+        # DATA ATUAL
+        # ==================================================
 
         hoje = date.today()
 
-        diferenca = (data_evento - hoje).days
+
+        # ==================================================
+        # DIFERENÇA
+        # ==================================================
+
+        diferenca = (
+            data_evento - hoje
+        ).days
 
 
-        # ==============================================
+        # ==================================================
         # EVENTO JÁ PASSOU
-        # ==============================================
+        # ==================================================
 
         if diferenca < 0:
 
@@ -100,9 +160,9 @@ def classificar_evento(data_evento):
             }
 
 
-        # ==============================================
+        # ==================================================
         # EVENTO HOJE
-        # ==============================================
+        # ==================================================
 
         if diferenca == 0:
 
@@ -113,9 +173,9 @@ def classificar_evento(data_evento):
             }
 
 
-        # ==============================================
+        # ==================================================
         # ATÉ 7 DIAS
-        # ==============================================
+        # ==================================================
 
         if diferenca <= 7:
 
@@ -126,9 +186,9 @@ def classificar_evento(data_evento):
             }
 
 
-        # ==============================================
+        # ==================================================
         # ATÉ 30 DIAS
-        # ==============================================
+        # ==================================================
 
         if diferenca <= 30:
 
@@ -139,9 +199,9 @@ def classificar_evento(data_evento):
             }
 
 
-        # ==============================================
+        # ==================================================
         # MAIS DE 30 DIAS
-        # ==============================================
+        # ==================================================
 
         return {
             "status": "Agendado",
@@ -169,7 +229,9 @@ def classificar_evento(data_evento):
 @app.route("/")
 def convite():
 
-    return render_template("convite.html")
+    return render_template(
+        "convite.html"
+    )
 
 
 # ==========================================================
@@ -179,7 +241,9 @@ def convite():
 @app.route("/apresentacao")
 def apresentacao():
 
-    return render_template("apresentacao.html")
+    return render_template(
+        "apresentacao.html"
+    )
 
 
 # ==========================================================
@@ -189,211 +253,254 @@ def apresentacao():
 @app.route("/sobre")
 def sobre():
 
-    return render_template("sobre.html")
+    return render_template(
+        "sobre.html"
+    )
 
 
 # ==========================================================
 # ORÇAMENTO
 # ==========================================================
 
-@app.route("/orcamento", methods=["GET", "POST"])
+@app.route(
+    "/orcamento",
+    methods=["GET", "POST"]
+)
 def orcamento():
 
-    if request.method == "POST":
+    # ======================================================
+    # GET
+    # ======================================================
+
+    if request.method == "GET":
+
+        return render_template(
+            "orcamento.html"
+        )
+
+
+    # ======================================================
+    # POST
+    # ======================================================
+
+    nome = request.form.get(
+        "nome"
+    )
+
+    whatsapp = request.form.get(
+        "whatsapp"
+    )
+
+    evento = request.form.get(
+        "evento"
+    )
+
+    data = request.form.get(
+        "data"
+    )
+
+    cidade = request.form.get(
+        "cidade"
+    )
+
+    local = request.form.get(
+        "local"
+    )
+
+    convidados = request.form.get(
+        "convidados"
+    )
+
+    servico = request.form.get(
+        "servico"
+    )
+
+    conheceu = request.form.get(
+        "conheceu"
+    )
+
+    sonho = request.form.get(
+        "sonho"
+    )
+
+
+    # ======================================================
+    # LOG
+    # ======================================================
+
+    print("")
+    print("=================================")
+    print("NOVO ORÇAMENTO")
+    print("=================================")
+
+    print("Nome:", nome)
+    print("WhatsApp:", whatsapp)
+    print("Evento:", evento)
+    print("Data:", data)
+    print("Cidade:", cidade)
+    print("Local:", local)
+    print("Convidados:", convidados)
+    print("Serviço:", servico)
+    print("Como conheceu:", conheceu)
+    print("Sonho:", sonho)
+
+    print("=================================")
+
+
+    conexao = None
+    cursor = None
+
+
+    try:
 
         # ==================================================
-        # PEGAR DADOS DO FORMULÁRIO
+        # CONECTAR
         # ==================================================
 
-        nome = request.form.get("nome")
-        whatsapp = request.form.get("whatsapp")
-        evento = request.form.get("evento")
-        data = request.form.get("data")
-        cidade = request.form.get("cidade")
-        local = request.form.get("local")
-        convidados = request.form.get("convidados")
-        servico = request.form.get("servico")
-        conheceu = request.form.get("conheceu")
-        sonho = request.form.get("sonho")
+        conexao = conectar_banco()
+
+        cursor = conexao.cursor()
 
 
         # ==================================================
-        # LOG DOS DADOS RECEBIDOS
+        # INSERIR
         # ==================================================
 
-        print("")
-        print("=================================")
-        print("NOVO ORÇAMENTO")
-        print("=================================")
-
-        print("Nome:", nome)
-        print("WhatsApp:", whatsapp)
-        print("Evento:", evento)
-        print("Data:", data)
-        print("Cidade:", cidade)
-        print("Local:", local)
-        print("Convidados:", convidados)
-        print("Serviço:", servico)
-        print("Como conheceu:", conheceu)
-        print("Sonho:", sonho)
-
-        print("=================================")
-
-
-        conexao = None
-        cursor = None
-
-
-        try:
-
-            # ==================================================
-            # CONECTAR AO MYSQL
-            # ==================================================
-
-            conexao = conectar_banco()
-
-            cursor = conexao.cursor()
-
-
-            # ==================================================
-            # INSERIR ORÇAMENTO
-            # ==================================================
-
-            comando = """
-                INSERT INTO orcamentos (
-                    nome,
-                    whatsapp,
-                    evento,
-                    data_evento,
-                    cidade,
-                    local_evento,
-                    convidados,
-                    servico,
-                    conheceu,
-                    sonho
-                )
-
-                VALUES (
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s
-                )
-            """
-
-
-            valores = (
+        comando = """
+            INSERT INTO orcamentos (
                 nome,
                 whatsapp,
                 evento,
-                data,
+                data_evento,
                 cidade,
-                local,
+                local_evento,
                 convidados,
                 servico,
                 conheceu,
                 sonho
             )
-
-
-            cursor.execute(
-                comando,
-                valores
+            VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
             )
+        """
 
 
-            conexao.commit()
+        valores = (
+            nome,
+            whatsapp,
+            evento,
+            data,
+            cidade,
+            local,
+            convidados,
+            servico,
+            conheceu,
+            sonho
+        )
 
 
-            print("=================================")
-            print("ORÇAMENTO SALVO COM SUCESSO!")
-            print("=================================")
+        cursor.execute(
+            comando,
+            valores
+        )
 
 
-            # ==================================================
-            # PÁGINA DE AGRADECIMENTO
-            # ==================================================
-
-            return render_template(
-                "obrigado.html"
-            )
+        conexao.commit()
 
 
-        except Exception as erro:
-
-            print("")
-            print("=================================")
-            print("ERRO AO SALVAR ORÇAMENTO")
-            print("=================================")
-
-            print("TIPO DO ERRO:")
-            print(type(erro).__name__)
-
-            print("ERRO:")
-            print(erro)
-
-            print("=================================")
-
-            traceback.print_exc()
-
-            print("=================================")
+        print("=================================")
+        print("ORÇAMENTO SALVO COM SUCESSO!")
+        print("=================================")
 
 
-            return (
-                "Erro ao salvar o orçamento. "
-                "Verifique os logs do Railway.",
-                500
-            )
+        # ==================================================
+        # AGRADECIMENTO
+        # ==================================================
+
+        return render_template(
+            "obrigado.html"
+        )
 
 
-        finally:
+    except Exception as erro:
 
-            if cursor:
+        print("")
+        print("=================================")
+        print("ERRO AO SALVAR ORÇAMENTO")
+        print("=================================")
 
-                try:
-                    cursor.close()
-                except:
-                    pass
+        print("TIPO DO ERRO:")
+        print(type(erro).__name__)
+
+        print("ERRO:")
+        print(erro)
+
+        print("=================================")
+
+        traceback.print_exc()
+
+        print("=================================")
 
 
-            if conexao:
+        return (
+            "Erro ao salvar o orçamento. "
+            "Verifique os logs do Railway.",
+            500
+        )
 
-                try:
-                    conexao.close()
-                except:
-                    pass
+
+    finally:
+
+        if cursor:
+
+            try:
+                cursor.close()
+
+            except Exception:
+                pass
 
 
-    # ==================================================
-    # GET
-    # ==================================================
+        if conexao:
 
-    return render_template(
-        "orcamento.html"
-    )
+            try:
+                conexao.close()
+
+            except Exception:
+                pass
 
 
 # ==========================================================
 # ADMINISTRADOR - LOGIN
 # ==========================================================
 
-@app.route("/admin", methods=["GET", "POST"])
+@app.route(
+    "/admin",
+    methods=["GET", "POST"]
+)
 def admin_login():
 
     if request.method == "POST":
 
-        usuario = request.form.get("usuario")
-        senha = request.form.get("senha")
+        usuario = request.form.get(
+            "usuario"
+        )
+
+        senha = request.form.get(
+            "senha"
+        )
 
 
         # ==================================================
-        # LOGIN VINDO DAS VARIABLES DO RAILWAY
+        # CREDENCIAIS
         # ==================================================
 
         usuario_correto = os.getenv(
@@ -406,7 +513,7 @@ def admin_login():
 
 
         # ==================================================
-        # VERIFICAR LOGIN
+        # LOGIN
         # ==================================================
 
         if (
@@ -417,7 +524,9 @@ def admin_login():
             session["admin_logado"] = True
 
             return redirect(
-                url_for("admin_painel")
+                url_for(
+                    "admin_painel"
+                )
             )
 
 
@@ -436,7 +545,9 @@ def admin_login():
 # ADMINISTRADOR - PAINEL
 # ==========================================================
 
-@app.route("/admin/painel")
+@app.route(
+    "/admin/painel"
+)
 @admin_required
 def admin_painel():
 
@@ -447,7 +558,7 @@ def admin_painel():
     try:
 
         # ==================================================
-        # PARÂMETROS DA PESQUISA
+        # PARÂMETROS
         # ==================================================
 
         busca = request.args.get(
@@ -463,7 +574,7 @@ def admin_painel():
 
 
         # ==================================================
-        # CONECTAR
+        # CONEXÃO
         # ==================================================
 
         conexao = conectar_banco()
@@ -474,7 +585,7 @@ def admin_painel():
 
 
         # ==================================================
-        # CONSULTA BASE
+        # CONSULTA
         # ==================================================
 
         comando = """
@@ -499,7 +610,7 @@ def admin_painel():
 
 
         # ==================================================
-        # PESQUISA POR NOME
+        # BUSCA
         # ==================================================
 
         if busca:
@@ -523,17 +634,20 @@ def admin_painel():
                 ORDER BY data_envio ASC
             """
 
+
         elif ordem == "evento_proximo":
 
             comando += """
                 ORDER BY data_evento ASC
             """
 
+
         elif ordem == "evento_longe":
 
             comando += """
                 ORDER BY data_evento DESC
             """
+
 
         else:
 
@@ -556,25 +670,39 @@ def admin_painel():
 
 
         # ==================================================
-        # CLASSIFICAR CADA CLIENTE
+        # CLASSIFICAR CLIENTES
         # ==================================================
 
         for cliente in clientes:
 
             informacao_evento = classificar_evento(
-                cliente.get("data_evento")
+                cliente.get(
+                    "data_evento"
+                )
             )
 
+
+            # ==================================================
+            # STATUS
+            # ==================================================
 
             cliente["status_evento"] = (
                 informacao_evento["status"]
             )
 
 
+            # ==================================================
+            # CLASSE
+            # ==================================================
+
             cliente["classe_evento"] = (
                 informacao_evento["classe"]
             )
 
+
+            # ==================================================
+            # DIAS
+            # ==================================================
 
             cliente["dias_evento"] = (
                 informacao_evento["dias"]
@@ -589,11 +717,24 @@ def admin_painel():
         print("=================================")
         print("PAINEL ADMINISTRATIVO")
         print("=================================")
-        print("Clientes encontrados:", len(clientes))
-        print("Busca:", busca)
-        print("Ordem:", ordem)
+        print(
+            "Clientes encontrados:",
+            len(clientes)
+        )
+        print(
+            "Busca:",
+            busca
+        )
+        print(
+            "Ordem:",
+            ordem
+        )
         print("=================================")
 
+
+        # ==================================================
+        # TEMPLATE
+        # ==================================================
 
         return render_template(
             "admin_painel.html",
@@ -611,7 +752,9 @@ def admin_painel():
         print("=================================")
 
         print("TIPO DO ERRO:")
-        print(type(erro).__name__)
+        print(
+            type(erro).__name__
+        )
 
         print("ERRO:")
         print(erro)
@@ -636,7 +779,8 @@ def admin_painel():
 
             try:
                 cursor.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -644,7 +788,8 @@ def admin_painel():
 
             try:
                 conexao.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -652,7 +797,9 @@ def admin_painel():
 # ADMINISTRADOR - VER CLIENTE
 # ==========================================================
 
-@app.route("/admin/cliente/<int:id>")
+@app.route(
+    "/admin/cliente/<int:id>"
+)
 @admin_required
 def admin_cliente(id):
 
@@ -661,6 +808,10 @@ def admin_cliente(id):
 
 
     try:
+
+        # ==================================================
+        # CONECTAR
+        # ==================================================
 
         conexao = conectar_banco()
 
@@ -699,7 +850,7 @@ def admin_cliente(id):
 
 
         # ==================================================
-        # VERIFICAR SE EXISTE
+        # VERIFICAR
         # ==================================================
 
         if not cliente:
@@ -715,7 +866,9 @@ def admin_cliente(id):
         # ==================================================
 
         informacao_evento = classificar_evento(
-            cliente.get("data_evento")
+            cliente.get(
+                "data_evento"
+            )
         )
 
 
@@ -734,6 +887,10 @@ def admin_cliente(id):
         )
 
 
+        # ==================================================
+        # TEMPLATE
+        # ==================================================
+
         return render_template(
             "admin_cliente.html",
             cliente=cliente
@@ -750,7 +907,9 @@ def admin_cliente(id):
         print("ID:", id)
 
         print("TIPO DO ERRO:")
-        print(type(erro).__name__)
+        print(
+            type(erro).__name__
+        )
 
         print("ERRO:")
         print(erro)
@@ -775,7 +934,8 @@ def admin_cliente(id):
 
             try:
                 cursor.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -783,7 +943,8 @@ def admin_cliente(id):
 
             try:
                 conexao.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -804,13 +965,17 @@ def admin_excluir_cliente(id):
 
     try:
 
+        # ==================================================
+        # CONECTAR
+        # ==================================================
+
         conexao = conectar_banco()
 
         cursor = conexao.cursor()
 
 
         # ==================================================
-        # VERIFICAR SE EXISTE
+        # VERIFICAR CLIENTE
         # ==================================================
 
         cursor.execute(
@@ -858,7 +1023,9 @@ def admin_excluir_cliente(id):
 
 
         return redirect(
-            url_for("admin_painel")
+            url_for(
+                "admin_painel"
+            )
         )
 
 
@@ -871,9 +1038,15 @@ def admin_excluir_cliente(id):
 
         print("ID:", id)
 
-        print("TIPO:", type(erro).__name__)
+        print(
+            "TIPO:",
+            type(erro).__name__
+        )
 
-        print("ERRO:", erro)
+        print(
+            "ERRO:",
+            erro
+        )
 
         print("=================================")
 
@@ -892,7 +1065,8 @@ def admin_excluir_cliente(id):
 
             try:
                 cursor.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -900,7 +1074,8 @@ def admin_excluir_cliente(id):
 
             try:
                 conexao.close()
-            except:
+
+            except Exception:
                 pass
 
 
@@ -908,13 +1083,17 @@ def admin_excluir_cliente(id):
 # ADMINISTRADOR - LOGOUT
 # ==========================================================
 
-@app.route("/admin/logout")
+@app.route(
+    "/admin/logout"
+)
 def admin_logout():
 
     session.clear()
 
     return redirect(
-        url_for("admin_login")
+        url_for(
+            "admin_login"
+        )
     )
 
 
