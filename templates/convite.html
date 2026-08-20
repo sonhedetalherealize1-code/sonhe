@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Um convite para você</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/convite.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fundo -->
+    <div class="background">
+
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+
+        <span class="particle p1"></span>
+        <span class="particle p2"></span>
+        <span class="particle p3"></span>
+        <span class="particle p4"></span>
+        <span class="particle p5"></span>
+
+    </div>
+
+
+    <!-- Conteúdo principal -->
+    <main class="convite">
+
+        <!-- Pequeno detalhe superior -->
+        <div class="ornamento">
+
+            <span></span>
+
+            <div class="diamond">✦</div>
+
+            <span></span>
+
+        </div>
+
+
+        <!-- Texto -->
+        <div class="conteudo">
+
+            <p class="mini-titulo">
+                UM CONVITE ESPECIAL
+            </p>
+
+
+            <h1>
+                Especialmente<br>
+                <span>para você.</span>
+            </h1>
+
+
+            <div class="linha"></div>
+
+
+            <p class="mensagem">
+
+                Olá! Se você chegou até aqui é porque está
+                dando um passo muito importante na realização
+                do seu sonho.
+
+            </p>
+
+
+            <p class="mensagem secundaria">
+
+                Preparei uma apresentação exclusiva para que
+                você conheça meu trabalho e descubra como
+                podemos transformar seu evento em uma
+                experiência inesquecível.
+
+            </p>
+
+
+            <!-- Botão -->
+            <button id="abrirConvite" class="botao">
+
+                <span class="icone">✦</span>
+
+                <span>
+                    Abrir minha apresentação
+                </span>
+
+                <span class="seta">→</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- Assinatura -->
+        <div class="assinatura">
+
+            <span>Sonhe.</span>
+            <span>Detalhe.</span>
+            <span>Realize.</span>
+
+        </div>
+
+    </main>
+
+
+    <!-- Tela de transição -->
+    <div id="transicao" class="transicao">
+
+        <div class="loader">
+
+            <div class="loader-flor">✦</div>
+
+            <p>
+                Preparando sua apresentação...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/convite.js') }}"></script>
+
+</body>
+
+</html>

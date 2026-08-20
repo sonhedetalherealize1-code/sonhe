@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma apresentação especial</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/apresentacao.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<div class="pagina">
+
+
+    <!-- Cabeçalho -->
+
+    <div class="cabecalho">
+
+        <span class="pequeno-titulo">
+            SONHE. DETALHE. REALIZE.
+        </span>
+
+        <h1>
+            Antes de começarmos...
+        </h1>
+
+        <p>
+            Quero que você conheça um pouco de mim
+            e do trabalho que fazemos.
+        </p>
+
+    </div>
+
+
+    <!-- VÍDEO -->
+
+    <section class="video-container">
+
+        <div class="video-wrapper">
+
+            <!--
+            QUANDO TIVER O VÍDEO:
+
+            <video controls>
+                <source src="{{ url_for('static', filename='videos/video.mp4') }}" type="video/mp4">
+            </video>
+
+            -->
+
+            <div class="video-vazio">
+
+                <div class="play">
+
+                    ▶
+
+                </div>
+
+                <p>
+                    Seu vídeo aparecerá aqui
+                </p>
+
+                <span>
+                    Em breve
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTÕES -->
+
+    <section class="opcoes">
+
+        <p class="opcoes-titulo">
+            Agora quero te convidar para conhecer
+            um pouco mais do nosso trabalho.
+        </p>
+
+
+        <div class="botoes">
+
+
+            <!-- Instagram -->
+
+            <a
+                href="https://instagram.com/"
+                target="_blank"
+                class="opcao"
+            >
+
+                <div class="icone">
+                    📸
+                </div>
+
+                <div class="texto">
+
+                    <span>
+                        Conheça nosso
+                    </span>
+
+                    <strong>
+                        Instagram
+                    </strong>
+
+                </div>
+
+                <div class="seta">
+                    →
+                </div>
+
+            </a>
+
+
+            <!-- Sobre -->
+
+            <a
+                href="{{ url_for('sobre') }}"
+                class="opcao"
+            >
+
+                <div class="icone">
+                    💎
+                </div>
+
+                <div class="texto">
+
+                    <span>
+                        Conheça
+                    </span>
+
+                    <strong>
+                        Nosso trabalho
+                    </strong>
+
+                </div>
+
+                <div class="seta">
+                    →
+                </div>
+
+            </a>
+
+
+            <!-- Orçamento -->
+
+            <a
+                href="{{ url_for('orcamento') }}"
+                class="opcao destaque"
+            >
+
+                <div class="icone">
+                    ✨
+                </div>
+
+                <div class="texto">
+
+                    <span>
+                        Solicite seu
+                    </span>
+
+                    <strong>
+                        Orçamento personalizado
+                    </strong>
+
+                </div>
+
+                <div class="seta">
+                    →
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        Cada evento é único.
+        Por isso, cada orçamento também é pensado
+        exclusivamente para você.
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

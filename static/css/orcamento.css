@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --oliva: #596348;
+    --escuro: #3e4733;
+    --fundo: #f3f0e8;
+    --texto: #454a40;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            white,
+            var(--fundo)
+        );
+
+    font-family: "Montserrat", sans-serif;
+
+    color: var(--texto);
+
+}
+
+
+.pagina {
+
+    width: min(650px, 90%);
+
+    margin: auto;
+
+    padding: 80px 0;
+
+}
+
+
+header {
+
+    text-align: center;
+
+    margin-bottom: 55px;
+
+}
+
+
+header span {
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: var(--oliva);
+
+}
+
+
+header h1 {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(45px, 7vw, 65px);
+
+    line-height: .95;
+
+    font-weight: 400;
+
+    color: var(--escuro);
+
+    margin: 20px 0;
+
+}
+
+
+header em {
+
+    color: var(--oliva);
+
+}
+
+
+header p {
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    font-weight: 300;
+
+}
+
+
+/* FORM */
+
+form {
+
+    background: rgba(255,255,255,.7);
+
+    padding: 45px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 60px rgba(50,60,40,.08);
+
+}
+
+
+.campo {
+
+    margin-bottom: 25px;
+
+}
+
+
+label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    color: var(--escuro);
+
+}
+
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border: 1px solid #dddcd4;
+
+    border-radius: 8px;
+
+    background: #fafaf7;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 12px;
+
+    color: var(--texto);
+
+    outline: none;
+
+    transition:
+        border .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: var(--oliva);
+
+    box-shadow:
+        0 0 0 3px rgba(89,99,72,.08);
+
+}
+
+
+textarea {
+
+    resize: vertical;
+
+}
+
+
+button {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--oliva),
+            var(--escuro)
+        );
+
+    color: white;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px rgba(60,70,50,.22);
+
+}
+
+
+@media(max-width: 600px) {
+
+    .pagina {
+
+        padding: 50px 0;
+
+    }
+
+    form {
+
+        padding: 28px 20px;
+
+    }
+
+}

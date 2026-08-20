@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Seu orçamento personalizado</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/orcamento.css') }}">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<div class="pagina">
+
+
+    <header>
+
+        <span>
+            SONHE. DETALHE. REALIZE.
+        </span>
+
+        <h1>
+            Vamos montar seu orçamento<br>
+            <em>personalizado.</em>
+        </h1>
+
+        <p>
+            Quero conhecer um pouco do seu sonho
+            para preparar algo pensado especialmente
+            para o seu evento.
+        </p>
+
+    </header>
+
+
+    <form method="POST">
+
+
+        <!-- NOME -->
+
+        <div class="campo">
+
+            <label>
+                Seu nome *
+            </label>
+
+            <input
+                type="text"
+                name="nome"
+                placeholder="Como posso te chamar?"
+                required
+            >
+
+        </div>
+
+
+        <!-- WHATSAPP -->
+
+        <div class="campo">
+
+            <label>
+                WhatsApp *
+            </label>
+
+            <input
+                type="tel"
+                name="whatsapp"
+                placeholder="(00) 00000-0000"
+                required
+            >
+
+        </div>
+
+
+        <!-- EVENTO -->
+
+        <div class="campo">
+
+            <label>
+                Qual será o seu evento? *
+            </label>
+
+            <select name="evento" required>
+
+                <option value="">
+                    Selecione uma opção
+                </option>
+
+                <option value="Casamento">
+                    Casamento
+                </option>
+
+                <option value="Debutante">
+                    Debutante
+                </option>
+
+                <option value="Aniversário">
+                    Aniversário
+                </option>
+
+                <option value="Corporativo">
+                    Corporativo
+                </option>
+
+                <option value="Chá Revelação">
+                    Chá Revelação
+                </option>
+
+                <option value="Outro">
+                    Outro
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- DATA -->
+
+        <div class="campo">
+
+            <label>
+                Data do evento *
+            </label>
+
+            <input
+                type="date"
+                name="data"
+                required
+            >
+
+        </div>
+
+
+        <!-- CIDADE -->
+
+        <div class="campo">
+
+            <label>
+                Cidade *
+            </label>
+
+            <input
+                type="text"
+                name="cidade"
+                placeholder="Onde será realizado?"
+                required
+            >
+
+        </div>
+
+
+        <!-- LOCAL -->
+
+        <div class="campo">
+
+            <label>
+                Local
+            </label>
+
+            <input
+                type="text"
+                name="local"
+                placeholder="Se já tiver escolhido"
+            >
+
+        </div>
+
+
+        <!-- CONVIDADOS -->
+
+        <div class="campo">
+
+            <label>
+                Quantidade aproximada de convidados
+            </label>
+
+            <input
+                type="number"
+                name="convidados"
+                placeholder="Ex.: 150"
+                min="1"
+            >
+
+        </div>
+
+
+        <!-- SERVIÇO -->
+
+        <div class="campo">
+
+            <label>
+                Qual serviço você deseja? *
+            </label>
+
+            <select name="servico" required>
+
+                <option value="">
+                    Selecione uma opção
+                </option>
+
+                <option value="Assessoria">
+                    Assessoria
+                </option>
+
+                <option value="Decoração">
+                    Decoração
+                </option>
+
+                <option value="Ambos">
+                    Assessoria + Decoração
+                </option>
+
+                <option value="Ainda não sei">
+                    Ainda não sei
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- COMO CONHECEU -->
+
+        <div class="campo">
+
+            <label>
+                Como conheceu a SDR?
+            </label>
+
+            <select name="conheceu">
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option value="Instagram">
+                    Instagram
+                </option>
+
+                <option value="Indicação">
+                    Indicação
+                </option>
+
+                <option value="Google">
+                    Google
+                </option>
+
+                <option value="Outro">
+                    Outro
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- SONHO -->
+
+        <div class="campo">
+
+            <label>
+                Conte um pouco sobre seu sonho.
+            </label>
+
+            <textarea
+                name="sonho"
+                rows="6"
+                placeholder="Quero saber tudo que você imagina para esse momento..."
+            ></textarea>
+
+        </div>
+
+
+        <button type="submit">
+
+            <span>
+                ✨
+            </span>
+
+            Enviar informações
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>
