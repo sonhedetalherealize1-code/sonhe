@@ -5,8 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Um convite especialmente para você</title>
 
@@ -15,19 +17,18 @@
     <!-- FONTES -->
     <!-- ================================================= -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
 
     <!-- ================================================= -->
-    <!-- CSS -->
+    <!-- ESTILO -->
     <!-- ================================================= -->
 
     <style>
@@ -41,10 +42,8 @@
 
         html,
         body {
-
             width: 100%;
             min-height: 100%;
-
         }
 
 
@@ -66,6 +65,8 @@
                 );
 
             color: #ffffff;
+
+            min-height: 100vh;
 
             overflow-x: hidden;
 
@@ -101,23 +102,28 @@
 
             border-radius: 50%;
 
-            background: rgba(
-                255,
-                255,
-                255,
-                0.06
-            );
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
 
-            filter: blur(80px);
+            filter: blur(90px);
 
-            animation: floatGlow 10s ease-in-out infinite;
+            animation:
+                movimentoLuz
+                12s
+                ease-in-out
+                infinite;
 
         }
 
 
         .glow.one {
 
-            top: -150px;
+            top: -180px;
 
             left: -100px;
 
@@ -126,102 +132,90 @@
 
         .glow.two {
 
-            right: -150px;
+            right: -180px;
 
-            bottom: -150px;
+            bottom: -180px;
 
             animation-delay: 3s;
 
         }
 
 
-        @keyframes floatGlow {
+        @keyframes movimentoLuz {
 
             0%,
             100% {
-
-                transform: translate(
-                    0,
-                    0
-                );
-
+                transform: translate(0, 0);
             }
 
             50% {
-
-                transform: translate(
-                    30px,
-                    -25px
-                );
-
+                transform: translate(35px, -30px);
             }
 
         }
 
 
         /* ================================================= */
-        /* ACESSOS */
+        /* ACESSOS SUPERIORES */
         /* ================================================= */
 
         .acessos {
 
-            position: absolute;
+            position: fixed;
 
-            top: 24px;
+            top: 22px;
 
-            right: 30px;
+            right: 25px;
 
             display: flex;
 
-            gap: 10px;
+            gap: 8px;
 
-            z-index: 20;
-
-            animation: fadeDown 1s ease forwards;
+            z-index: 100;
 
         }
 
 
         .acessos a {
 
-            color: rgba(
-                255,
-                255,
-                255,
-                0.82
-            );
-
-            text-decoration: none;
-
-            font-size: 11px;
-
-            letter-spacing: 0.5px;
-
-            padding: 9px 15px;
-
-            border:
-
-                1px solid
-
+            color:
                 rgba(
                     255,
                     255,
                     255,
-                    0.28
+                    0.75
+                );
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            letter-spacing: 0.5px;
+
+            padding: 8px 13px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
                 );
 
             border-radius: 30px;
 
-            backdrop-filter: blur(8px);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.03
+                );
 
-            background: rgba(
-                255,
-                255,
-                255,
-                0.04
-            );
+            backdrop-filter: blur(10px);
 
-            transition: all 0.35s ease;
+            transition: 0.3s ease;
 
         }
 
@@ -230,28 +224,22 @@
 
             background: #ffffff;
 
-            color: #4f5a43;
-
-            border-color: #ffffff;
+            color: #4d5843;
 
             transform: translateY(-2px);
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.15);
 
         }
 
 
         /* ================================================= */
-        /* CONTAINER */
+        /* ÁREA PRINCIPAL */
         /* ================================================= */
 
         .pagina {
 
             position: relative;
 
-            z-index: 2;
+            z-index: 5;
 
             min-height: 100vh;
 
@@ -266,128 +254,365 @@
         }
 
 
-        /* ================================================= */
-        /* CONVITE */
-        /* ================================================= */
-
-        .convite {
-
-            position: relative;
+        .conteudo {
 
             width: 100%;
 
-            max-width: 650px;
+            max-width: 760px;
 
-            padding: 65px 55px;
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* ================================================= */
+        /* TEXTO "UM CONVITE" */
+        /* ================================================= */
+
+        .titulo-inicial {
 
             text-align: center;
 
-            background:
+            margin-bottom: 38px;
 
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.13),
-                    rgba(255,255,255,0.05)
-                );
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
 
-            border:
+        }
 
-                1px solid
 
+        .titulo-inicial .pequeno {
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color:
                 rgba(
                     255,
                     255,
                     255,
-                    0.20
+                    0.65
                 );
 
-            border-radius: 8px;
+            margin-bottom: 12px;
 
-            backdrop-filter: blur(18px);
+        }
+
+
+        .titulo-inicial h1 {
+
+            font-family:
+                'Cormorant Garamond',
+                serif;
+
+            font-size: 42px;
+
+            font-weight: 500;
+
+        }
+
+
+        .titulo-inicial.esconder {
+
+            opacity: 0;
+
+            transform:
+                translateY(-20px);
+
+            pointer-events: none;
+
+            position: absolute;
+
+        }
+
+
+        /* ================================================= */
+        /* ENVELOPE */
+        /* ================================================= */
+
+        .envelope-container {
+
+            position: relative;
+
+            width: min(
+                570px,
+                88vw
+            );
+
+            height: 370px;
+
+            perspective: 1400px;
+
+            transition:
+                transform 1s ease;
+
+        }
+
+
+        /* ================================================= */
+        /* CORPO DO ENVELOPE */
+        /* ================================================= */
+
+        .envelope {
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            width: 100%;
+
+            height: 280px;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e9e1d1,
+                    #f6f0e4
+                );
+
+            border-radius: 4px;
 
             box-shadow:
 
-                0 30px 80px
-                rgba(0,0,0,0.22);
+                0 35px 70px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.30
+                );
 
-            animation:
+        }
 
-                conviteEntrada
+
+        /* ================================================= */
+        /* PARTE INFERIOR DO ENVELOPE */
+        /* ================================================= */
+
+        .envelope-frente {
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 5;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ded4c1,
+                    #f0e8d9
+                );
+
+            clip-path:
+                polygon(
+                    0 0,
+                    50% 58%,
+                    100% 0,
+                    100% 100%,
+                    0 100%
+                );
+
+            border-radius: 4px;
+
+        }
+
+
+        /* ================================================= */
+        /* TRIÂNGULO SUPERIOR / ABA */
+        /* ================================================= */
+
+        .aba {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            z-index: 7;
+
+            transform-origin: top center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #eee7da,
+                    #d9cfbd
+                );
+
+            clip-path:
+                polygon(
+                    0 0,
+                    100% 0,
+                    50% 58%
+                );
+
+            border-radius: 4px 4px 0 0;
+
+            transition:
+                transform
                 1.2s
                 cubic-bezier(
-                    .22,
-                    1,
-                    .36,
+                    .65,
+                    0,
+                    .35,
                     1
                 );
 
         }
 
 
-        @keyframes conviteEntrada {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(35px)
-                    scale(.97);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
-
         /* ================================================= */
-        /* BORDA DECORATIVA */
+        /* DOBRAS LATERAIS */
         /* ================================================= */
 
-        .convite::before {
-
-            content: "";
+        .lado-esquerdo {
 
             position: absolute;
 
-            inset: 12px;
+            inset: 0;
 
-            border:
+            z-index: 4;
 
-                1px solid
+            background:
+                #e6ddcc;
 
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.12
+            clip-path:
+                polygon(
+                    0 0,
+                    50% 58%,
+                    0 100%
                 );
 
-            pointer-events: none;
+        }
+
+
+        .lado-direito {
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 4;
+
+            background:
+                #d9cfbd;
+
+            clip-path:
+                polygon(
+                    100% 0,
+                    50% 58%,
+                    100% 100%
+                );
 
         }
 
 
         /* ================================================= */
-        /* ESPAÇO DA LOGO */
+        /* CARTA */
+        /* ================================================= */
+
+        .carta {
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            width: 88%;
+
+            max-width: 500px;
+
+            min-height: 330px;
+
+            transform:
+                translate(
+                    -50%,
+                    -45%
+                );
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fffdf8,
+                    #f4eee2
+                );
+
+            color: #4d5843;
+
+            padding: 42px 38px;
+
+            text-align: center;
+
+            border-radius: 3px;
+
+            box-shadow:
+
+                0 20px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+
+            z-index: 3;
+
+            opacity: 0;
+
+            transition:
+
+                transform
+                1.4s
+                cubic-bezier(
+                    .22,
+                    1,
+                    .36,
+                    1
+                ),
+
+                opacity
+                0.5s
+                ease;
+
+        }
+
+
+        /* ================================================= */
+        /* LOGO */
         /* ================================================= */
 
         .logo-area {
 
-            width: 180px;
+            width: 150px;
 
-            height: 100px;
+            height: 65px;
 
-            margin: 0 auto 25px;
+            margin: 0 auto 18px;
 
             display: flex;
 
@@ -398,165 +623,118 @@
         }
 
 
-        /*
-        ================================================
-        ESPAÇO RESERVADO PARA A LOGO
-
-        Quando tiver sua logo, coloque por exemplo:
-
-        <img
-            src="{{ url_for('static',
-            filename='img/logo.png') }}"
-            alt="Sonhe.Detalhe.Realize"
-        >
-
-        dentro da .logo-area.
-
-        ================================================
-        */
-
-
         .logo-placeholder {
 
-            color: rgba(
-                255,
-                255,
-                255,
-                0.45
-            );
-
-            font-size: 10px;
+            font-size: 9px;
 
             letter-spacing: 2px;
 
             text-transform: uppercase;
 
-        }
-
-
-        /* ================================================= */
-        /* DETALHE */
-        /* ================================================= */
-
-        .detalhe {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 12px;
-
-            margin-bottom: 28px;
-
-            opacity: 0.65;
-
-        }
-
-
-        .detalhe span {
-
-            width: 45px;
-
-            height: 1px;
-
-            background:
+            color:
                 rgba(
-                    255,
-                    255,
-                    255,
-                    0.45
+                    77,
+                    88,
+                    67,
+                    0.35
                 );
 
         }
 
 
-        .detalhe i {
+        /* ================================================= */
+        /* DETALHE DA CARTA */
+        /* ================================================= */
 
-            font-size: 15px;
+        .ornamento {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .ornamento span {
+
+            width: 35px;
+
+            height: 1px;
+
+            background:
+                rgba(
+                    77,
+                    88,
+                    67,
+                    0.35
+                );
+
+        }
+
+
+        .ornamento i {
 
             font-style: normal;
 
+            font-size: 13px;
+
         }
 
 
         /* ================================================= */
-        /* TÍTULO */
+        /* TÍTULO DA CARTA */
         /* ================================================= */
 
-        h1 {
+        .carta h2 {
 
             font-family:
                 'Cormorant Garamond',
                 serif;
 
-            font-size: clamp(
-                36px,
-                5vw,
-                52px
-            );
+            font-size: 36px;
 
-            font-weight: 500;
+            line-height: 1.1;
 
-            line-height: 1.05;
+            font-weight: 600;
 
-            margin-bottom: 30px;
-
-            color: #fff;
-
-            animation:
-
-                fadeUp
-                1s
-                .25s
-                both;
+            margin-bottom: 22px;
 
         }
 
 
         /* ================================================= */
-        /* TEXTO */
+        /* TEXTO DA CARTA */
         /* ================================================= */
 
-        .texto {
+        .carta p {
 
             font-family:
                 'Cormorant Garamond',
                 serif;
 
-            font-size: 21px;
+            font-size: 19px;
 
-            line-height: 1.55;
+            line-height: 1.5;
 
-            font-weight: 400;
+            color:
+                #626957;
 
-            color: rgba(
-                255,
-                255,
-                255,
-                0.91
-            );
-
-            max-width: 510px;
-
-            margin: 0 auto 35px;
-
-            animation:
-
-                fadeUp
-                1s
-                .45s
-                both;
+            margin-bottom: 25px;
 
         }
 
 
         /* ================================================= */
-        /* BOTÃO */
+        /* BOTÃO APRESENTAÇÃO */
         /* ================================================= */
 
-        .botao {
+        .botao-apresentacao {
 
             display: inline-flex;
 
@@ -564,117 +742,311 @@
 
             justify-content: center;
 
-            gap: 8px;
+            min-width: 180px;
 
-            min-width: 240px;
+            padding: 13px 27px;
 
-            padding: 15px 28px;
+            border-radius: 30px;
 
-            border-radius: 40px;
+            background:
+                #4f5b45;
 
-            background: #f5f1e8;
-
-            color: #4f5944;
+            color: #ffffff;
 
             text-decoration: none;
 
-            font-size: 12px;
+            font-size: 11px;
 
-            font-weight: 600;
+            letter-spacing: 1px;
 
-            letter-spacing: 0.7px;
+            text-transform: uppercase;
+
+            transition:
+                0.35s ease;
+
+            box-shadow:
+
+                0 10px 25px
+                rgba(
+                    50,
+                    60,
+                    43,
+                    0.20
+                );
+
+        }
+
+
+        .botao-apresentacao:hover {
+
+            background:
+                #394331;
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+
+                0 15px 30px
+                rgba(
+                    50,
+                    60,
+                    43,
+                    0.28
+                );
+
+        }
+
+
+        /* ================================================= */
+        /* SELO */
+        /* ================================================= */
+
+        .selo {
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(
+                    -50%,
+                    -42%
+                );
+
+            width: 92px;
+
+            height: 92px;
+
+            border-radius: 50%;
+
+            z-index: 20;
+
+            cursor: pointer;
+
+            background:
+                #59664c;
+
+            border:
+                5px solid
+                #e8dfce;
+
+            box-shadow:
+
+                0 8px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition:
+                0.4s ease;
+
+            animation:
+                pulsar
+                2.2s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .selo::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 6px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+
+            border-radius: 50%;
+
+        }
+
+
+        .selo span {
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            font-weight: 500;
+
+            z-index: 2;
+
+        }
+
+
+        .selo:hover {
+
+            transform:
+                translate(
+                    -50%,
+                    -42%
+                )
+                scale(1.08);
 
             box-shadow:
 
                 0 12px 30px
-                rgba(0,0,0,0.15);
-
-            transition:
-
-                transform .35s ease,
-
-                box-shadow .35s ease,
-
-                background .35s ease;
-
-            animation:
-
-                fadeUp
-                1s
-                .65s
-                both;
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.30
+                );
 
         }
 
 
-        .botao:hover {
+        @keyframes pulsar {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 8px 20px
+                    rgba(0,0,0,0.25);
+            }
+
+            50% {
+                box-shadow:
+                    0 8px 30px
+                    rgba(255,255,255,0.18);
+            }
+
+        }
+
+
+        /* ================================================= */
+        /* ENVELOPE ABERTO */
+        /* ================================================= */
+
+        .envelope-container.aberto .aba {
 
             transform:
-                translateY(-4px);
+                rotateX(
+                    180deg
+                );
 
-            background: #ffffff;
+        }
+
+
+        .envelope-container.aberto .selo {
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translate(
+                    -50%,
+                    -42%
+                )
+                scale(0.7);
+
+        }
+
+
+        .envelope-container.aberto .carta {
+
+            opacity: 1;
+
+            transform:
+                translate(
+                    -50%,
+                    -76%
+                );
+
+            z-index: 10;
+
+        }
+
+
+        .envelope-container.aberto .envelope {
 
             box-shadow:
 
-                0 18px 35px
-                rgba(0,0,0,0.22);
-
-        }
-
-
-        .botao:active {
-
-            transform:
-                translateY(-1px);
+                0 40px 80px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.22
+                );
 
         }
 
 
         /* ================================================= */
-        /* ANIMAÇÃO */
+        /* TEXTO DE INSTRUÇÃO */
         /* ================================================= */
 
-        @keyframes fadeUp {
+        .instrucao {
 
-            from {
+            margin-top: 20px;
 
-                opacity: 0;
+            font-size: 10px;
 
-                transform:
-                    translateY(20px);
+            letter-spacing: 2px;
 
-            }
+            text-transform: uppercase;
 
-            to {
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
 
-                opacity: 1;
+            animation:
+                aparecer
+                1s
+                1s
+                both;
 
-                transform:
-                    translateY(0);
-
-            }
+            transition:
+                opacity 0.4s ease;
 
         }
 
 
-        @keyframes fadeDown {
+        .instrucao.esconder {
+
+            opacity: 0;
+
+        }
+
+
+        @keyframes aparecer {
 
             from {
-
                 opacity: 0;
-
-                transform:
-                    translateY(-15px);
-
             }
 
             to {
-
                 opacity: 1;
-
-                transform:
-                    translateY(0);
-
             }
 
         }
@@ -684,96 +1056,156 @@
         /* RESPONSIVO */
         /* ================================================= */
 
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
 
             .pagina {
 
                 padding:
-                    100px 15px 30px;
-
-            }
-
-
-            .convite {
-
-                padding:
-                    55px 28px;
+                    90px 15px 35px;
 
             }
 
 
             .acessos {
 
-                top: 15px;
+                top: 12px;
 
-                right: 15px;
+                right: 10px;
 
-                left: 15px;
+                left: 10px;
 
-                justify-content:
-                    center;
+                justify-content: center;
 
             }
 
 
             .acessos a {
 
+                font-size: 8px;
+
+                padding: 7px 10px;
+
+            }
+
+
+            .titulo-inicial {
+
+                margin-bottom: 25px;
+
+            }
+
+
+            .titulo-inicial .pequeno {
+
                 font-size: 9px;
 
+                letter-spacing: 3px;
+
+            }
+
+
+            .titulo-inicial h1 {
+
+                font-size: 35px;
+
+            }
+
+
+            .envelope-container {
+
+                height: 310px;
+
+            }
+
+
+            .envelope {
+
+                height: 230px;
+
+            }
+
+
+            .carta {
+
+                min-height: 300px;
+
                 padding:
-                    8px 11px;
+                    30px 24px;
 
             }
 
 
-            h1 {
+            .carta h2 {
 
-                font-size: 39px;
-
-            }
-
-
-            .texto {
-
-                font-size: 19px;
+                font-size: 31px;
 
             }
 
 
-            .botao {
+            .carta p {
 
-                width: 100%;
-
-                min-width: 0;
+                font-size: 17px;
 
             }
+
+
+            .selo {
+
+                width: 78px;
+
+                height: 78px;
+
+            }
+
+
+            .selo span {
+
+                font-size: 9px;
+
+            }
+
 
         }
 
 
-        @media (max-width: 380px) {
+        @media (max-width: 400px) {
 
-            .acessos {
+            .envelope-container {
 
-                gap: 5px;
+                width: 94vw;
 
-            }
-
-
-            .acessos a {
-
-                padding:
-                    7px 8px;
-
-                font-size: 8px;
+                height: 290px;
 
             }
 
 
-            .convite {
+            .envelope {
+
+                height: 210px;
+
+            }
+
+
+            .carta {
+
+                width: 90%;
 
                 padding:
-                    45px 20px;
+                    25px 20px;
+
+            }
+
+
+            .carta h2 {
+
+                font-size: 28px;
+
+            }
+
+
+            .carta p {
+
+                font-size: 16px;
 
             }
 
@@ -788,7 +1220,7 @@
 
 
     <!-- ================================================= -->
-    <!-- FUNDO ANIMADO -->
+    <!-- FUNDO -->
     <!-- ================================================= -->
 
     <div class="background">
@@ -801,21 +1233,21 @@
 
 
     <!-- ================================================= -->
-    <!-- LINKS DE ACESSO -->
+    <!-- ACESSOS -->
     <!-- ================================================= -->
 
     <nav class="acessos">
 
         <a href="{{ url_for('admin_login') }}">
 
-            🔐 Área Administrativa
+            🔐 Administrador
 
         </a>
 
 
         <a href="{{ url_for('cliente_login') }}">
 
-            👤 Área do Cliente
+            👤 Cliente
 
         </a>
 
@@ -828,112 +1260,277 @@
 
     <main class="pagina">
 
-
-        <!-- ================================================= -->
-        <!-- CONVITE -->
-        <!-- ================================================= -->
-
-        <section class="convite">
+        <div class="conteudo">
 
 
             <!-- ================================================= -->
-            <!-- LOGO
+            <!-- TÍTULO INICIAL -->
             <!-- ================================================= -->
 
-            <div class="logo-area">
-
-                <!--
-                COLOQUE SUA LOGO AQUI FUTURAMENTE.
-
-                Exemplo:
-
-                <img
-                    src="{{ url_for('static',
-                    filename='img/logo.png') }}"
-                    alt="Sonhe.Detalhe.Realize"
-                    style="
-                        max-width: 170px;
-                        max-height: 90px;
-                    "
-                >
-                -->
-
-
-                <span class="logo-placeholder">
-
-                    Sua logo aqui
-
-                </span>
-
-            </div>
-
-
-            <!-- ================================================= -->
-            <!-- DETALHE -->
-            <!-- ================================================= -->
-
-            <div class="detalhe">
-
-                <span></span>
-
-                <i>✦</i>
-
-                <span></span>
-
-            </div>
-
-
-            <!-- ================================================= -->
-            <!-- TÍTULO -->
-            <!-- ================================================= -->
-
-            <h1>
-
-                💌 Um convite
-                especialmente para você.
-
-            </h1>
-
-
-            <!-- ================================================= -->
-            <!-- TEXTO -->
-            <!-- ================================================= -->
-
-            <p class="texto">
-
-                Olá! Se você chegou até aqui é porque
-                está dando um passo muito importante
-                na realização do seu sonho.
-                <br><br>
-
-                Preparei uma apresentação exclusiva
-                para que você conheça meu trabalho e
-                descubra como podemos transformar seu
-                evento em uma experiência inesquecível.
-
-            </p>
-
-
-            <!-- ================================================= -->
-            <!-- BOTÃO -->
-            <!-- ================================================= -->
-
-            <a
-                href="{{ url_for('apresentacao') }}"
-                class="botao"
+            <div
+                class="titulo-inicial"
+                id="tituloInicial"
             >
 
-                ✨
+                <div class="pequeno">
 
-                Abrir minha apresentação
+                    Sonhe.Detalhe.Realize
 
-            </a>
+                </div>
 
 
-        </section>
+                <h1>
 
+                    Um convite especial
+
+                </h1>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- ENVELOPE -->
+            <!-- ================================================= -->
+
+            <div
+                class="envelope-container"
+                id="envelope"
+            >
+
+
+                <!-- ================================================= -->
+                <!-- CARTA -->
+                <!-- ================================================= -->
+
+                <div class="carta">
+
+
+                    <!-- ================================================= -->
+                    <!-- ESPAÇO PARA LOGO
+                    <!-- ================================================= -->
+
+                    <div class="logo-area">
+
+                        
+
+                        QUANDO TIVER SUA LOGO:
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='img/logo.png'
+                            ) }}"
+                            alt="Sonhe.Detalhe.Realize"
+                            style="
+                                max-width:150px;
+                                max-height:65px;
+                            "
+                        >
+
+                        
+
+                        <span class="logo-placeholder">
+
+                            Sua logo aqui
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- ORNAMENTO -->
+                    <!-- ================================================= -->
+
+                    <div class="ornamento">
+
+                        <span></span>
+
+                        <i>✦</i>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- MENSAGEM -->
+                    <!-- ================================================= -->
+
+                    <h2>
+
+                        💌 Um convite
+                        especialmente para você.
+
+                    </h2>
+
+
+                    <p>
+
+                        Olá! Se você chegou até aqui
+                        é porque está dando um passo
+                        muito importante na realização
+                        do seu sonho.
+
+                        <br><br>
+
+                        Preparei uma apresentação
+                        exclusiva para que você conheça
+                        meu trabalho e descubra como
+                        podemos transformar seu evento
+                        em uma experiência inesquecível.
+
+                    </p>
+
+
+                    <!-- ================================================= -->
+                    <!-- BOTÃO -->
+                    <!-- ================================================= -->
+
+                    <a
+                        href="{{ url_for('apresentacao') }}"
+                        class="botao-apresentacao"
+                    >
+
+                        Apresentação
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- ENVELOPE -->
+                <!-- ================================================= -->
+
+                <div class="envelope">
+
+
+                    <!-- LADO ESQUERDO -->
+
+                    <div class="lado-esquerdo"></div>
+
+
+                    <!-- LADO DIREITO -->
+
+                    <div class="lado-direito"></div>
+
+
+                    <!-- FRENTE -->
+
+                    <div class="envelope-frente"></div>
+
+
+                    <!-- ABA SUPERIOR -->
+
+                    <div class="aba"></div>
+
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- SELO -->
+                <!-- ================================================= -->
+
+                <div
+                    class="selo"
+                    id="selo"
+                    onclick="abrirCarta()"
+                >
+
+                    <span>
+
+                        ABRIR
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- INSTRUÇÃO -->
+            <!-- ================================================= -->
+
+            <div
+                class="instrucao"
+                id="instrucao"
+            >
+
+                Toque no selo para abrir seu convite
+
+            </div>
+
+
+        </div>
 
     </main>
+
+
+    <!-- ================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================= -->
+
+    <script>
+
+        function abrirCarta() {
+
+            const envelope =
+                document.getElementById(
+                    "envelope"
+                );
+
+            const titulo =
+                document.getElementById(
+                    "tituloInicial"
+                );
+
+            const instrucao =
+                document.getElementById(
+                    "instrucao"
+                );
+
+
+            // Evita clicar novamente
+
+            if (
+                envelope.classList.contains(
+                    "aberto"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            // Abre o envelope
+
+            envelope.classList.add(
+                "aberto"
+            );
+
+
+            // Esconde título
+
+            titulo.classList.add(
+                "esconder"
+            );
+
+
+            // Esconde instrução
+
+            instrucao.classList.add(
+                "esconder"
+            );
+
+        }
+
+    </script>
 
 
 </body>
