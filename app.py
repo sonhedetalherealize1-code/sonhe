@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import mysql.connector
 from functools import wraps
+from datetime import date
 
 
 app = Flask(__name__)
 
-# ==================================================
+# ============================================================
 # CONFIGURAÇÕES
-# ==================================================
+# ============================================================
 
 app.secret_key = os.getenv(
     "SECRET_KEY",
@@ -16,9 +17,9 @@ app.secret_key = os.getenv(
 )
 
 
-# ==================================================
-# CONEXÃO COM O BANCO DE DADOS
-# ==================================================
+# ============================================================
+# CONEXÃO COM O MYSQL
+# ============================================================
 
 def conectar_banco():
 
@@ -33,77 +34,62 @@ def conectar_banco():
     return conexao
 
 
-# ==================================================
-# CRIAR TABELA AUTOMATICAMENTE
-# ==================================================
+# ============================================================
+# FUNÇÕES AUXILIARES
+# ============================================================
 
-def criar_tabela():
+def calcular_status(data_evento):
 
-    conexao = None
-    cursor = None
+    """
+    Calcula automaticamente o status do evento
+    com base na data atual.
+    """
 
-    try:
+    if not data_evento:
+        return "Pendente", "pendente", None
 
-        conexao = conectar_banco()
-        cursor = conexao.cursor()
+    hoje = date.today()
 
-        comando = """
-        CREATE TABLE IF NOT EXISTS orcamentos (
+    diferenca = (data_evento - hoje).days
 
-            id INT AUTO_INCREMENT PRIMARY KEY,
+    if diferenca < 0:
 
-            nome VARCHAR(150) NOT NULL,
+        return "Concluído", "concluido", diferenca
 
-            whatsapp VARCHAR(30) NOT NULL,
+    elif diferenca <= 7:
 
-            evento VARCHAR(100) NOT NULL,
+        return "Urgente", "urgente", diferenca
 
-            data_evento DATE NOT NULL,
+    elif diferenca <= 30:
 
-            cidade VARCHAR(150) NOT NULL,
+        return "Atenção", "atencao", diferenca
 
-            local_evento VARCHAR(200),
+    else:
 
-            convidados VARCHAR(50),
-
-            servico VARCHAR(100),
-
-            conheceu VARCHAR(150),
-
-            sonho TEXT,
-
-            data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-        )
-        """
-
-        cursor.execute(comando)
-
-        conexao.commit()
-
-        print("=================================")
-        print("TABELA ORCAMENTOS VERIFICADA")
-        print("=================================")
-
-    except Exception as erro:
-
-        print("=================================")
-        print("ERRO AO CRIAR TABELA")
-        print("=================================")
-        print(erro)
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if conexao:
-            conexao.close()
+        return "Pendente", "pendente", diferenca
 
 
-# ==================================================
-# PROTEÇÃO DO ADMIN
-# ==================================================
+def preparar_cliente(cliente):
+
+    """
+    Adiciona informações calculadas ao orçamento
+    sem alterar o banco de dados.
+    """
+
+    status, status_classe, dias = calcular_status(
+        cliente.get("data_evento")
+    )
+
+    cliente["status"] = status
+    cliente["status_classe"] = status_classe
+    cliente["dias_restantes"] = dias
+
+    return cliente
+
+
+# ============================================================
+# PROTEÇÃO DO ADMINISTRADOR
+# ============================================================
 
 def admin_required(func):
 
@@ -111,55 +97,91 @@ def admin_required(func):
     def verificar_login(*args, **kwargs):
 
         if not session.get("admin_logado"):
-            return redirect(url_for("admin_login"))
+
+            return redirect(
+                url_for("admin_login")
+            )
 
         return func(*args, **kwargs)
 
     return verificar_login
 
 
-# ==================================================
+# ============================================================
+# PROTEÇÃO DA ÁREA DO CLIENTE
+# ============================================================
+
+def cliente_required(func):
+
+    @wraps(func)
+    def verificar_cliente(*args, **kwargs):
+
+        if not session.get("cliente_id"):
+
+            return redirect(
+                url_for("cliente_login")
+            )
+
+        return func(*args, **kwargs)
+
+    return verificar_cliente
+
+
+# ============================================================
+# SITE
+# ============================================================
+
+# ------------------------------------------------------------
 # CONVITE
-# ==================================================
+# ------------------------------------------------------------
 
 @app.route("/")
 def convite():
 
-    return render_template("convite.html")
+    return render_template(
+        "convite.html"
+    )
 
 
-# ==================================================
+# ------------------------------------------------------------
 # APRESENTAÇÃO / VÍDEO
-# ==================================================
+# ------------------------------------------------------------
 
 @app.route("/apresentacao")
 def apresentacao():
 
-    return render_template("apresentacao.html")
+    return render_template(
+        "apresentacao.html"
+    )
 
 
-# ==================================================
+# ------------------------------------------------------------
 # SOBRE A YASMINI
-# ==================================================
+# ------------------------------------------------------------
 
 @app.route("/sobre")
 def sobre():
 
-    return render_template("sobre.html")
+    return render_template(
+        "sobre.html"
+    )
 
 
-# ==================================================
+# ============================================================
 # ORÇAMENTO
-# ==================================================
+# ============================================================
 
-@app.route("/orcamento", methods=["GET", "POST"])
+@app.route(
+    "/orcamento",
+    methods=["GET", "POST"]
+)
 def orcamento():
 
     if request.method == "POST":
 
-        # ==========================================
+        # ----------------------------------------------------
         # PEGAR DADOS DO FORMULÁRIO
-        # ==========================================
+        # ----------------------------------------------------
 
         nome = request.form.get("nome")
         whatsapp = request.form.get("whatsapp")
@@ -172,24 +194,11 @@ def orcamento():
         conheceu = request.form.get("conheceu")
         sonho = request.form.get("sonho")
 
-        # ==========================================
-        # VERIFICAR CAMPOS OBRIGATÓRIOS
-        # ==========================================
-
-        if not nome or not whatsapp or not evento or not data or not cidade:
-
-            return render_template(
-                "orcamento.html",
-                erro="Por favor, preencha todos os campos obrigatórios."
-            )
-
-        # ==========================================
-        # MOSTRAR DADOS NO LOG
-        # ==========================================
 
         print("=================================")
         print("NOVO ORÇAMENTO")
         print("=================================")
+
         print("Nome:", nome)
         print("WhatsApp:", whatsapp)
         print("Evento:", evento)
@@ -200,26 +209,26 @@ def orcamento():
         print("Serviço:", servico)
         print("Como conheceu:", conheceu)
         print("Sonho:", sonho)
+
         print("=================================")
+
+
+        # ----------------------------------------------------
+        # SALVAR NO MYSQL
+        # ----------------------------------------------------
 
         conexao = None
         cursor = None
 
         try:
 
-            # ======================================
-            # CONECTAR AO MYSQL
-            # ======================================
-
             conexao = conectar_banco()
 
             print("Conectado ao MySQL com sucesso!")
 
+
             cursor = conexao.cursor()
 
-            # ======================================
-            # INSERIR ORÇAMENTO
-            # ======================================
 
             comando = """
                 INSERT INTO orcamentos (
@@ -249,6 +258,7 @@ def orcamento():
                 )
             """
 
+
             valores = (
                 nome,
                 whatsapp,
@@ -262,92 +272,140 @@ def orcamento():
                 sonho
             )
 
-            cursor.execute(comando, valores)
+
+            cursor.execute(
+                comando,
+                valores
+            )
+
 
             conexao.commit()
 
-            print("=================================")
-            print("ORÇAMENTO SALVO COM SUCESSO!")
-            print("=================================")
 
-            # ======================================
-            # MOSTRAR PÁGINA DE AGRADECIMENTO
-            # ======================================
+            print(
+                "ORÇAMENTO SALVO COM SUCESSO!"
+            )
 
-            return render_template("obrigado.html")
+
+            # ------------------------------------------------
+            # PÁGINA DE AGRADECIMENTO
+            # ------------------------------------------------
+
+            return render_template(
+                "obrigado.html"
+            )
+
 
         except Exception as erro:
 
             print("=================================")
             print("ERRO AO SALVAR ORÇAMENTO")
             print("=================================")
-            print("TIPO DO ERRO:", type(erro).__name__)
-            print("ERRO:", erro)
+
+            print(
+                "TIPO DO ERRO:",
+                type(erro).__name__
+            )
+
+            print(
+                "ERRO:",
+                erro
+            )
+
             print("=================================")
 
-            return render_template(
-                "orcamento.html",
-                erro="Não foi possível enviar suas informações. Tente novamente."
-            ), 500
+
+            if conexao:
+
+                conexao.rollback()
+
+
+            return (
+                "Erro ao salvar o orçamento.",
+                500
+            )
+
 
         finally:
 
             if cursor:
+
                 cursor.close()
 
+
             if conexao:
+
                 conexao.close()
 
-    # ==========================================
-    # GET
-    # ==========================================
 
-    return render_template("orcamento.html")
+    return render_template(
+        "orcamento.html"
+    )
 
 
-# ==================================================
-# ADMINISTRADOR - LOGIN
-# ==================================================
+# ============================================================
+# ADMINISTRADOR
+# ============================================================
 
-@app.route("/admin", methods=["GET", "POST"])
+# ------------------------------------------------------------
+# LOGIN DO ADMIN
+# ------------------------------------------------------------
+
+@app.route(
+    "/admin",
+    methods=["GET", "POST"]
+)
 def admin_login():
 
     if request.method == "POST":
 
-        usuario = request.form.get("usuario")
-        senha = request.form.get("senha")
+        usuario = request.form.get(
+            "usuario"
+        )
 
-        # ==========================================
-        # PEGAR LOGIN DO RAILWAY
-        # ==========================================
+        senha = request.form.get(
+            "senha"
+        )
 
-        usuario_correto = os.getenv("ADMIN_USER")
-        senha_correta = os.getenv("ADMIN_PASSWORD")
 
-        # ==========================================
-        # VERIFICAR LOGIN
-        # ==========================================
+        usuario_correto = os.getenv(
+            "ADMIN_USER"
+        )
+
+        senha_correta = os.getenv(
+            "ADMIN_PASSWORD"
+        )
+
 
         if (
             usuario == usuario_correto
-            and senha == senha_correta
+            and
+            senha == senha_correta
         ):
+
+            session.clear()
 
             session["admin_logado"] = True
 
-            return redirect(url_for("admin_painel"))
+            return redirect(
+                url_for("admin_painel")
+            )
+
 
         return render_template(
             "admin_login.html",
             erro="Usuário ou senha incorretos."
         )
 
-    return render_template("admin_login.html")
+
+    return render_template(
+        "admin_login.html"
+    )
 
 
-# ==================================================
-# ADMINISTRADOR - PAINEL
-# ==================================================
+# ------------------------------------------------------------
+# PAINEL ADMIN
+# ------------------------------------------------------------
 
 @app.route("/admin/painel")
 @admin_required
@@ -360,44 +418,168 @@ def admin_painel():
 
         conexao = conectar_banco()
 
-        cursor = conexao.cursor(dictionary=True)
+        cursor = conexao.cursor(
+            dictionary=True
+        )
 
-        cursor.execute("""
-            SELECT *
-            FROM orcamentos
-            ORDER BY data_envio DESC
-        """)
+
+        # ----------------------------------------------------
+        # PESQUISA
+        # ----------------------------------------------------
+
+        pesquisa = request.args.get(
+            "pesquisa",
+            ""
+        ).strip()
+
+
+        # ----------------------------------------------------
+        # ORDENAÇÃO
+        # ----------------------------------------------------
+
+        ordem = request.args.get(
+            "ordem",
+            "recente"
+        )
+
+
+        if ordem == "data_asc":
+
+            ordenacao = "data_evento ASC"
+
+        elif ordem == "data_desc":
+
+            ordenacao = "data_evento DESC"
+
+        elif ordem == "nome":
+
+            ordenacao = "nome ASC"
+
+        else:
+
+            ordenacao = "data_envio DESC"
+
+
+        # ----------------------------------------------------
+        # CONSULTA
+        # ----------------------------------------------------
+
+        if pesquisa:
+
+            cursor.execute(
+                f"""
+                SELECT *
+                FROM orcamentos
+                WHERE nome LIKE %s
+                ORDER BY {ordenacao}
+                """,
+                (
+                    f"%{pesquisa}%",
+                )
+            )
+
+        else:
+
+            cursor.execute(
+                f"""
+                SELECT *
+                FROM orcamentos
+                ORDER BY {ordenacao}
+                """
+            )
+
 
         clientes = cursor.fetchall()
 
+
+        # ----------------------------------------------------
+        # PREPARAR STATUS
+        # ----------------------------------------------------
+
+        for cliente in clientes:
+
+            preparar_cliente(
+                cliente
+            )
+
+
+        # ----------------------------------------------------
+        # ESTATÍSTICAS
+        # ----------------------------------------------------
+
+        total = len(clientes)
+
+        urgentes = 0
+        atencao = 0
+        concluidos = 0
+        pendentes = 0
+
+
+        for cliente in clientes:
+
+            if cliente["status"] == "Urgente":
+
+                urgentes += 1
+
+            elif cliente["status"] == "Atenção":
+
+                atencao += 1
+
+            elif cliente["status"] == "Concluído":
+
+                concluidos += 1
+
+            else:
+
+                pendentes += 1
+
+
         return render_template(
             "admin_painel.html",
-            clientes=clientes
+            clientes=clientes,
+            total=total,
+            urgentes=urgentes,
+            atencao=atencao,
+            concluidos=concluidos,
+            pendentes=pendentes,
+            pesquisa=pesquisa,
+            ordem=ordem
         )
+
 
     except Exception as erro:
 
-        print("=================================")
-        print("ERRO AO BUSCAR CLIENTES")
-        print("=================================")
+        print(
+            "ERRO AO CARREGAR PAINEL:"
+        )
+
         print(erro)
 
-        return "Erro ao carregar os clientes.", 500
+        return (
+            "Erro ao carregar os clientes.",
+            500
+        )
+
 
     finally:
 
         if cursor:
+
             cursor.close()
 
+
         if conexao:
+
             conexao.close()
 
 
-# ==================================================
-# ADMINISTRADOR - VER CLIENTE
-# ==================================================
+# ------------------------------------------------------------
+# VER CLIENTE
+# ------------------------------------------------------------
 
-@app.route("/admin/cliente/<int:id>")
+@app.route(
+    "/admin/cliente/<int:id>"
+)
 @admin_required
 def admin_cliente(id):
 
@@ -408,65 +590,402 @@ def admin_cliente(id):
 
         conexao = conectar_banco()
 
-        cursor = conexao.cursor(dictionary=True)
+        cursor = conexao.cursor(
+            dictionary=True
+        )
 
-        cursor.execute("""
+
+        cursor.execute(
+            """
             SELECT *
             FROM orcamentos
             WHERE id = %s
-        """, (id,))
+            """,
+            (id,)
+        )
+
 
         cliente = cursor.fetchone()
 
+
         if not cliente:
 
-            return "Cliente não encontrado.", 404
+            return (
+                "Cliente não encontrado.",
+                404
+            )
+
+
+        preparar_cliente(
+            cliente
+        )
+
 
         return render_template(
             "admin_cliente.html",
             cliente=cliente
         )
 
+
     except Exception as erro:
 
-        print("=================================")
-        print("ERRO AO BUSCAR CLIENTE")
-        print("=================================")
+        print(
+            "ERRO AO BUSCAR CLIENTE:"
+        )
+
         print(erro)
 
-        return "Erro ao carregar cliente.", 500
+        return (
+            "Erro ao carregar cliente.",
+            500
+        )
+
 
     finally:
 
         if cursor:
+
             cursor.close()
 
+
         if conexao:
+
             conexao.close()
 
 
-# ==================================================
-# ADMINISTRADOR - LOGOUT
-# ==================================================
+# ------------------------------------------------------------
+# EXCLUIR ORÇAMENTO
+# ------------------------------------------------------------
 
-@app.route("/admin/logout")
+@app.route(
+    "/admin/excluir/<int:id>",
+    methods=["POST"]
+)
+@admin_required
+def admin_excluir(id):
+
+    conexao = None
+    cursor = None
+
+    try:
+
+        conexao = conectar_banco()
+
+        cursor = conexao.cursor()
+
+
+        cursor.execute(
+            """
+            DELETE FROM orcamentos
+            WHERE id = %s
+            """,
+            (id,)
+        )
+
+
+        conexao.commit()
+
+
+        return redirect(
+            url_for("admin_painel")
+        )
+
+
+    except Exception as erro:
+
+        print(
+            "ERRO AO EXCLUIR:"
+        )
+
+        print(erro)
+
+        return (
+            "Erro ao excluir orçamento.",
+            500
+        )
+
+
+    finally:
+
+        if cursor:
+
+            cursor.close()
+
+
+        if conexao:
+
+            conexao.close()
+
+
+# ------------------------------------------------------------
+# LOGOUT ADMIN
+# ------------------------------------------------------------
+
+@app.route(
+    "/admin/logout"
+)
 def admin_logout():
 
-    session.clear()
+    session.pop(
+        "admin_logado",
+        None
+    )
 
-    return redirect(url_for("admin_login"))
+    return redirect(
+        url_for("admin_login")
+    )
 
 
-# ==================================================
-# INICIALIZAÇÃO
-# ==================================================
+# ============================================================
+# ÁREA DO CLIENTE
+# ============================================================
+
+# ------------------------------------------------------------
+# LOGIN DO CLIENTE
+# ------------------------------------------------------------
+
+@app.route(
+    "/cliente",
+    methods=["GET", "POST"]
+)
+def cliente_login():
+
+    if request.method == "POST":
+
+        whatsapp = request.form.get(
+            "whatsapp"
+        )
+
+        if not whatsapp:
+
+            return render_template(
+                "cliente_login.html",
+                erro="Digite seu WhatsApp."
+            )
+
+
+        conexao = None
+        cursor = None
+
+        try:
+
+            conexao = conectar_banco()
+
+            cursor = conexao.cursor(
+                dictionary=True
+            )
+
+
+            # ----------------------------------------------
+            # LIMPAR FORMATAÇÃO DO WHATSAPP
+            # ----------------------------------------------
+
+            whatsapp_limpo = (
+                whatsapp
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+                .replace(" ", "")
+            )
+
+
+            # ----------------------------------------------
+            # BUSCAR CLIENTE
+            # ----------------------------------------------
+
+            cursor.execute(
+                """
+                SELECT *
+                FROM orcamentos
+                WHERE REPLACE(
+                    REPLACE(
+                        REPLACE(
+                            REPLACE(whatsapp, '(', ''),
+                            ')', ''
+                        ),
+                        '-', ''
+                    ),
+                    ' ', ''
+                ) = %s
+
+                ORDER BY data_envio DESC
+
+                LIMIT 1
+                """,
+                (whatsapp_limpo,)
+            )
+
+
+            cliente = cursor.fetchone()
+
+
+            if not cliente:
+
+                return render_template(
+                    "cliente_login.html",
+                    erro=(
+                        "Não encontramos um orçamento "
+                        "com esse WhatsApp."
+                    )
+                )
+
+
+            # ----------------------------------------------
+            # LOGIN CLIENTE
+            # ----------------------------------------------
+
+            session.clear()
+
+            session["cliente_id"] = cliente["id"]
+
+
+            return redirect(
+                url_for("cliente_painel")
+            )
+
+
+        except Exception as erro:
+
+            print(
+                "ERRO NO LOGIN DO CLIENTE:"
+            )
+
+            print(erro)
+
+            return (
+                "Erro ao acessar a área do cliente.",
+                500
+            )
+
+
+        finally:
+
+            if cursor:
+
+                cursor.close()
+
+
+            if conexao:
+
+                conexao.close()
+
+
+    return render_template(
+        "cliente_login.html"
+    )
+
+
+# ------------------------------------------------------------
+# PAINEL DO CLIENTE
+# ------------------------------------------------------------
+
+@app.route(
+    "/cliente/painel"
+)
+@cliente_required
+def cliente_painel():
+
+    cliente_id = session.get(
+        "cliente_id"
+    )
+
+
+    conexao = None
+    cursor = None
+
+    try:
+
+        conexao = conectar_banco()
+
+        cursor = conexao.cursor(
+            dictionary=True
+        )
+
+
+        cursor.execute(
+            """
+            SELECT *
+            FROM orcamentos
+            WHERE id = %s
+            """,
+            (cliente_id,)
+        )
+
+
+        cliente = cursor.fetchone()
+
+
+        if not cliente:
+
+            session.clear()
+
+            return redirect(
+                url_for("cliente_login")
+            )
+
+
+        preparar_cliente(
+            cliente
+        )
+
+
+        return render_template(
+            "cliente_painel.html",
+            cliente=cliente
+        )
+
+
+    except Exception as erro:
+
+        print(
+            "ERRO AO CARREGAR ÁREA DO CLIENTE:"
+        )
+
+        print(erro)
+
+        return (
+            "Erro ao carregar sua área.",
+            500
+        )
+
+
+    finally:
+
+        if cursor:
+
+            cursor.close()
+
+
+        if conexao:
+
+            conexao.close()
+
+
+# ------------------------------------------------------------
+# LOGOUT CLIENTE
+# ------------------------------------------------------------
+
+@app.route(
+    "/cliente/logout"
+)
+def cliente_logout():
+
+    session.pop(
+        "cliente_id",
+        None
+    )
+
+    return redirect(
+        url_for("cliente_login")
+    )
+
+
+# ============================================================
+# EXECUÇÃO LOCAL
+# ============================================================
 
 if __name__ == "__main__":
 
-    criar_tabela()
-
     app.run(
-        host="0.0.0.0",
-        port=int(os.getenv("PORT", 5000)),
         debug=True
     )

@@ -2,132 +2,939 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Um convite para você</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/convite.css') }}">
+    <title>Um convite especialmente para você</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- ================================================= -->
+    <!-- FONTES -->
+    <!-- ================================================= -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+
+    <!-- ================================================= -->
+    <!-- CSS -->
+    <!-- ================================================= -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            min-height: 100%;
+
+        }
+
+
+        body {
+
+            font-family: 'Montserrat', sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(255,255,255,0.08),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #3f4936,
+                    #59634b,
+                    #4a553f
+                );
+
+            color: #ffffff;
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* ================================================= */
+        /* FUNDO */
+        /* ================================================= */
+
+        .background {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+        }
+
+
+        .glow {
+
+            position: absolute;
+
+            width: 450px;
+
+            height: 450px;
+
+            border-radius: 50%;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.06
+            );
+
+            filter: blur(80px);
+
+            animation: floatGlow 10s ease-in-out infinite;
+
+        }
+
+
+        .glow.one {
+
+            top: -150px;
+
+            left: -100px;
+
+        }
+
+
+        .glow.two {
+
+            right: -150px;
+
+            bottom: -150px;
+
+            animation-delay: 3s;
+
+        }
+
+
+        @keyframes floatGlow {
+
+            0%,
+            100% {
+
+                transform: translate(
+                    0,
+                    0
+                );
+
+            }
+
+            50% {
+
+                transform: translate(
+                    30px,
+                    -25px
+                );
+
+            }
+
+        }
+
+
+        /* ================================================= */
+        /* ACESSOS */
+        /* ================================================= */
+
+        .acessos {
+
+            position: absolute;
+
+            top: 24px;
+
+            right: 30px;
+
+            display: flex;
+
+            gap: 10px;
+
+            z-index: 20;
+
+            animation: fadeDown 1s ease forwards;
+
+        }
+
+
+        .acessos a {
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.82
+            );
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            letter-spacing: 0.5px;
+
+            padding: 9px 15px;
+
+            border:
+
+                1px solid
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.28
+                );
+
+            border-radius: 30px;
+
+            backdrop-filter: blur(8px);
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.04
+            );
+
+            transition: all 0.35s ease;
+
+        }
+
+
+        .acessos a:hover {
+
+            background: #ffffff;
+
+            color: #4f5a43;
+
+            border-color: #ffffff;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.15);
+
+        }
+
+
+        /* ================================================= */
+        /* CONTAINER */
+        /* ================================================= */
+
+        .pagina {
+
+            position: relative;
+
+            z-index: 2;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 80px 20px 40px;
+
+        }
+
+
+        /* ================================================= */
+        /* CONVITE */
+        /* ================================================= */
+
+        .convite {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 650px;
+
+            padding: 65px 55px;
+
+            text-align: center;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.13),
+                    rgba(255,255,255,0.05)
+                );
+
+            border:
+
+                1px solid
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+                );
+
+            border-radius: 8px;
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(0,0,0,0.22);
+
+            animation:
+
+                conviteEntrada
+                1.2s
+                cubic-bezier(
+                    .22,
+                    1,
+                    .36,
+                    1
+                );
+
+        }
+
+
+        @keyframes conviteEntrada {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* ================================================= */
+        /* BORDA DECORATIVA */
+        /* ================================================= */
+
+        .convite::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 12px;
+
+            border:
+
+                1px solid
+
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            pointer-events: none;
+
+        }
+
+
+        /* ================================================= */
+        /* ESPAÇO DA LOGO */
+        /* ================================================= */
+
+        .logo-area {
+
+            width: 180px;
+
+            height: 100px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /*
+        ================================================
+        ESPAÇO RESERVADO PARA A LOGO
+
+        Quando tiver sua logo, coloque por exemplo:
+
+        <img
+            src="{{ url_for('static',
+            filename='img/logo.png') }}"
+            alt="Sonhe.Detalhe.Realize"
+        >
+
+        dentro da .logo-area.
+
+        ================================================
+        */
+
+
+        .logo-placeholder {
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.45
+            );
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* ================================================= */
+        /* DETALHE */
+        /* ================================================= */
+
+        .detalhe {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-bottom: 28px;
+
+            opacity: 0.65;
+
+        }
+
+
+        .detalhe span {
+
+            width: 45px;
+
+            height: 1px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.45
+                );
+
+        }
+
+
+        .detalhe i {
+
+            font-size: 15px;
+
+            font-style: normal;
+
+        }
+
+
+        /* ================================================= */
+        /* TÍTULO */
+        /* ================================================= */
+
+        h1 {
+
+            font-family:
+                'Cormorant Garamond',
+                serif;
+
+            font-size: clamp(
+                36px,
+                5vw,
+                52px
+            );
+
+            font-weight: 500;
+
+            line-height: 1.05;
+
+            margin-bottom: 30px;
+
+            color: #fff;
+
+            animation:
+
+                fadeUp
+                1s
+                .25s
+                both;
+
+        }
+
+
+        /* ================================================= */
+        /* TEXTO */
+        /* ================================================= */
+
+        .texto {
+
+            font-family:
+                'Cormorant Garamond',
+                serif;
+
+            font-size: 21px;
+
+            line-height: 1.55;
+
+            font-weight: 400;
+
+            color: rgba(
+                255,
+                255,
+                255,
+                0.91
+            );
+
+            max-width: 510px;
+
+            margin: 0 auto 35px;
+
+            animation:
+
+                fadeUp
+                1s
+                .45s
+                both;
+
+        }
+
+
+        /* ================================================= */
+        /* BOTÃO */
+        /* ================================================= */
+
+        .botao {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            min-width: 240px;
+
+            padding: 15px 28px;
+
+            border-radius: 40px;
+
+            background: #f5f1e8;
+
+            color: #4f5944;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.7px;
+
+            box-shadow:
+
+                0 12px 30px
+                rgba(0,0,0,0.15);
+
+            transition:
+
+                transform .35s ease,
+
+                box-shadow .35s ease,
+
+                background .35s ease;
+
+            animation:
+
+                fadeUp
+                1s
+                .65s
+                both;
+
+        }
+
+
+        .botao:hover {
+
+            transform:
+                translateY(-4px);
+
+            background: #ffffff;
+
+            box-shadow:
+
+                0 18px 35px
+                rgba(0,0,0,0.22);
+
+        }
+
+
+        .botao:active {
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        /* ================================================= */
+        /* ANIMAÇÃO */
+        /* ================================================= */
+
+        @keyframes fadeUp {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes fadeDown {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* ================================================= */
+        /* RESPONSIVO */
+        /* ================================================= */
+
+        @media (max-width: 700px) {
+
+            .pagina {
+
+                padding:
+                    100px 15px 30px;
+
+            }
+
+
+            .convite {
+
+                padding:
+                    55px 28px;
+
+            }
+
+
+            .acessos {
+
+                top: 15px;
+
+                right: 15px;
+
+                left: 15px;
+
+                justify-content:
+                    center;
+
+            }
+
+
+            .acessos a {
+
+                font-size: 9px;
+
+                padding:
+                    8px 11px;
+
+            }
+
+
+            h1 {
+
+                font-size: 39px;
+
+            }
+
+
+            .texto {
+
+                font-size: 19px;
+
+            }
+
+
+            .botao {
+
+                width: 100%;
+
+                min-width: 0;
+
+            }
+
+        }
+
+
+        @media (max-width: 380px) {
+
+            .acessos {
+
+                gap: 5px;
+
+            }
+
+
+            .acessos a {
+
+                padding:
+                    7px 8px;
+
+                font-size: 8px;
+
+            }
+
+
+            .convite {
+
+                padding:
+                    45px 20px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- Fundo -->
+
+    <!-- ================================================= -->
+    <!-- FUNDO ANIMADO -->
+    <!-- ================================================= -->
+
     <div class="background">
 
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
+        <div class="glow one"></div>
 
-        <span class="particle p1"></span>
-        <span class="particle p2"></span>
-        <span class="particle p3"></span>
-        <span class="particle p4"></span>
-        <span class="particle p5"></span>
+        <div class="glow two"></div>
 
     </div>
 
 
-    <!-- Conteúdo principal -->
-    <main class="convite">
+    <!-- ================================================= -->
+    <!-- LINKS DE ACESSO -->
+    <!-- ================================================= -->
 
-        <!-- Pequeno detalhe superior -->
-        <div class="ornamento">
+    <nav class="acessos">
 
-            <span></span>
+        <a href="{{ url_for('admin_login') }}">
 
-            <div class="diamond">✦</div>
+            🔐 Área Administrativa
 
-            <span></span>
-
-        </div>
+        </a>
 
 
-        <!-- Texto -->
-        <div class="conteudo">
+        <a href="{{ url_for('cliente_login') }}">
 
-            <p class="mini-titulo">
-                UM CONVITE ESPECIAL
-            </p>
+            👤 Área do Cliente
 
+        </a>
+
+    </nav>
+
+
+    <!-- ================================================= -->
+    <!-- PÁGINA -->
+    <!-- ================================================= -->
+
+    <main class="pagina">
+
+
+        <!-- ================================================= -->
+        <!-- CONVITE -->
+        <!-- ================================================= -->
+
+        <section class="convite">
+
+
+            <!-- ================================================= -->
+            <!-- LOGO
+            <!-- ================================================= -->
+
+            <div class="logo-area">
+
+                <!--
+                COLOQUE SUA LOGO AQUI FUTURAMENTE.
+
+                Exemplo:
+
+                <img
+                    src="{{ url_for('static',
+                    filename='img/logo.png') }}"
+                    alt="Sonhe.Detalhe.Realize"
+                    style="
+                        max-width: 170px;
+                        max-height: 90px;
+                    "
+                >
+                -->
+
+
+                <span class="logo-placeholder">
+
+                    Sua logo aqui
+
+                </span>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- DETALHE -->
+            <!-- ================================================= -->
+
+            <div class="detalhe">
+
+                <span></span>
+
+                <i>✦</i>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- TÍTULO -->
+            <!-- ================================================= -->
 
             <h1>
-                Especialmente<br>
-                <span>para você.</span>
+
+                💌 Um convite
+                especialmente para você.
+
             </h1>
 
 
-            <div class="linha"></div>
+            <!-- ================================================= -->
+            <!-- TEXTO -->
+            <!-- ================================================= -->
 
+            <p class="texto">
 
-            <p class="mensagem">
+                Olá! Se você chegou até aqui é porque
+                está dando um passo muito importante
+                na realização do seu sonho.
+                <br><br>
 
-                Olá! Se você chegou até aqui é porque está
-                dando um passo muito importante na realização
-                do seu sonho.
-
-            </p>
-
-
-            <p class="mensagem secundaria">
-
-                Preparei uma apresentação exclusiva para que
-                você conheça meu trabalho e descubra como
-                podemos transformar seu evento em uma
-                experiência inesquecível.
+                Preparei uma apresentação exclusiva
+                para que você conheça meu trabalho e
+                descubra como podemos transformar seu
+                evento em uma experiência inesquecível.
 
             </p>
 
 
-            <!-- Botão -->
-            <button id="abrirConvite" class="botao">
+            <!-- ================================================= -->
+            <!-- BOTÃO -->
+            <!-- ================================================= -->
 
-                <span class="icone">✦</span>
+            <a
+                href="{{ url_for('apresentacao') }}"
+                class="botao"
+            >
 
-                <span>
-                    Abrir minha apresentação
-                </span>
+                ✨
 
-                <span class="seta">→</span>
+                Abrir minha apresentação
 
-            </button>
-
-        </div>
+            </a>
 
 
-        <!-- Assinatura -->
-        <div class="assinatura">
+        </section>
 
-            <span>Sonhe.</span>
-            <span>Detalhe.</span>
-            <span>Realize.</span>
-
-        </div>
 
     </main>
 
-
-    <!-- Tela de transição -->
-    <div id="transicao" class="transicao">
-
-        <div class="loader">
-
-            <div class="loader-flor">✦</div>
-
-            <p>
-                Preparando sua apresentação...
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <script src="{{ url_for('static', filename='js/convite.js') }}"></script>
 
 </body>
 

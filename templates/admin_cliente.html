@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {{ cliente.nome }} | Sonhe.Detalhe.Realize
-    </title>
-
+    <title>{{ cliente.nome }} | SDR</title>
 
     <style>
 
@@ -23,30 +17,28 @@
             box-sizing: border-box;
         }
 
-
         body {
 
-            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            background: #f4f0e8;
 
-            background: #f4f0e6;
-
-            color: #4d523b;
+            color: #4d5545;
 
         }
 
 
-        /* ==================================
+        /* ==========================================
            CABEÇALHO
-        ================================== */
+        ========================================== */
 
-        .topo {
+        header {
 
-            min-height: 85px;
+            background: #59634b;
+
+            color: white;
+
+            padding: 20px 5%;
 
             display: flex;
 
@@ -54,27 +46,18 @@
 
             justify-content: space-between;
 
-            padding: 0 6%;
-
-            color: white;
-
-            background: #737a57;
-
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.10);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 
         }
 
 
         .marca h1 {
 
-            font-family: Georgia, serif;
+            font-size: 23px;
 
-            font-weight: normal;
+            font-weight: 500;
 
-            font-size: 22px;
-
-            letter-spacing: 2px;
+            letter-spacing: 1px;
 
         }
 
@@ -83,28 +66,28 @@
 
             display: block;
 
-            margin-top: 5px;
-
             font-size: 11px;
 
             letter-spacing: 2px;
 
             opacity: 0.75;
 
+            margin-top: 3px;
+
         }
 
 
         .voltar {
 
-            padding: 9px 18px;
-
-            border-radius: 20px;
+            color: white;
 
             text-decoration: none;
 
-            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
 
-            border: 1px solid rgba(255,255,255,0.35);
+            padding: 9px 16px;
+
+            border-radius: 30px;
 
             font-size: 13px;
 
@@ -115,250 +98,381 @@
 
         .voltar:hover {
 
-            background: rgba(255,255,255,0.15);
+            background: white;
+
+            color: #59634b;
 
         }
 
 
-        /* ==================================
-           CONTEÚDO
-        ================================== */
+        /* ==========================================
+           CONTAINER
+        ========================================== */
 
-        .conteudo {
+        .container {
 
-            width: 90%;
+            width: 92%;
 
-            max-width: 1000px;
+            max-width: 1100px;
 
-            margin: 50px auto;
-
-        }
-
-
-        .titulo {
-
-            margin-bottom: 35px;
+            margin: 35px auto 60px;
 
         }
 
 
-        .titulo h2 {
+        /* ==========================================
+           CABEÇALHO DA CLIENTE
+        ========================================== */
 
-            font-family: Georgia, serif;
-
-            font-weight: normal;
-
-            font-size: 35px;
-
-            color: #5f6547;
-
-        }
-
-
-        .titulo p {
-
-            margin-top: 8px;
-
-            color: #858979;
-
-        }
-
-
-        /* ==================================
-           CARD PRINCIPAL
-        ================================== */
-
-        .card {
+        .cliente-topo {
 
             background: white;
 
             border-radius: 22px;
 
-            overflow: hidden;
-
-            box-shadow:
-                0 10px 35px rgba(65,70,45,0.08);
-
-            border: 1px solid #e6e1d5;
-
-        }
-
-
-        .card-topo {
-
             padding: 30px;
 
-            background: #f9f8f3;
+            box-shadow: 0 7px 30px rgba(62,67,52,0.08);
 
-            border-bottom: 1px solid #e9e6dc;
+            display: flex;
 
-        }
+            justify-content: space-between;
 
+            align-items: center;
 
-        .cliente-nome {
+            gap: 20px;
 
-            font-family: Georgia, serif;
-
-            font-size: 30px;
-
-            font-weight: normal;
-
-            color: #626a49;
+            margin-bottom: 22px;
 
         }
 
 
-        .cliente-evento {
+        .cliente-identidade h2 {
 
-            margin-top: 8px;
+            font-size: 32px;
 
-            color: #858979;
+            font-weight: 400;
+
+            color: #4d5843;
 
         }
 
+
+        .cliente-identidade p {
+
+            margin-top: 7px;
+
+            color: #898e80;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==========================================
+           STATUS
+        ========================================== */
 
         .status {
 
-            display: inline-block;
+            padding: 10px 17px;
 
-            margin-top: 15px;
+            border-radius: 30px;
 
-            padding: 7px 14px;
+            font-size: 13px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+        }
+
+
+        .status.pendente {
+
+            background: #edf0e8;
+
+            color: #647055;
+
+        }
+
+
+        .status.atencao {
+
+            background: #fff3d8;
+
+            color: #a87a22;
+
+        }
+
+
+        .status.urgente {
+
+            background: #fbe2df;
+
+            color: #b65046;
+
+        }
+
+
+        .status.concluido {
+
+            background: #e8e8e8;
+
+            color: #777;
+
+        }
+
+
+        /* ==========================================
+           CONTADOR
+        ========================================== */
+
+        .contador {
+
+            background: #59634b;
+
+            color: white;
 
             border-radius: 20px;
 
-            font-size: 11px;
+            padding: 28px;
 
-            font-weight: bold;
+            margin-bottom: 22px;
 
-            color: #657043;
+            text-align: center;
 
-            background: #e8ecd9;
-
-        }
-
-
-        /* ==================================
-           INFORMAÇÕES
-        ================================== */
-
-        .informacoes {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
+            box-shadow: 0 7px 30px rgba(62,67,52,0.12);
 
         }
 
 
-        .campo {
+        .contador small {
 
-            padding: 25px 30px;
+            display: block;
 
-            border-bottom: 1px solid #eeeae1;
+            opacity: 0.75;
 
-        }
-
-
-        .campo:nth-child(odd) {
-
-            border-right: 1px solid #eeeae1;
-
-        }
-
-
-        .campo-titulo {
-
-            margin-bottom: 8px;
-
-            font-size: 11px;
-
-            text-transform: uppercase;
+            font-size: 12px;
 
             letter-spacing: 1px;
 
-            color: #949787;
+            text-transform: uppercase;
+
+            margin-bottom: 7px;
 
         }
 
 
-        .campo-valor {
+        .contador strong {
 
-            font-size: 16px;
+            font-size: 32px;
 
-            color: #4f553c;
+            font-weight: 400;
 
-            line-height: 1.5;
+        }
+
+
+        .contador.urgente {
+
+            background: #a65349;
+
+        }
+
+
+        .contador.concluido {
+
+            background: #777;
+
+        }
+
+
+        /* ==========================================
+           GRID
+        ========================================== */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        /* ==========================================
+           CARD
+        ========================================== */
+
+        .card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow: 0 6px 25px rgba(62,67,52,0.07);
+
+        }
+
+
+        .card h3 {
+
+            color: #59634b;
+
+            font-size: 18px;
+
+            font-weight: 500;
+
+            margin-bottom: 20px;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #ece9df;
+
+        }
+
+
+        /* ==========================================
+           INFORMAÇÃO
+        ========================================== */
+
+        .linha {
+
+            display: flex;
+
+            gap: 13px;
+
+            margin: 17px 0;
+
+            align-items: flex-start;
+
+        }
+
+
+        .icone {
+
+            width: 34px;
+
+            height: 34px;
+
+            min-width: 34px;
+
+            border-radius: 50%;
+
+            background: #f1eee6;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 15px;
+
+        }
+
+
+        .linha small {
+
+            display: block;
+
+            color: #999d91;
+
+            font-size: 11px;
+
+            margin-bottom: 3px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+        .linha strong {
+
+            display: block;
+
+            color: #4e5647;
+
+            font-size: 14px;
+
+            font-weight: 500;
 
             word-break: break-word;
 
         }
 
 
-        .campo-sonho {
-
-            grid-column: span 2;
-
-        }
-
+        /* ==========================================
+           SONHO
+        ========================================== */
 
         .sonho {
 
-            padding: 25px 30px;
+            background: #f8f5ee;
 
-            background: #faf9f5;
+            border-radius: 15px;
 
-            border-top: 1px solid #eeeae1;
+            padding: 22px;
 
-        }
+            color: #686f61;
 
+            font-size: 15px;
 
-        .sonho-texto {
+            line-height: 1.7;
 
-            margin-top: 12px;
+            font-style: italic;
 
-            font-family: Georgia, serif;
-
-            font-size: 18px;
-
-            line-height: 1.8;
-
-            color: #656a53;
+            position: relative;
 
         }
 
 
-        /* ==================================
-           AÇÕES
-        ================================== */
+        .sonho::before {
 
-        .acoes {
+            content: "“";
 
-            display: flex;
+            font-size: 50px;
 
-            gap: 15px;
+            color: #a6ad97;
 
-            padding: 30px;
+            line-height: 0;
 
-            border-top: 1px solid #eeeae1;
+            vertical-align: -15px;
+
+            margin-right: 5px;
 
         }
 
 
-        .botao {
+        /* ==========================================
+           WHATSAPP
+        ========================================== */
 
-            display: inline-flex;
+        .whatsapp {
 
-            align-items: center;
+            display: block;
 
-            justify-content: center;
+            width: 100%;
 
-            padding: 13px 22px;
-
-            border-radius: 25px;
+            text-align: center;
 
             text-decoration: none;
+
+            background: #59634b;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            margin-top: 20px;
 
             font-size: 14px;
 
@@ -367,63 +481,162 @@
         }
 
 
-        .botao-voltar {
+        .whatsapp:hover {
 
-            color: #636a4c;
+            background: #46503b;
 
-            background: #eeeadd;
-
-        }
-
-
-        .botao-voltar:hover {
-
-            background: #e2dfd1;
+            transform: translateY(-1px);
 
         }
 
 
-        .botao-whatsapp {
+        /* ==========================================
+           AÇÕES
+        ========================================== */
 
-            color: white;
+        .acoes {
 
-            background: #78805b;
+            margin-top: 22px;
 
-        }
+            display: flex;
 
-
-        .botao-whatsapp:hover {
-
-            background: #616947;
-
-            transform: translateY(-2px);
+            gap: 12px;
 
         }
 
 
-        /* ==================================
+        .btn {
+
+            flex: 1;
+
+            padding: 13px;
+
+            border-radius: 11px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .btn-voltar {
+
+            background: white;
+
+            color: #59634b;
+
+            border: 1px solid #d8d5ca;
+
+        }
+
+
+        .btn-voltar:hover {
+
+            background: #f5f2eb;
+
+        }
+
+
+        .btn-excluir {
+
+            background: #f8ecea;
+
+            color: #a45148;
+
+            border: none;
+
+        }
+
+
+        .btn-excluir:hover {
+
+            background: #f3d9d5;
+
+        }
+
+
+        /* ==========================================
            RESPONSIVO
-        ================================== */
+        ========================================== */
 
-        @media (max-width: 700px) {
+        @media (max-width: 750px) {
 
-            .informacoes {
+            .grid {
 
                 grid-template-columns: 1fr;
 
             }
 
 
-            .campo:nth-child(odd) {
+            .cliente-topo {
 
-                border-right: none;
+                flex-direction: column;
+
+                align-items: flex-start;
 
             }
 
 
-            .campo-sonho {
+            .cliente-identidade h2 {
 
-                grid-column: span 1;
+                font-size: 27px;
+
+            }
+
+
+            .status {
+
+                align-self: flex-start;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            header {
+
+                padding: 17px 5%;
+
+            }
+
+
+            .marca h1 {
+
+                font-size: 18px;
+
+            }
+
+
+            .marca span {
+
+                font-size: 9px;
+
+            }
+
+
+            .voltar {
+
+                padding: 8px 11px;
+
+                font-size: 11px;
+
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 22px;
 
             }
 
@@ -431,27 +644,6 @@
             .acoes {
 
                 flex-direction: column;
-
-            }
-
-
-            .botao {
-
-                width: 100%;
-
-            }
-
-
-            .titulo h2 {
-
-                font-size: 28px;
-
-            }
-
-
-            .cliente-nome {
-
-                font-size: 26px;
 
             }
 
@@ -465,287 +657,517 @@
 <body>
 
 
-    <!-- ==================================
-         CABEÇALHO
-    ================================== -->
+<!-- ==================================================
+     CABEÇALHO
+================================================== -->
 
-    <header class="topo">
+<header>
 
+    <div class="marca">
 
-        <div class="marca">
+        <h1>
+            Sonhe.Detalhe.Realize
+        </h1>
 
-            <h1>
-                SONHE.DETALHE.REALIZE
-            </h1>
+        <span>
+            PAINEL ADMINISTRATIVO
+        </span>
 
-            <span>
-                PAINEL ADMINISTRATIVO
-            </span>
-
-        </div>
-
-
-        <a
-            href="{{ url_for('admin_painel') }}"
-            class="voltar"
-        >
-
-            ← Voltar para clientes
-
-        </a>
+    </div>
 
 
-    </header>
+    <a
+        href="{{ url_for('admin_painel') }}"
+        class="voltar"
+    >
+        ← Voltar
+    </a>
+
+</header>
 
 
+<!-- ==================================================
+     CONTEÚDO
+================================================== -->
 
-    <!-- ==================================
-         CONTEÚDO
-    ================================== -->
-
-    <main class="conteudo">
+<main class="container">
 
 
-        <div class="titulo">
+    <!-- ==================================================
+         CABEÇALHO DA CLIENTE
+    ================================================== -->
+
+    <section class="cliente-topo">
+
+        <div class="cliente-identidade">
 
             <h2>
-                Detalhes da cliente
+                {{ cliente.nome }}
             </h2>
 
             <p>
-                Informações enviadas através do formulário.
+                {{ cliente.evento }}
             </p>
 
         </div>
 
 
+        <div class="status {{ cliente.status_classe }}">
+
+            {{ cliente.status }}
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CONTADOR
+    ================================================== -->
+
+    {% if cliente.status == "Concluído" %}
+
+        <section class="contador concluido">
+
+            <small>
+                Status do evento
+            </small>
+
+            <strong>
+                Evento já realizado
+            </strong>
+
+        </section>
+
+    {% elif cliente.dias_restantes == 0 %}
+
+        <section class="contador urgente">
+
+            <small>
+                Atenção
+            </small>
+
+            <strong>
+                ✨ O evento é hoje!
+            </strong>
+
+        </section>
+
+    {% elif cliente.dias_restantes <= 7 %}
+
+        <section class="contador urgente">
+
+            <small>
+                Contagem regressiva
+            </small>
+
+            <strong>
+                {{ cliente.dias_restantes }} dias
+            </strong>
+
+        </section>
+
+    {% else %}
+
+        <section class="contador">
+
+            <small>
+                Contagem regressiva
+            </small>
+
+            <strong>
+                {{ cliente.dias_restantes }} dias para o evento
+            </strong>
+
+        </section>
+
+    {% endif %}
+
+
+    <!-- ==================================================
+         INFORMAÇÕES
+    ================================================== -->
+
+    <div class="grid">
+
+
+        <!-- ==================================================
+             DADOS DA CLIENTE
+        ================================================== -->
 
         <section class="card">
 
-
-            <!-- ==================================
-                 CABEÇALHO DO CLIENTE
-            ================================== -->
-
-            <div class="card-topo">
-
-                <h1 class="cliente-nome">
-
-                    {{ cliente.nome }}
-
-                </h1>
+            <h3>
+                👤 Informações da cliente
+            </h3>
 
 
-                <p class="cliente-evento">
+            <div class="linha">
 
-                    {{ cliente.evento }}
+                <div class="icone">
+                    👤
+                </div>
 
-                </p>
+                <div>
 
+                    <small>
+                        Nome
+                    </small>
 
-                <span class="status">
+                    <strong>
+                        {{ cliente.nome }}
+                    </strong>
 
-                    {{ cliente.status or "Novo" }}
-
-                </span>
+                </div>
 
             </div>
 
 
+            <div class="linha">
 
-            <!-- ==================================
-                 INFORMAÇÕES
-            ================================== -->
+                <div class="icone">
+                    📱
+                </div>
 
-            <div class="informacoes">
+                <div>
 
-
-                <div class="campo">
-
-                    <div class="campo-titulo">
+                    <small>
                         WhatsApp
-                    </div>
+                    </small>
 
-                    <div class="campo-valor">
-
+                    <strong>
                         {{ cliente.whatsapp }}
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="campo">
-
-                    <div class="campo-titulo">
-                        Data do evento
-                    </div>
-
-                    <div class="campo-valor">
-
-                        {% if cliente.data_evento %}
-
-                            {{ cliente.data_evento.strftime("%d/%m/%Y") }}
-
-                        {% else %}
-
-                            -
-
-                        {% endif %}
-
-                    </div>
+                    </strong>
 
                 </div>
 
+            </div>
 
 
-                <div class="campo">
+            <div class="linha">
 
-                    <div class="campo-titulo">
+                <div class="icone">
+                    📍
+                </div>
+
+                <div>
+
+                    <small>
                         Cidade
-                    </div>
+                    </small>
 
-                    <div class="campo-valor">
-
+                    <strong>
                         {{ cliente.cidade }}
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="campo">
-
-                    <div class="campo-titulo">
-                        Local do evento
-                    </div>
-
-                    <div class="campo-valor">
-
-                        {{ cliente.local_evento or "Ainda não definido" }}
-
-                    </div>
+                    </strong>
 
                 </div>
 
+            </div>
 
 
-                <div class="campo">
+            <div class="linha">
 
-                    <div class="campo-titulo">
-                        Convidados
-                    </div>
-
-                    <div class="campo-valor">
-
-                        {{ cliente.convidados or "Não informado" }}
-
-                    </div>
-
+                <div class="icone">
+                    📣
                 </div>
 
+                <div>
 
+                    <small>
+                        Como conheceu a SDR
+                    </small>
 
-                <div class="campo">
-
-                    <div class="campo-titulo">
-                        Serviço desejado
-                    </div>
-
-                    <div class="campo-valor">
-
-                        {{ cliente.servico }}
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="campo campo-sonho">
-
-                    <div class="campo-titulo">
-                        Como conheceu a SDR?
-                    </div>
-
-                    <div class="campo-valor">
-
+                    <strong>
                         {{ cliente.conheceu or "Não informado" }}
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- ==================================
-                 SONHO DA CLIENTE
-            ================================== -->
-
-            <div class="sonho">
-
-                <div class="campo-titulo">
-                    Conte um pouco sobre seu sonho
-                </div>
-
-                <div class="sonho-texto">
-
-                    {% if cliente.sonho %}
-
-                        "{{ cliente.sonho }}"
-
-                    {% else %}
-
-                        Nenhuma informação foi enviada.
-
-                    {% endif %}
+                    </strong>
 
                 </div>
 
             </div>
 
 
+            <!-- WHATSAPP -->
 
-            <!-- ==================================
-                 AÇÕES
-            ================================== -->
+            {% set telefone = cliente.whatsapp|replace('(', '')|replace(')', '')|replace('-', '')|replace(' ', '') %}
 
-            <div class="acoes">
-
-
-                <a
-                    href="{{ url_for('admin_painel') }}"
-                    class="botao botao-voltar"
-                >
-
-                    ← Voltar
-
-                </a>
-
-
-                <a
-                    href="https://wa.me/{{ cliente.whatsapp|replace('(', '')|replace(')', '')|replace(' ', '')|replace('-', '') }}"
-                    target="_blank"
-                    class="botao botao-whatsapp"
-                >
-
-                    💬 Conversar pelo WhatsApp
-
-                </a>
-
-
-            </div>
-
+            <a
+                href="https://wa.me/55{{ telefone }}"
+                target="_blank"
+                class="whatsapp"
+            >
+                📱 Conversar pelo WhatsApp
+            </a>
 
         </section>
 
 
-    </main>
+        <!-- ==================================================
+             DADOS DO EVENTO
+        ================================================== -->
+
+        <section class="card">
+
+            <h3>
+                💍 Informações do evento
+            </h3>
+
+
+            <div class="linha">
+
+                <div class="icone">
+                    💍
+                </div>
+
+                <div>
+
+                    <small>
+                        Tipo de evento
+                    </small>
+
+                    <strong>
+                        {{ cliente.evento }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="icone">
+                    📅
+                </div>
+
+                <div>
+
+                    <small>
+                        Data
+                    </small>
+
+                    <strong>
+
+                        {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="icone">
+                    🏛️
+                </div>
+
+                <div>
+
+                    <small>
+                        Local
+                    </small>
+
+                    <strong>
+                        {{ cliente.local_evento or "Ainda não definido" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="icone">
+                    👥
+                </div>
+
+                <div>
+
+                    <small>
+                        Convidados
+                    </small>
+
+                    <strong>
+                        {{ cliente.convidados or "Não informado" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="icone">
+                    ✨
+                </div>
+
+                <div>
+
+                    <small>
+                        Serviço desejado
+                    </small>
+
+                    <strong>
+                        {{ cliente.servico or "Não informado" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         SONHO
+    ================================================== -->
+
+    <section class="card" style="margin-top: 22px;">
+
+        <h3>
+            💚 O sonho da cliente
+        </h3>
+
+
+        <div class="sonho">
+
+            {% if cliente.sonho %}
+
+                {{ cliente.sonho }}
+
+            {% else %}
+
+                A cliente não deixou uma descrição do sonho.
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         DATA DO ENVIO
+    ================================================== -->
+
+    <section class="card" style="margin-top: 22px;">
+
+        <h3>
+            📨 Informações do atendimento
+        </h3>
+
+
+        <div class="linha">
+
+            <div class="icone">
+                📨
+            </div>
+
+            <div>
+
+                <small>
+                    Orçamento recebido em
+                </small>
+
+                <strong>
+
+                    {% if cliente.data_envio %}
+
+                        {{ cliente.data_envio.strftime('%d/%m/%Y às %H:%M') }}
+
+                    {% else %}
+
+                        Não informado
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="linha">
+
+            <div class="icone">
+                📊
+            </div>
+
+            <div>
+
+                <small>
+                    Situação atual
+                </small>
+
+                <strong>
+                    {{ cliente.status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         AÇÕES
+    ================================================== -->
+
+    <div class="acoes">
+
+
+        <a
+            href="{{ url_for('admin_painel') }}"
+            class="btn btn-voltar"
+        >
+            ← Voltar para os orçamentos
+        </a>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('admin_excluir', id=cliente.id) }}"
+            style="flex: 1;"
+            onsubmit="return confirmarExclusao();"
+        >
+
+            <button
+                type="submit"
+                class="btn btn-excluir"
+                style="width: 100%;"
+            >
+                🗑 Excluir orçamento
+            </button>
+
+        </form>
+
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+function confirmarExclusao() {
+
+    return confirm(
+        "Tem certeza que deseja excluir este orçamento?\n\n" +
+        "Essa ação não poderá ser desfeita."
+    );
+
+}
+
+</script>
 
 
 </body>
