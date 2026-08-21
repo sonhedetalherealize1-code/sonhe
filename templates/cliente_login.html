@@ -11,7 +11,7 @@
     >
 
     <title>
-        Meu Evento | Sonhe.Detalhe.Realize
+        Área da Cliente | Sonhe.Detalhe.Realize
     </title>
 
 
@@ -26,28 +26,32 @@
 
         body {
 
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
             font-family:
-                "Georgia",
+                Georgia,
                 "Times New Roman",
                 serif;
-
-            min-height: 100vh;
 
             background:
                 linear-gradient(
                     135deg,
                     #f8f5ed,
-                    #eee9dc
+                    #e8e5d9
                 );
 
-            color: #3f4936;
+            color: #4c5741;
 
         }
 
-
-        /* =====================================================
-           FUNDO
-        ===================================================== */
 
         .background {
 
@@ -59,8 +63,6 @@
 
             pointer-events: none;
 
-            z-index: 0;
-
         }
 
 
@@ -70,8 +72,6 @@
 
             border-radius: 50%;
 
-            filter: blur(2px);
-
             opacity: .35;
 
         }
@@ -80,12 +80,14 @@
         .circle-one {
 
             width: 350px;
+
             height: 350px;
 
-            background: #d7ddc8;
+            background: #d6ddc8;
 
-            top: -120px;
-            left: -100px;
+            top: -150px;
+
+            left: -120px;
 
         }
 
@@ -93,21 +95,19 @@
         .circle-two {
 
             width: 300px;
+
             height: 300px;
 
-            background: #e2d8c2;
+            background: #ddd4c0;
 
-            bottom: -100px;
-            right: -80px;
+            bottom: -120px;
+
+            right: -100px;
 
         }
 
 
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
-
-        .container {
+        .login {
 
             position: relative;
 
@@ -115,24 +115,32 @@
 
             width: 100%;
 
-            max-width: 1100px;
+            max-width: 430px;
 
-            margin: auto;
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .92
+                );
 
-            padding: 40px 20px 60px;
+            border: 1px solid #e1dccf;
 
-        }
+            border-radius: 28px;
 
-
-        /* =====================================================
-           CABEÇALHO
-        ===================================================== */
-
-        .header {
+            padding: 45px 35px;
 
             text-align: center;
 
-            margin-bottom: 35px;
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    63,
+                    73,
+                    54,
+                    .15
+                );
 
             animation:
                 aparecer .8s ease;
@@ -140,28 +148,25 @@
         }
 
 
-        .logo-area {
+        .logo {
 
             width: 90px;
+
             height: 90px;
 
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
 
             border-radius: 50%;
 
             background: white;
 
-            border: 1px solid #d8d2c3;
+            border: 1px solid #ddd8ca;
 
             display: flex;
 
             align-items: center;
 
             justify-content: center;
-
-            box-shadow:
-                0 10px 30px
-                rgba(63,73,54,.10);
 
             overflow: hidden;
 
@@ -169,541 +174,230 @@
 
 
         /*
-            ESPAÇO PARA SUA LOGO
+            QUANDO TIVER SUA LOGO:
 
-            Quando quiser adicionar a logo,
-            basta trocar o conteúdo abaixo por:
+            coloque:
 
-            <img src="/static/img/logo.png">
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/logo.png'
+                ) }}"
+                alt="Sonhe.Detalhe.Realize"
+            >
 
         */
 
-        .logo-area span {
+        .logo span {
 
-            font-size: 30px;
+            font-size: 32px;
 
-            color: #7c8968;
+            color: #788567;
 
         }
 
 
-        .header h1 {
+        h1 {
 
-            font-size: 38px;
+            font-size: 30px;
 
             font-weight: normal;
 
-            color: #4d5b3f;
+            color: #4f5c42;
 
             margin-bottom: 10px;
 
         }
 
 
-        .header p {
+        .subtitle {
 
-            font-family: Arial, sans-serif;
-
-            font-size: 15px;
-
-            color: #777;
-
-        }
-
-
-        /* =====================================================
-           CARD CONTADOR
-        ===================================================== */
-
-        .countdown-card {
-
-            position: relative;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #667354,
-                    #84906f
-                );
-
-            color: white;
-
-            border-radius: 25px;
-
-            padding: 45px 30px;
-
-            text-align: center;
-
-            margin-bottom: 30px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 20px 50px
-                rgba(63,73,54,.20);
-
-            animation:
-                subir .8s ease;
-
-        }
-
-
-        .countdown-card::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 250px;
-            height: 250px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,.08);
-
-            top: -120px;
-            right: -80px;
-
-        }
-
-
-        .countdown-card::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,.06);
-
-            bottom: -100px;
-            left: -60px;
-
-        }
-
-
-        .countdown-content {
-
-            position: relative;
-
-            z-index: 1;
-
-        }
-
-
-        .heart {
-
-            font-size: 25px;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .countdown-title {
+            color: #858585;
 
             font-family: Arial, sans-serif;
 
             font-size: 14px;
 
-            letter-spacing: 2px;
+            line-height: 1.6;
 
-            text-transform: uppercase;
-
-            opacity: .85;
-
-            margin-bottom: 12px;
+            margin-bottom: 30px;
 
         }
 
 
-        .days {
+        .label {
 
-            font-size: 70px;
+            display: block;
 
-            line-height: 1;
+            text-align: left;
 
-            font-weight: bold;
+            font-family: Arial, sans-serif;
 
-            margin-bottom: 10px;
+            font-size: 12px;
+
+            color: #777;
+
+            margin-bottom: 8px;
 
         }
 
 
-        .days-text {
+        .input {
 
-            font-size: 20px;
+            width: 100%;
+
+            padding: 15px 18px;
+
+            border: 1px solid #ddd8ca;
+
+            border-radius: 14px;
+
+            background: #faf9f5;
+
+            color: #4c5741;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition: .3s;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .input:focus {
+
+            border-color: #8b9877;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    139,
+                    152,
+                    119,
+                    .12
+                );
+
+            background: white;
+
+        }
+
+
+        .input::placeholder {
+
+            color: #aaa;
+
+        }
+
+
+        .button {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 50px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #657354,
+                    #84906f
+                );
+
+            color: white;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+            margin-top: 5px;
+
+        }
+
+
+        .button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    63,
+                    73,
+                    54,
+                    .18
+                );
+
+        }
+
+
+        .erro {
+
+            background: #f7e9e7;
+
+            color: #9b5b52;
+
+            border: 1px solid #ecd2ce;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
 
             margin-bottom: 20px;
 
         }
 
 
-        .event-date {
+        .info {
 
-            display: inline-block;
-
-            padding: 10px 20px;
-
-            border-radius: 50px;
-
-            background: rgba(255,255,255,.14);
+            margin-top: 25px;
 
             font-family: Arial, sans-serif;
 
-            font-size: 14px;
+            color: #999;
+
+            font-size: 12px;
+
+            line-height: 1.6;
 
         }
 
 
-        /* =====================================================
-           STATUS
-        ===================================================== */
+        .footer {
 
-        .status {
+            margin-top: 25px;
 
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            margin-top: 20px;
-
-            padding: 9px 18px;
-
-            border-radius: 50px;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 13px;
-
-            background: rgba(255,255,255,.15);
-
-        }
-
-
-        .status-dot {
-
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: #fff;
-
-        }
-
-
-        /* =====================================================
-           GRID
-        ===================================================== */
-
-        .grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-
-        }
-
-
-        /* =====================================================
-           CARDS
-        ===================================================== */
-
-        .card {
-
-            background: rgba(
-                255,
-                255,
-                255,
-                .86
-            );
-
-            border: 1px solid #e4dfd3;
-
-            border-radius: 22px;
-
-            padding: 28px;
-
-            box-shadow:
-                0 10px 35px
-                rgba(63,73,54,.08);
-
-            animation:
-                subir .8s ease;
-
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease;
-
-        }
-
-
-        .card:hover {
-
-            transform:
-                translateY(-4px);
-
-            box-shadow:
-                0 18px 40px
-                rgba(63,73,54,.13);
-
-        }
-
-
-        .card-full {
-
-            grid-column: 1 / -1;
-
-        }
-
-
-        .card-title {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            margin-bottom: 22px;
-
-            color: #536145;
-
-        }
-
-
-        .card-title-icon {
-
-            width: 38px;
-            height: 38px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background: #eef1e7;
-
-            font-size: 17px;
-
-        }
-
-
-        .card-title h2 {
-
-            font-size: 20px;
-
-            font-weight: normal;
-
-        }
-
-
-        /* =====================================================
-           INFORMAÇÕES
-        ===================================================== */
-
-        .info-list {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
-
-        }
-
-
-        .info-item {
-
-            padding-bottom: 15px;
-
-            border-bottom:
-                1px solid #eee9df;
-
-        }
-
-
-        .info-label {
+            color: #9b9b9b;
 
             font-family: Arial, sans-serif;
 
             font-size: 11px;
 
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-
-            color: #999;
-
-            margin-bottom: 6px;
-
         }
 
 
-        .info-value {
+        .footer strong {
 
-            color: #4c5543;
-
-            font-size: 16px;
-
-            word-break: break-word;
-
-        }
-
-
-        /* =====================================================
-           SONHO
-        ===================================================== */
-
-        .dream {
-
-            background: #f7f5ef;
-
-            border-radius: 16px;
-
-            padding: 25px;
-
-            border-left:
-                4px solid #7d8a68;
-
-            color: #666;
-
-            font-size: 16px;
-
-            line-height: 1.8;
-
-            font-style: italic;
-
-        }
-
-
-        .dream::before {
-
-            content: "“";
-
-            font-size: 45px;
-
-            color: #aab39a;
-
-            line-height: 0;
-
-            vertical-align: -15px;
-
-            margin-right: 5px;
-
-        }
-
-
-        /* =====================================================
-           BOTÕES
-        ===================================================== */
-
-        .actions {
-
-            display: flex;
-
-            justify-content: center;
-
-            margin-top: 35px;
-
-        }
-
-
-        .btn {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 8px;
-
-            text-decoration: none;
-
-            padding: 14px 28px;
-
-            border-radius: 50px;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 14px;
-
-            transition:
-                all .3s ease;
-
-        }
-
-
-        .btn-outline {
-
-            color: #657354;
-
-            border:
-                1px solid #aab39a;
-
-            background: transparent;
-
-        }
-
-
-        .btn-outline:hover {
-
-            background: #657354;
-
-            color: white;
-
-            transform:
-                translateY(-2px);
-
-        }
-
-
-        /* =====================================================
-           RODAPÉ
-        ===================================================== */
-
-        footer {
-
-            text-align: center;
-
-            margin-top: 45px;
-
-            color: #999;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 12px;
-
-        }
-
-
-        footer strong {
-
-            color: #687558;
+            color: #6f7c5e;
 
             font-weight: normal;
 
         }
 
-
-        /* =====================================================
-           ANIMAÇÕES
-        ===================================================== */
 
         @keyframes aparecer {
 
@@ -711,25 +405,8 @@
 
                 opacity: 0;
 
-            }
-
-            to {
-
-                opacity: 1;
-
-            }
-
-        }
-
-
-        @keyframes subir {
-
-            from {
-
-                opacity: 0;
-
                 transform:
-                    translateY(25px);
+                    translateY(20px);
 
             }
 
@@ -745,68 +422,19 @@
         }
 
 
-        /* =====================================================
-           RESPONSIVO
-        ===================================================== */
+        @media (max-width: 500px) {
 
-        @media (max-width: 700px) {
-
-            .container {
+            .login {
 
                 padding:
-                    25px 15px 45px;
+                    35px 22px;
 
             }
 
 
-            .header h1 {
+            h1 {
 
-                font-size: 30px;
-
-            }
-
-
-            .grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .card-full {
-
-                grid-column: auto;
-
-            }
-
-
-            .info-list {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .countdown-card {
-
-                padding:
-                    35px 20px;
-
-            }
-
-
-            .days {
-
-                font-size: 58px;
-
-            }
-
-
-            .days-text {
-
-                font-size: 17px;
+                font-size: 26px;
 
             }
 
@@ -820,10 +448,6 @@
 <body>
 
 
-    <!-- =====================================================
-         FUNDO
-    ====================================================== -->
-
     <div class="background">
 
         <div class="circle circle-one"></div>
@@ -833,460 +457,122 @@
     </div>
 
 
-    <main class="container">
-
-
-        <!-- =================================================
-             CABEÇALHO
-        ================================================== -->
-
-        <header class="header">
-
-
-            <!-- LOGO -->
-
-            <div class="logo-area">
-
-                <!--
-
-                QUANDO TIVER A LOGO:
-
-                <img
-                    src="{{ url_for('static', filename='img/logo.png') }}"
-                    alt="Sonhe.Detalhe.Realize"
-                    style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                    "
-                >
-
-                -->
-
-                <span>
-                    ✦
-                </span>
-
-            </div>
-
-
-            <h1>
-                Olá, {{ cliente.nome }} 💚
-            </h1>
-
-
-            <p>
-                Seja bem-vinda à sua área especial.
-            </p>
-
-
-        </header>
-
-
-        <!-- =================================================
-             CONTADOR
-        ================================================== -->
-
-        <section class="countdown-card">
-
-            <div class="countdown-content">
-
-
-                <div class="heart">
-                    ✨
-                </div>
-
-
-                <div class="countdown-title">
-                    Seu grande dia
-                </div>
-
-
-                {% if dias_restantes is not none %}
-
-
-                    {% if dias_restantes > 0 %}
-
-                        <div class="days">
-
-                            {{ dias_restantes }}
-
-                        </div>
-
-
-                        <div class="days-text">
-
-                            dias para realizar seu sonho 💚
-
-                        </div>
-
-
-                    {% elif dias_restantes == 0 %}
-
-                        <div class="days">
-
-                            Hoje!
-
-                        </div>
-
-
-                        <div class="days-text">
-
-                            O grande dia chegou! ✨
-
-                        </div>
-
-
-                    {% else %}
-
-                        <div class="days">
-
-                            ♥
-                            
-                        </div>
-
-
-                        <div class="days-text">
-
-                            Seu evento já aconteceu.
-
-                        </div>
-
-                    {% endif %}
-
-
-                {% else %}
-
-                    <div class="days">
-
-                        ✨
-
-                    </div>
-
-
-                    <div class="days-text">
-
-                        Sua data ainda não foi informada.
-
-                    </div>
-
-                {% endif %}
-
-
-                {% if cliente.data_evento %}
-
-                    <div class="event-date">
-
-                        📅
-
-                        {{ cliente.data_evento.strftime('%d/%m/%Y') }}
-
-                    </div>
-
-                {% endif %}
-
-
-                <div class="status">
-
-                    <span class="status-dot"></span>
-
-                    {{ cliente.status }}
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             INFORMAÇÕES
-        ================================================== -->
-
-        <div class="grid">
-
-
-            <!-- =============================================
-                 EVENTO
-            ============================================== -->
-
-            <section class="card">
-
-
-                <div class="card-title">
-
-                    <div class="card-title-icon">
-                        💍
-                    </div>
-
-                    <h2>
-                        Seu evento
-                    </h2>
-
-                </div>
-
-
-                <div class="info-list">
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Tipo de evento
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.evento or "Não informado" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Data
-                        </div>
-
-                        <div class="info-value">
-
-                            {% if cliente.data_evento %}
-
-                                {{ cliente.data_evento.strftime('%d/%m/%Y') }}
-
-                            {% else %}
-
-                                Não informado
-
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Cidade
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.cidade or "Não informado" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Local
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.local_evento or "Ainda não definido" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Convidados
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.convidados or "Não informado" }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Serviço
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.servico or "Não informado" }}
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </section>
-
-
-            <!-- =============================================
-                 CONTATO
-            ============================================== -->
-
-            <section class="card">
-
-
-                <div class="card-title">
-
-                    <div class="card-title-icon">
-                        💌
-                    </div>
-
-                    <h2>
-                        Seus dados
-                    </h2>
-
-                </div>
-
-
-                <div class="info-list">
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Nome
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.nome }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            WhatsApp
-                        </div>
-
-                        <div class="info-value">
-                            {{ cliente.whatsapp }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Como conheceu a SDR?
-                        </div>
-
-                        <div class="info-value">
-
-                            {{ cliente.conheceu or "Não informado" }}
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <div class="info-label">
-                            Solicitação
-                        </div>
-
-                        <div class="info-value">
-
-                            {{ cliente.servico or "Não informado" }}
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </section>
-
-
-            <!-- =============================================
-                 SONHO
-            ============================================== -->
-
-            <section class="card card-full">
-
-
-                <div class="card-title">
-
-                    <div class="card-title-icon">
-                        ✨
-                    </div>
-
-                    <h2>
-                        O seu sonho
-                    </h2>
-
-                </div>
-
-
-                <div class="dream">
-
-                    {% if cliente.sonho %}
-
-                        {{ cliente.sonho }}
-
-                    {% else %}
-
-                        Ainda não recebemos uma descrição
-                        do seu sonho.
-
-                    {% endif %}
-
-                </div>
-
-
-            </section>
-
+    <main class="login">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <!--
+            Futuramente coloque sua logo aqui.
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/logo.png'
+                ) }}"
+                alt="Sonhe.Detalhe.Realize"
+                style="
+                    width:100%;
+                    height:100%;
+                    object-fit:contain;
+                "
+            >
+            -->
+
+            <span>
+                ✦
+            </span>
 
         </div>
 
 
-        <!-- =================================================
-             BOTÃO SAIR
-        ================================================== -->
+        <h1>
+            Área da Cliente
+        </h1>
 
-        <div class="actions">
 
-            <a
-                href="{{ url_for('cliente_logout') }}"
-                class="btn btn-outline"
+        <p class="subtitle">
+
+            Acompanhe os detalhes do seu evento
+            e fique pertinho desse momento
+            tão especial. 💚
+
+        </p>
+
+
+        {% if erro %}
+
+            <div class="erro">
+
+                {{ erro }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="{{ url_for('cliente_login') }}"
+        >
+
+
+            <label
+                class="label"
+                for="whatsapp"
             >
 
-                Sair da minha área
+                WhatsApp cadastrado
 
-            </a>
-
-        </div>
+            </label>
 
 
-        <!-- =================================================
-             RODAPÉ
-        ================================================== -->
+            <input
+                class="input"
+                type="tel"
+                id="whatsapp"
+                name="whatsapp"
+                placeholder="(21) 99999-9999"
+                autocomplete="tel"
+                required
+            >
 
-        <footer>
 
-            Cada evento é único.
+            <button
+                type="submit"
+                class="button"
+            >
 
-            <br>
+                ✨ Entrar na minha área
 
-            Por isso, cada detalhe é pensado
-            exclusivamente para você.
+            </button>
 
-            <br><br>
+
+        </form>
+
+
+        <p class="info">
+
+            Utilize o mesmo número de WhatsApp
+            informado no formulário de orçamento.
+
+        </p>
+
+
+        <div class="footer">
 
             <strong>
                 Sonhe.Detalhe.Realize
             </strong>
 
-        </footer>
+            <br>
+
+            Cada detalhe pensado especialmente
+            para você.
+
+        </div>
 
 
     </main>
