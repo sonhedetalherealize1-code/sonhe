@@ -5,9 +5,15 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>{{ cliente.nome }} | SDR</title>
+    <title>
+        Meu Evento | Sonhe.Detalhe.Realize
+    </title>
+
 
     <style>
 
@@ -17,429 +23,581 @@
             box-sizing: border-box;
         }
 
+
         body {
 
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Georgia",
+                "Times New Roman",
+                serif;
 
-            background: #f4f0e8;
+            min-height: 100vh;
 
-            color: #4d5545;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8f5ed,
+                    #eee9dc
+                );
 
-        }
-
-
-        /* ==========================================
-           CABEÇALHO
-        ========================================== */
-
-        header {
-
-            background: #59634b;
-
-            color: white;
-
-            padding: 20px 5%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            color: #3f4936;
 
         }
 
 
-        .marca h1 {
+        /* =====================================================
+           FUNDO
+        ===================================================== */
 
-            font-size: 23px;
+        .background {
 
-            font-weight: 500;
+            position: fixed;
 
-            letter-spacing: 1px;
+            inset: 0;
 
-        }
+            overflow: hidden;
 
+            pointer-events: none;
 
-        .marca span {
-
-            display: block;
-
-            font-size: 11px;
-
-            letter-spacing: 2px;
-
-            opacity: 0.75;
-
-            margin-top: 3px;
+            z-index: 0;
 
         }
 
 
-        .voltar {
+        .circle {
 
-            color: white;
+            position: absolute;
 
-            text-decoration: none;
+            border-radius: 50%;
 
-            border: 1px solid rgba(255,255,255,0.4);
+            filter: blur(2px);
 
-            padding: 9px 16px;
-
-            border-radius: 30px;
-
-            font-size: 13px;
-
-            transition: 0.3s;
+            opacity: .35;
 
         }
 
 
-        .voltar:hover {
+        .circle-one {
 
-            background: white;
+            width: 350px;
+            height: 350px;
 
-            color: #59634b;
+            background: #d7ddc8;
+
+            top: -120px;
+            left: -100px;
 
         }
 
 
-        /* ==========================================
+        .circle-two {
+
+            width: 300px;
+            height: 300px;
+
+            background: #e2d8c2;
+
+            bottom: -100px;
+            right: -80px;
+
+        }
+
+
+        /* =====================================================
            CONTAINER
-        ========================================== */
+        ===================================================== */
 
         .container {
 
-            width: 92%;
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
 
             max-width: 1100px;
 
-            margin: 35px auto 60px;
+            margin: auto;
+
+            padding: 40px 20px 60px;
 
         }
 
 
-        /* ==========================================
-           CABEÇALHO DA CLIENTE
-        ========================================== */
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
 
-        .cliente-topo {
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+            animation:
+                aparecer .8s ease;
+
+        }
+
+
+        .logo-area {
+
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
 
             background: white;
 
-            border-radius: 22px;
-
-            padding: 30px;
-
-            box-shadow: 0 7px 30px rgba(62,67,52,0.08);
+            border: 1px solid #d8d2c3;
 
             display: flex;
 
-            justify-content: space-between;
-
             align-items: center;
 
-            gap: 20px;
+            justify-content: center;
 
-            margin-bottom: 22px;
+            box-shadow:
+                0 10px 30px
+                rgba(63,73,54,.10);
 
-        }
-
-
-        .cliente-identidade h2 {
-
-            font-size: 32px;
-
-            font-weight: 400;
-
-            color: #4d5843;
+            overflow: hidden;
 
         }
 
 
-        .cliente-identidade p {
+        /*
+            ESPAÇO PARA SUA LOGO
 
-            margin-top: 7px;
+            Quando quiser adicionar a logo,
+            basta trocar o conteúdo abaixo por:
 
-            color: #898e80;
+            <img src="/static/img/logo.png">
 
-            font-size: 14px;
+        */
 
-        }
+        .logo-area span {
 
+            font-size: 30px;
 
-        /* ==========================================
-           STATUS
-        ========================================== */
-
-        .status {
-
-            padding: 10px 17px;
-
-            border-radius: 30px;
-
-            font-size: 13px;
-
-            font-weight: 600;
-
-            white-space: nowrap;
+            color: #7c8968;
 
         }
 
 
-        .status.pendente {
+        .header h1 {
 
-            background: #edf0e8;
+            font-size: 38px;
 
-            color: #647055;
+            font-weight: normal;
 
-        }
+            color: #4d5b3f;
 
-
-        .status.atencao {
-
-            background: #fff3d8;
-
-            color: #a87a22;
+            margin-bottom: 10px;
 
         }
 
 
-        .status.urgente {
+        .header p {
 
-            background: #fbe2df;
+            font-family: Arial, sans-serif;
 
-            color: #b65046;
-
-        }
-
-
-        .status.concluido {
-
-            background: #e8e8e8;
+            font-size: 15px;
 
             color: #777;
 
         }
 
 
-        /* ==========================================
-           CONTADOR
-        ========================================== */
+        /* =====================================================
+           CARD CONTADOR
+        ===================================================== */
 
-        .contador {
+        .countdown-card {
 
-            background: #59634b;
+            position: relative;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667354,
+                    #84906f
+                );
 
             color: white;
 
-            border-radius: 20px;
+            border-radius: 25px;
 
-            padding: 28px;
-
-            margin-bottom: 22px;
+            padding: 45px 30px;
 
             text-align: center;
 
-            box-shadow: 0 7px 30px rgba(62,67,52,0.12);
+            margin-bottom: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 50px
+                rgba(63,73,54,.20);
+
+            animation:
+                subir .8s ease;
 
         }
 
 
-        .contador small {
+        .countdown-card::before {
 
-            display: block;
+            content: "";
 
-            opacity: 0.75;
+            position: absolute;
 
-            font-size: 12px;
+            width: 250px;
+            height: 250px;
 
-            letter-spacing: 1px;
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.08);
+
+            top: -120px;
+            right: -80px;
+
+        }
+
+
+        .countdown-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.06);
+
+            bottom: -100px;
+            left: -60px;
+
+        }
+
+
+        .countdown-content {
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+
+        .heart {
+
+            font-size: 25px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .countdown-title {
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
 
             text-transform: uppercase;
 
-            margin-bottom: 7px;
+            opacity: .85;
+
+            margin-bottom: 12px;
 
         }
 
 
-        .contador strong {
+        .days {
 
-            font-size: 32px;
+            font-size: 70px;
 
-            font-weight: 400;
+            line-height: 1;
 
-        }
+            font-weight: bold;
 
-
-        .contador.urgente {
-
-            background: #a65349;
+            margin-bottom: 10px;
 
         }
 
 
-        .contador.concluido {
+        .days-text {
 
-            background: #777;
+            font-size: 20px;
+
+            margin-bottom: 20px;
 
         }
 
 
-        /* ==========================================
+        .event-date {
+
+            display: inline-block;
+
+            padding: 10px 20px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.14);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 20px;
+
+            padding: 9px 18px;
+
+            border-radius: 50px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
+
+            background: rgba(255,255,255,.15);
+
+        }
+
+
+        .status-dot {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #fff;
+
+        }
+
+
+        /* =====================================================
            GRID
-        ========================================== */
+        ===================================================== */
 
         .grid {
 
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:
+                repeat(2, 1fr);
 
-            gap: 22px;
+            gap: 20px;
 
         }
 
 
-        /* ==========================================
-           CARD
-        ========================================== */
+        /* =====================================================
+           CARDS
+        ===================================================== */
 
         .card {
 
-            background: white;
+            background: rgba(
+                255,
+                255,
+                255,
+                .86
+            );
 
-            border-radius: 20px;
+            border: 1px solid #e4dfd3;
 
-            padding: 25px;
+            border-radius: 22px;
 
-            box-shadow: 0 6px 25px rgba(62,67,52,0.07);
+            padding: 28px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(63,73,54,.08);
+
+            animation:
+                subir .8s ease;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
 
         }
 
 
-        .card h3 {
+        .card:hover {
 
-            color: #59634b;
+            transform:
+                translateY(-4px);
 
-            font-size: 18px;
-
-            font-weight: 500;
-
-            margin-bottom: 20px;
-
-            padding-bottom: 12px;
-
-            border-bottom: 1px solid #ece9df;
+            box-shadow:
+                0 18px 40px
+                rgba(63,73,54,.13);
 
         }
 
 
-        /* ==========================================
-           INFORMAÇÃO
-        ========================================== */
+        .card-full {
 
-        .linha {
+            grid-column: 1 / -1;
+
+        }
+
+
+        .card-title {
 
             display: flex;
-
-            gap: 13px;
-
-            margin: 17px 0;
-
-            align-items: flex-start;
-
-        }
-
-
-        .icone {
-
-            width: 34px;
-
-            height: 34px;
-
-            min-width: 34px;
-
-            border-radius: 50%;
-
-            background: #f1eee6;
-
-            display: flex;
-
-            justify-content: center;
 
             align-items: center;
 
-            font-size: 15px;
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+            color: #536145;
 
         }
 
 
-        .linha small {
+        .card-title-icon {
 
-            display: block;
+            width: 38px;
+            height: 38px;
 
-            color: #999d91;
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eef1e7;
+
+            font-size: 17px;
+
+        }
+
+
+        .card-title h2 {
+
+            font-size: 20px;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =====================================================
+           INFORMAÇÕES
+        ===================================================== */
+
+        .info-list {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .info-item {
+
+            padding-bottom: 15px;
+
+            border-bottom:
+                1px solid #eee9df;
+
+        }
+
+
+        .info-label {
+
+            font-family: Arial, sans-serif;
 
             font-size: 11px;
 
-            margin-bottom: 3px;
-
             text-transform: uppercase;
 
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+
+            color: #999;
+
+            margin-bottom: 6px;
 
         }
 
 
-        .linha strong {
+        .info-value {
 
-            display: block;
+            color: #4c5543;
 
-            color: #4e5647;
-
-            font-size: 14px;
-
-            font-weight: 500;
+            font-size: 16px;
 
             word-break: break-word;
 
         }
 
 
-        /* ==========================================
+        /* =====================================================
            SONHO
-        ========================================== */
+        ===================================================== */
 
-        .sonho {
+        .dream {
 
-            background: #f8f5ee;
+            background: #f7f5ef;
 
-            border-radius: 15px;
+            border-radius: 16px;
 
-            padding: 22px;
+            padding: 25px;
 
-            color: #686f61;
+            border-left:
+                4px solid #7d8a68;
 
-            font-size: 15px;
+            color: #666;
 
-            line-height: 1.7;
+            font-size: 16px;
+
+            line-height: 1.8;
 
             font-style: italic;
-
-            position: relative;
 
         }
 
 
-        .sonho::before {
+        .dream::before {
 
             content: "“";
 
-            font-size: 50px;
+            font-size: 45px;
 
-            color: #a6ad97;
+            color: #aab39a;
 
             line-height: 0;
 
@@ -450,200 +608,205 @@
         }
 
 
-        /* ==========================================
-           WHATSAPP
-        ========================================== */
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
 
-        .whatsapp {
-
-            display: block;
-
-            width: 100%;
-
-            text-align: center;
-
-            text-decoration: none;
-
-            background: #59634b;
-
-            color: white;
-
-            padding: 14px;
-
-            border-radius: 12px;
-
-            margin-top: 20px;
-
-            font-size: 14px;
-
-            transition: 0.3s;
-
-        }
-
-
-        .whatsapp:hover {
-
-            background: #46503b;
-
-            transform: translateY(-1px);
-
-        }
-
-
-        /* ==========================================
-           AÇÕES
-        ========================================== */
-
-        .acoes {
-
-            margin-top: 22px;
+        .actions {
 
             display: flex;
 
-            gap: 12px;
+            justify-content: center;
+
+            margin-top: 35px;
 
         }
 
 
         .btn {
 
-            flex: 1;
+            display: inline-flex;
 
-            padding: 13px;
+            align-items: center;
 
-            border-radius: 11px;
+            justify-content: center;
 
-            text-align: center;
+            gap: 8px;
 
             text-decoration: none;
 
-            font-size: 13px;
+            padding: 14px 28px;
 
-            cursor: pointer;
+            border-radius: 50px;
 
-            transition: 0.3s;
+            font-family: Arial, sans-serif;
 
-        }
+            font-size: 14px;
 
-
-        .btn-voltar {
-
-            background: white;
-
-            color: #59634b;
-
-            border: 1px solid #d8d5ca;
+            transition:
+                all .3s ease;
 
         }
 
 
-        .btn-voltar:hover {
+        .btn-outline {
 
-            background: #f5f2eb;
+            color: #657354;
 
-        }
+            border:
+                1px solid #aab39a;
 
-
-        .btn-excluir {
-
-            background: #f8ecea;
-
-            color: #a45148;
-
-            border: none;
+            background: transparent;
 
         }
 
 
-        .btn-excluir:hover {
+        .btn-outline:hover {
 
-            background: #f3d9d5;
+            background: #657354;
+
+            color: white;
+
+            transform:
+                translateY(-2px);
 
         }
 
 
-        /* ==========================================
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 45px;
+
+            color: #999;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+        }
+
+
+        footer strong {
+
+            color: #687558;
+
+            font-weight: normal;
+
+        }
+
+
+        /* =====================================================
+           ANIMAÇÕES
+        ===================================================== */
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        @keyframes subir {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =====================================================
            RESPONSIVO
-        ========================================== */
+        ===================================================== */
 
-        @media (max-width: 750px) {
-
-            .grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .cliente-topo {
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-            }
-
-
-            .cliente-identidade h2 {
-
-                font-size: 27px;
-
-            }
-
-
-            .status {
-
-                align-self: flex-start;
-
-            }
-
-        }
-
-
-        @media (max-width: 500px) {
-
-            header {
-
-                padding: 17px 5%;
-
-            }
-
-
-            .marca h1 {
-
-                font-size: 18px;
-
-            }
-
-
-            .marca span {
-
-                font-size: 9px;
-
-            }
-
-
-            .voltar {
-
-                padding: 8px 11px;
-
-                font-size: 11px;
-
-            }
-
+        @media (max-width: 700px) {
 
             .container {
 
-                width: 94%;
-
-                margin-top: 22px;
+                padding:
+                    25px 15px 45px;
 
             }
 
 
-            .acoes {
+            .header h1 {
 
-                flex-direction: column;
+                font-size: 30px;
+
+            }
+
+
+            .grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .card-full {
+
+                grid-column: auto;
+
+            }
+
+
+            .info-list {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .countdown-card {
+
+                padding:
+                    35px 20px;
+
+            }
+
+
+            .days {
+
+                font-size: 58px;
+
+            }
+
+
+            .days-text {
+
+                font-size: 17px;
 
             }
 
@@ -657,517 +820,476 @@
 <body>
 
 
-<!-- ==================================================
-     CABEÇALHO
-================================================== -->
+    <!-- =====================================================
+         FUNDO
+    ====================================================== -->
 
-<header>
+    <div class="background">
 
-    <div class="marca">
+        <div class="circle circle-one"></div>
 
-        <h1>
-            Sonhe.Detalhe.Realize
-        </h1>
-
-        <span>
-            PAINEL ADMINISTRATIVO
-        </span>
+        <div class="circle circle-two"></div>
 
     </div>
 
 
-    <a
-        href="{{ url_for('admin_painel') }}"
-        class="voltar"
-    >
-        ← Voltar
-    </a>
-
-</header>
+    <main class="container">
 
 
-<!-- ==================================================
-     CONTEÚDO
-================================================== -->
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
 
-<main class="container">
+        <header class="header">
 
 
-    <!-- ==================================================
-         CABEÇALHO DA CLIENTE
-    ================================================== -->
+            <!-- LOGO -->
 
-    <section class="cliente-topo">
+            <div class="logo-area">
 
-        <div class="cliente-identidade">
+                <!--
 
-            <h2>
-                {{ cliente.nome }}
-            </h2>
+                QUANDO TIVER A LOGO:
+
+                <img
+                    src="{{ url_for('static', filename='img/logo.png') }}"
+                    alt="Sonhe.Detalhe.Realize"
+                    style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    "
+                >
+
+                -->
+
+                <span>
+                    ✦
+                </span>
+
+            </div>
+
+
+            <h1>
+                Olá, {{ cliente.nome }} 💚
+            </h1>
+
 
             <p>
-                {{ cliente.evento }}
+                Seja bem-vinda à sua área especial.
             </p>
 
-        </div>
+
+        </header>
 
 
-        <div class="status {{ cliente.status_classe }}">
-
-            {{ cliente.status }}
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         CONTADOR
-    ================================================== -->
-
-    {% if cliente.status == "Concluído" %}
-
-        <section class="contador concluido">
-
-            <small>
-                Status do evento
-            </small>
-
-            <strong>
-                Evento já realizado
-            </strong>
-
-        </section>
-
-    {% elif cliente.dias_restantes == 0 %}
-
-        <section class="contador urgente">
-
-            <small>
-                Atenção
-            </small>
-
-            <strong>
-                ✨ O evento é hoje!
-            </strong>
-
-        </section>
-
-    {% elif cliente.dias_restantes <= 7 %}
-
-        <section class="contador urgente">
-
-            <small>
-                Contagem regressiva
-            </small>
-
-            <strong>
-                {{ cliente.dias_restantes }} dias
-            </strong>
-
-        </section>
-
-    {% else %}
-
-        <section class="contador">
-
-            <small>
-                Contagem regressiva
-            </small>
-
-            <strong>
-                {{ cliente.dias_restantes }} dias para o evento
-            </strong>
-
-        </section>
-
-    {% endif %}
-
-
-    <!-- ==================================================
-         INFORMAÇÕES
-    ================================================== -->
-
-    <div class="grid">
-
-
-        <!-- ==================================================
-             DADOS DA CLIENTE
+        <!-- =================================================
+             CONTADOR
         ================================================== -->
 
-        <section class="card">
+        <section class="countdown-card">
 
-            <h3>
-                👤 Informações da cliente
-            </h3>
+            <div class="countdown-content">
 
 
-            <div class="linha">
-
-                <div class="icone">
-                    👤
-                </div>
-
-                <div>
-
-                    <small>
-                        Nome
-                    </small>
-
-                    <strong>
-                        {{ cliente.nome }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    📱
-                </div>
-
-                <div>
-
-                    <small>
-                        WhatsApp
-                    </small>
-
-                    <strong>
-                        {{ cliente.whatsapp }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    📍
-                </div>
-
-                <div>
-
-                    <small>
-                        Cidade
-                    </small>
-
-                    <strong>
-                        {{ cliente.cidade }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    📣
-                </div>
-
-                <div>
-
-                    <small>
-                        Como conheceu a SDR
-                    </small>
-
-                    <strong>
-                        {{ cliente.conheceu or "Não informado" }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <!-- WHATSAPP -->
-
-            {% set telefone = cliente.whatsapp|replace('(', '')|replace(')', '')|replace('-', '')|replace(' ', '') %}
-
-            <a
-                href="https://wa.me/55{{ telefone }}"
-                target="_blank"
-                class="whatsapp"
-            >
-                📱 Conversar pelo WhatsApp
-            </a>
-
-        </section>
-
-
-        <!-- ==================================================
-             DADOS DO EVENTO
-        ================================================== -->
-
-        <section class="card">
-
-            <h3>
-                💍 Informações do evento
-            </h3>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    💍
-                </div>
-
-                <div>
-
-                    <small>
-                        Tipo de evento
-                    </small>
-
-                    <strong>
-                        {{ cliente.evento }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    📅
-                </div>
-
-                <div>
-
-                    <small>
-                        Data
-                    </small>
-
-                    <strong>
-
-                        {{ cliente.data_evento.strftime('%d/%m/%Y') }}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    🏛️
-                </div>
-
-                <div>
-
-                    <small>
-                        Local
-                    </small>
-
-                    <strong>
-                        {{ cliente.local_evento or "Ainda não definido" }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
-                    👥
-                </div>
-
-                <div>
-
-                    <small>
-                        Convidados
-                    </small>
-
-                    <strong>
-                        {{ cliente.convidados or "Não informado" }}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="linha">
-
-                <div class="icone">
+                <div class="heart">
                     ✨
                 </div>
 
-                <div>
 
-                    <small>
-                        Serviço desejado
-                    </small>
+                <div class="countdown-title">
+                    Seu grande dia
+                </div>
 
-                    <strong>
-                        {{ cliente.servico or "Não informado" }}
-                    </strong>
+
+                {% if dias_restantes is not none %}
+
+
+                    {% if dias_restantes > 0 %}
+
+                        <div class="days">
+
+                            {{ dias_restantes }}
+
+                        </div>
+
+
+                        <div class="days-text">
+
+                            dias para realizar seu sonho 💚
+
+                        </div>
+
+
+                    {% elif dias_restantes == 0 %}
+
+                        <div class="days">
+
+                            Hoje!
+
+                        </div>
+
+
+                        <div class="days-text">
+
+                            O grande dia chegou! ✨
+
+                        </div>
+
+
+                    {% else %}
+
+                        <div class="days">
+
+                            ♥
+                            
+                        </div>
+
+
+                        <div class="days-text">
+
+                            Seu evento já aconteceu.
+
+                        </div>
+
+                    {% endif %}
+
+
+                {% else %}
+
+                    <div class="days">
+
+                        ✨
+
+                    </div>
+
+
+                    <div class="days-text">
+
+                        Sua data ainda não foi informada.
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if cliente.data_evento %}
+
+                    <div class="event-date">
+
+                        📅
+
+                        {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    {{ cliente.status }}
 
                 </div>
+
 
             </div>
 
         </section>
 
 
-    </div>
+        <!-- =================================================
+             INFORMAÇÕES
+        ================================================== -->
+
+        <div class="grid">
 
 
-    <!-- ==================================================
-         SONHO
-    ================================================== -->
+            <!-- =============================================
+                 EVENTO
+            ============================================== -->
 
-    <section class="card" style="margin-top: 22px;">
-
-        <h3>
-            💚 O sonho da cliente
-        </h3>
+            <section class="card">
 
 
-        <div class="sonho">
+                <div class="card-title">
 
-            {% if cliente.sonho %}
+                    <div class="card-title-icon">
+                        💍
+                    </div>
 
-                {{ cliente.sonho }}
+                    <h2>
+                        Seu evento
+                    </h2>
 
-            {% else %}
-
-                A cliente não deixou uma descrição do sonho.
-
-            {% endif %}
-
-        </div>
-
-    </section>
+                </div>
 
 
-    <!-- ==================================================
-         DATA DO ENVIO
-    ================================================== -->
-
-    <section class="card" style="margin-top: 22px;">
-
-        <h3>
-            📨 Informações do atendimento
-        </h3>
+                <div class="info-list">
 
 
-        <div class="linha">
+                    <div class="info-item">
 
-            <div class="icone">
-                📨
-            </div>
+                        <div class="info-label">
+                            Tipo de evento
+                        </div>
 
-            <div>
+                        <div class="info-value">
+                            {{ cliente.evento or "Não informado" }}
+                        </div>
 
-                <small>
-                    Orçamento recebido em
-                </small>
+                    </div>
 
-                <strong>
 
-                    {% if cliente.data_envio %}
+                    <div class="info-item">
 
-                        {{ cliente.data_envio.strftime('%d/%m/%Y às %H:%M') }}
+                        <div class="info-label">
+                            Data
+                        </div>
+
+                        <div class="info-value">
+
+                            {% if cliente.data_evento %}
+
+                                {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+                            {% else %}
+
+                                Não informado
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Cidade
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.cidade or "Não informado" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Local
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.local_evento or "Ainda não definido" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Convidados
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.convidados or "Não informado" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Serviço
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.servico or "Não informado" }}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CONTATO
+            ============================================== -->
+
+            <section class="card">
+
+
+                <div class="card-title">
+
+                    <div class="card-title-icon">
+                        💌
+                    </div>
+
+                    <h2>
+                        Seus dados
+                    </h2>
+
+                </div>
+
+
+                <div class="info-list">
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Nome
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.nome }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            WhatsApp
+                        </div>
+
+                        <div class="info-value">
+                            {{ cliente.whatsapp }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Como conheceu a SDR?
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ cliente.conheceu or "Não informado" }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+                            Solicitação
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ cliente.servico or "Não informado" }}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 SONHO
+            ============================================== -->
+
+            <section class="card card-full">
+
+
+                <div class="card-title">
+
+                    <div class="card-title-icon">
+                        ✨
+                    </div>
+
+                    <h2>
+                        O seu sonho
+                    </h2>
+
+                </div>
+
+
+                <div class="dream">
+
+                    {% if cliente.sonho %}
+
+                        {{ cliente.sonho }}
 
                     {% else %}
 
-                        Não informado
+                        Ainda não recebemos uma descrição
+                        do seu sonho.
 
                     {% endif %}
 
-                </strong>
+                </div>
 
-            </div>
+
+            </section>
+
 
         </div>
 
 
-        <div class="linha">
+        <!-- =================================================
+             BOTÃO SAIR
+        ================================================== -->
 
-            <div class="icone">
-                📊
-            </div>
+        <div class="actions">
 
-            <div>
-
-                <small>
-                    Situação atual
-                </small>
-
-                <strong>
-                    {{ cliente.status }}
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         AÇÕES
-    ================================================== -->
-
-    <div class="acoes">
-
-
-        <a
-            href="{{ url_for('admin_painel') }}"
-            class="btn btn-voltar"
-        >
-            ← Voltar para os orçamentos
-        </a>
-
-
-        <form
-            method="POST"
-            action="{{ url_for('admin_excluir', id=cliente.id) }}"
-            style="flex: 1;"
-            onsubmit="return confirmarExclusao();"
-        >
-
-            <button
-                type="submit"
-                class="btn btn-excluir"
-                style="width: 100%;"
+            <a
+                href="{{ url_for('cliente_logout') }}"
+                class="btn btn-outline"
             >
-                🗑 Excluir orçamento
-            </button>
 
-        </form>
+                Sair da minha área
 
+            </a>
 
-    </div>
-
-
-</main>
+        </div>
 
 
-<script>
+        <!-- =================================================
+             RODAPÉ
+        ================================================== -->
 
-function confirmarExclusao() {
+        <footer>
 
-    return confirm(
-        "Tem certeza que deseja excluir este orçamento?\n\n" +
-        "Essa ação não poderá ser desfeita."
-    );
+            Cada evento é único.
 
-}
+            <br>
 
-</script>
+            Por isso, cada detalhe é pensado
+            exclusivamente para você.
+
+            <br><br>
+
+            <strong>
+                Sonhe.Detalhe.Realize
+            </strong>
+
+        </footer>
+
+
+    </main>
 
 
 </body>
