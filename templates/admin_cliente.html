@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ cliente.nome }} | Cliente</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1eb;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .topo {
+            background: #586348;
+            color: white;
+            padding: 20px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .topo h1 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .voltar {
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,.5);
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: .2s;
+        }
+
+        .voltar:hover {
+            background: rgba(255,255,255,.15);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .cabecalho {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .cabecalho h2 {
+            color: #586348;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .cabecalho p {
+            color: #777;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #e9eee5;
+            color: #586348;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .card h3 {
+            color: #586348;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        .campo:last-child {
+            margin-bottom: 0;
+        }
+
+        .campo .titulo {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 5px;
+        }
+
+        .campo .valor {
+            font-size: 16px;
+            color: #333;
+            word-break: break-word;
+        }
+
+        .sonho {
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .prazo {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: #586348;
+            color: white;
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        .prazo .numero {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .prazo p {
+            opacity: .9;
+        }
+
+        .acoes {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .btn-voltar {
+            background: #586348;
+            color: white;
+        }
+
+        .btn-excluir {
+            background: #f5dddd;
+            color: #b44b4b;
+        }
+
+        @media (max-width: 700px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prazo {
+                grid-column: auto;
+            }
+
+            .topo {
+                padding: 18px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .cabecalho,
+            .card {
+                padding: 20px;
+            }
+
+            .acoes {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     TOPO
+================================================== -->
+
+<header class="topo">
+
+    <h1>Painel Administrativo</h1>
+
+    <a href="{{ url_for('admin_painel') }}"
+       class="voltar">
+
+        ← Voltar para clientes
+
+    </a>
+
+</header>
+
+
+<!-- ==================================================
+     CONTEÚDO
+================================================== -->
+
+<main class="container">
+
+
+    <!-- CABEÇALHO DO CLIENTE -->
+
+    <section class="cabecalho">
+
+        <h2>
+            {{ cliente.nome }}
+        </h2>
+
+        <p>
+            {{ cliente.evento }}
+        </p>
+
+        {% if cliente.data_evento %}
+
+            <span class="status">
+
+                Evento:
+                {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+            </span>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <section class="grid">
+
+
+        <!-- ==================================================
+             DADOS PESSOAIS
+        ================================================== -->
+
+        <div class="card">
+
+            <h3>
+                Dados do cliente
+            </h3>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Nome
+                </div>
+
+                <div class="valor">
+                    {{ cliente.nome }}
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    WhatsApp
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.whatsapp }}
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Cidade
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.cidade }}
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Local do evento
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.local_evento }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             DADOS DO EVENTO
+        ================================================== -->
+
+        <div class="card">
+
+            <h3>
+                Dados do evento
+            </h3>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Tipo de evento
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.evento }}
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Data
+                </div>
+
+                <div class="valor">
+
+                    {% if cliente.data_evento %}
+
+                        {{ cliente.data_evento.strftime('%d/%m/%Y') }}
+
+                    {% else %}
+
+                        Não informado
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Número de convidados
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.convidados }}
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Serviço desejado
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.servico }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             COMO CONHECEU
+        ================================================== -->
+
+        <div class="card">
+
+            <h3>
+                Outras informações
+            </h3>
+
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Como conheceu
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.conheceu }}
+
+                </div>
+
+            </div>
+
+
+            {% if cliente.data_envio %}
+
+            <div class="campo">
+
+                <div class="titulo">
+                    Solicitação enviada em
+                </div>
+
+                <div class="valor">
+
+                    {{ cliente.data_envio.strftime('%d/%m/%Y às %H:%M') }}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- ==================================================
+             SONHO DO CLIENTE
+        ================================================== -->
+
+        <div class="card">
+
+            <h3>
+                O sonho do cliente
+            </h3>
+
+            <div class="campo">
+
+                <div class="valor sonho">
+
+                    {% if cliente.sonho %}
+
+                        {{ cliente.sonho }}
+
+                    {% else %}
+
+                        O cliente não informou nenhum detalhe.
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             PRAZO
+        ================================================== -->
+
+        <div class="prazo">
+
+            <p>
+                Contagem para o evento
+            </p>
+
+            {% if cliente.data_evento %}
+
+                <div
+                    class="numero"
+                    id="contador"
+                    data-data="{{ cliente.data_evento }}"
+                >
+                    Calculando...
+                </div>
+
+                <p id="mensagem-contador">
+                    Aguarde...
+                </p>
+
+            {% else %}
+
+                <div class="numero">
+                    —
+                </div>
+
+                <p>
+                    Data do evento não informada.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         AÇÕES
+    ================================================== -->
+
+    <div class="acoes">
+
+        <a
+            href="{{ url_for('admin_painel') }}"
+            class="btn btn-voltar"
+        >
+            ← Voltar
+        </a>
+
+
+        {% if cliente.id %}
+
+        <a
+            href="{{ url_for('excluir_cliente', id=cliente.id) }}"
+            class="btn btn-excluir"
+            onclick="return confirm('Tem certeza que deseja excluir este orçamento? Esta ação não pode ser desfeita.')"
+        >
+            Excluir orçamento
+        </a>
+
+        {% endif %}
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     CONTADOR
+================================================== -->
+
+<script>
+
+    const contador = document.getElementById("contador");
+    const mensagem = document.getElementById("mensagem-contador");
+
+    if (contador) {
+
+        const dataEvento =
+            contador.getAttribute("data-data");
+
+        function atualizarContador() {
+
+            /*
+             * Como o MySQL envia a data no formato:
+             *
+             * YYYY-MM-DD
+             *
+             * transformamos para uma data local.
+             */
+
+            const partes = dataEvento.split("-");
+
+            const ano = parseInt(partes[0]);
+            const mes = parseInt(partes[1]) - 1;
+            const dia = parseInt(partes[2]);
+
+            const evento =
+                new Date(ano, mes, dia);
+
+            evento.setHours(0, 0, 0, 0);
+
+
+            const agora = new Date();
+
+            agora.setHours(0, 0, 0, 0);
+
+
+            const diferenca =
+                evento - agora;
+
+
+            const dias =
+                Math.ceil(
+                    diferenca /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            if (dias > 0) {
+
+                contador.innerText =
+                    dias + " dias";
+
+                mensagem.innerText =
+                    "Faltam " +
+                    dias +
+                    " dias para o evento.";
+
+            }
+
+            else if (dias === 0) {
+
+                contador.innerText =
+                    "HOJE";
+
+                mensagem.innerText =
+                    "O evento acontece hoje!";
+
+            }
+
+            else {
+
+                contador.innerText =
+                    "CONCLUÍDO";
+
+                mensagem.innerText =
+                    "A data do evento já passou.";
+
+            }
+
+        }
+
+
+        atualizarContador();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
