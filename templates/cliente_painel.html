@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Minha Área | Sonhe.Detalhe.Realize
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --oliva: #657354;
+            --oliva-claro: #84906f;
+            --oliva-escuro: #4d593f;
+
+            --bege: #f5f1e8;
+            --bege-escuro: #e7e0d2;
+
+            --branco: #ffffff;
+
+            --texto: #4d4d4d;
+            --cinza: #888888;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            color: var(--texto);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8f6ef 0%,
+                    #efebe1 50%,
+                    #e7e4d9 100%
+                );
+
+        }
+
+
+        /* ==========================================
+           FUNDO DECORATIVO
+        ========================================== */
+
+        .background {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+        }
+
+
+        .bolha {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            opacity: .35;
+
+            filter: blur(1px);
+
+        }
+
+
+        .bolha-1 {
+
+            width: 420px;
+
+            height: 420px;
+
+            background: #d5ddc9;
+
+            top: -200px;
+
+            left: -160px;
+
+        }
+
+
+        .bolha-2 {
+
+            width: 350px;
+
+            height: 350px;
+
+            background: #ded6c3;
+
+            bottom: -180px;
+
+            right: -120px;
+
+        }
+
+
+        .bolha-3 {
+
+            width: 180px;
+
+            height: 180px;
+
+            background: #e0e5d6;
+
+            top: 40%;
+
+            right: 10%;
+
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: min(
+                1100px,
+                calc(100% - 30px)
+            );
+
+            margin: auto;
+
+            padding:
+                35px 0 60px;
+
+        }
+
+
+        /* ==========================================
+           TOPO
+        ========================================== */
+
+        .topo {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .marca {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .logo {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 50%;
+
+            background: var(--branco);
+
+            border: 1px solid #ddd8ca;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        /*
+            FUTURA LOGO
+
+            Quando quiser colocar sua logo,
+            substitua o conteúdo do .logo por:
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/logo.png'
+                ) }}"
+                alt="Sonhe.Detalhe.Realize"
+            >
+
+        */
+
+        .logo span {
+
+            font-size: 24px;
+
+            color: var(--oliva);
+
+        }
+
+
+        .marca-texto h2 {
+
+            font-size: 18px;
+
+            font-weight: normal;
+
+            color: var(--oliva-escuro);
+
+        }
+
+
+        .marca-texto span {
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            color: var(--cinza);
+
+        }
+
+
+        .sair {
+
+            text-decoration: none;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
+
+            color: var(--oliva);
+
+            padding:
+                10px 18px;
+
+            border: 1px solid #d3cebf;
+
+            border-radius: 30px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                .6
+            );
+
+            transition: .3s;
+
+        }
+
+
+        .sair:hover {
+
+            background: var(--oliva);
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* ==========================================
+           HERO
+        ========================================== */
+
+        .hero {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .88
+                );
+
+            border: 1px solid #e0dbcf;
+
+            border-radius: 30px;
+
+            padding:
+                45px 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    70,
+                    78,
+                    60,
+                    .10
+                );
+
+            margin-bottom: 25px;
+
+            animation:
+                aparecer .8s ease;
+
+        }
+
+
+        .pequeno {
+
+            font-family: Arial, sans-serif;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-size: 10px;
+
+            color: var(--oliva);
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .hero h1 {
+
+            font-size: 38px;
+
+            font-weight: normal;
+
+            color: var(--oliva-escuro);
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .hero p {
+
+            font-size: 15px;
+
+            color: #858585;
+
+            line-height: 1.7;
+
+            max-width: 650px;
+
+            margin: auto;
+
+        }
+
+
+        /* ==========================================
+           CONTADOR
+        ========================================== */
+
+        .contador {
+
+            margin-top: 30px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .tempo {
+
+            min-width: 100px;
+
+            padding:
+                18px 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #657354,
+                    #84906f
+                );
+
+            color: white;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    72,
+                    82,
+                    59,
+                    .15
+                );
+
+        }
+
+
+        .tempo strong {
+
+            display: block;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 30px;
+
+            font-weight: normal;
+
+        }
+
+
+        .tempo span {
+
+            display: block;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            opacity: .85;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* ==========================================
+           STATUS
+        ========================================== */
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 25px;
+
+            padding:
+                9px 18px;
+
+            border-radius: 30px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+        }
+
+
+        .status-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: currentColor;
+
+        }
+
+
+        .status-normal {
+
+            color: #657354;
+
+            background: #e9eee2;
+
+        }
+
+
+        .status-atencao {
+
+            color: #9a7541;
+
+            background: #f5ead7;
+
+        }
+
+
+        .status-urgente {
+
+            color: #a35b52;
+
+            background: #f6e1dd;
+
+        }
+
+
+        .status-concluido {
+
+            color: #657354;
+
+            background: #dfe9d6;
+
+        }
+
+
+        /* ==========================================
+           GRID
+        ========================================== */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 20px;
+
+        }
+
+
+        /* ==========================================
+           CARD
+        ========================================== */
+
+        .card {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .90
+                );
+
+            border: 1px solid #e0dbcf;
+
+            border-radius: 24px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(
+                    70,
+                    78,
+                    60,
+                    .07
+                );
+
+            animation:
+                aparecer .8s ease;
+
+        }
+
+
+        .card-full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .card-titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid #ebe6dc;
+
+        }
+
+
+        .icone {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 12px;
+
+            background: #eef1e8;
+
+            color: var(--oliva);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+
+        }
+
+
+        .card-titulo h3 {
+
+            color: var(--oliva-escuro);
+
+            font-size: 20px;
+
+            font-weight: normal;
+
+        }
+
+
+        /* ==========================================
+           INFORMAÇÕES
+        ========================================== */
+
+        .informacoes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 20px;
+
+        }
+
+
+        .info {
+
+            padding: 5px 0;
+
+        }
+
+
+        .info-label {
+
+            display: block;
+
+            font-family: Arial, sans-serif;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            font-size: 9px;
+
+            color: #a0a0a0;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .info-valor {
+
+            font-size: 16px;
+
+            color: #555;
+
+            word-break: break-word;
+
+        }
+
+
+        /* ==========================================
+           SONHO
+        ========================================== */
+
+        .sonho {
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            color: #666;
+
+            background: #faf8f3;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            border-left:
+                3px solid
+                var(--oliva);
+
+            white-space: pre-line;
+
+        }
+
+
+        /* ==========================================
+           FRASE FINAL
+        ========================================== */
+
+        .final {
+
+            text-align: center;
+
+            padding:
+                40px 20px 10px;
+
+        }
+
+
+        .final .simbolo {
+
+            color: var(--oliva);
+
+            font-size: 20px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .final p {
+
+            font-size: 17px;
+
+            color: #707070;
+
+            font-style: italic;
+
+            line-height: 1.7;
+
+        }
+
+
+        .final small {
+
+            display: block;
+
+            margin-top: 12px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            color: #aaa;
+
+        }
+
+
+        /* ==========================================
+           ANIMAÇÃO
+        ========================================== */
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVO
+        ========================================== */
+
+        @media (max-width: 750px) {
+
+            .container {
+
+                width:
+                    calc(100% - 20px);
+
+                padding-top: 20px;
+
+            }
+
+
+            .topo {
+
+                align-items: flex-start;
+
+            }
+
+
+            .hero {
+
+                padding:
+                    35px 22px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .card-full {
+
+                grid-column: auto;
+
+            }
+
+
+            .informacoes {
+
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+
+            }
+
+
+            .tempo {
+
+                min-width: 75px;
+
+                padding:
+                    14px 10px;
+
+            }
+
+
+            .tempo strong {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .marca-texto {
+
+                display: none;
+
+            }
+
+
+            .hero h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .contador {
+
+                gap: 7px;
+
+            }
+
+
+            .tempo {
+
+                min-width: 65px;
+
+            }
+
+
+            .tempo strong {
+
+                font-size: 21px;
+
+            }
+
+
+            .tempo span {
+
+                font-size: 8px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         FUNDO
+    ========================================== -->
+
+    <div class="background">
+
+        <div class="bolha bolha-1"></div>
+
+        <div class="bolha bolha-2"></div>
+
+        <div class="bolha bolha-3"></div>
+
+    </div>
+
+
+
+    <main class="container">
+
+
+        <!-- ======================================
+             TOPO
+        ======================================= -->
+
+        <header class="topo">
+
+
+            <div class="marca">
+
+
+                <div class="logo">
+
+                    <!--
+
+                    FUTURA LOGO:
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='img/logo.png'
+                        ) }}"
+                        alt="Sonhe.Detalhe.Realize"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:contain;
+                        "
+                    >
+
+                    -->
+
+                    <span>✦</span>
+
+                </div>
+
+
+                <div class="marca-texto">
+
+                    <h2>
+                        Sonhe.Detalhe.Realize
+                    </h2>
+
+                    <span>
+                        Assessoria & Cerimonial
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="{{ url_for('cliente_logout') }}"
+                class="sair"
+            >
+
+                Sair
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- ======================================
+             HERO
+        ======================================= -->
+
+        <section class="hero">
+
+
+            <div class="pequeno">
+
+                Seu momento especial
+
+            </div>
+
+
+            <h1>
+
+                Olá, {{ cliente.nome }}! 💚
+
+            </h1>
+
+
+            <p>
+
+                Este espaço foi preparado especialmente
+                para você acompanhar os detalhes do
+                seu evento e cada etapa dessa jornada.
+
+            </p>
+
+
+
+            <!-- ==================================
+                 CONTADOR
+            =================================== -->
+
+            <div
+                class="contador"
+                id="contador"
+            >
+
+
+                <div class="tempo">
+
+                    <strong id="dias">
+                        0
+                    </strong>
+
+                    <span>
+                        Dias
+                    </span>
+
+                </div>
+
+
+                <div class="tempo">
+
+                    <strong id="horas">
+                        0
+                    </strong>
+
+                    <span>
+                        Horas
+                    </span>
+
+                </div>
+
+
+                <div class="tempo">
+
+                    <strong id="minutos">
+                        0
+                    </strong>
+
+                    <span>
+                        Minutos
+                    </span>
+
+                </div>
+
+
+                <div class="tempo">
+
+                    <strong id="segundos">
+                        0
+                    </strong>
+
+                    <span>
+                        Segundos
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================
+                 STATUS
+            =================================== -->
+
+            <div
+                class="status status-normal"
+                id="status"
+            >
+
+                <span class="status-dot"></span>
+
+                <span id="status-text">
+
+                    Evento confirmado
+
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             CARDS
+        ======================================= -->
+
+        <section class="grid">
+
+
+            <!-- ==================================
+                 EVENTO
+            =================================== -->
+
+            <article class="card">
+
+
+                <div class="card-titulo">
+
+                    <div class="icone">
+
+                        💍
+
+                    </div>
+
+
+                    <h3>
+
+                        Seu evento
+
+                    </h3>
+
+                </div>
+
+
+
+                <div class="informacoes">
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Tipo de evento
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.evento or
+                            "Não informado" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Data
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.data_formatada or
+                            cliente.data_evento or
+                            "Não informada" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Cidade
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.cidade or
+                            "Não informada" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Local
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.local_evento or
+                            "Ainda não definido" }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- ==================================
+                 CONTATO
+            =================================== -->
+
+            <article class="card">
+
+
+                <div class="card-titulo">
+
+                    <div class="icone">
+
+                        📱
+
+                    </div>
+
+
+                    <h3>
+
+                        Seus dados
+
+                    </h3>
+
+                </div>
+
+
+
+                <div class="informacoes">
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Nome
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.nome }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            WhatsApp
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.whatsapp }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Convidados
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.convidados or
+                            "Não informado" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Serviço
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.servico or
+                            "Ainda não definido" }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- ==================================
+                 SONHO
+            =================================== -->
+
+            <article class="card card-full">
+
+
+                <div class="card-titulo">
+
+                    <div class="icone">
+
+                        ✨
+
+                    </div>
+
+
+                    <h3>
+
+                        O seu sonho
+
+                    </h3>
+
+                </div>
+
+
+                <div class="sonho">
+
+                    {% if cliente.sonho %}
+
+                        {{ cliente.sonho }}
+
+                    {% else %}
+
+                        Estamos esperando para conhecer
+                        um pouquinho mais sobre o seu sonho. 💚
+
+                    {% endif %}
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- ==================================
+                 COMO CONHECEU
+            =================================== -->
+
+            <article class="card card-full">
+
+
+                <div class="card-titulo">
+
+                    <div class="icone">
+
+                        💌
+
+                    </div>
+
+
+                    <h3>
+
+                        Informações do atendimento
+
+                    </h3>
+
+                </div>
+
+
+
+                <div class="informacoes">
+
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Como conheceu a SDR
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.conheceu or
+                            "Não informado" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    {% if cliente.data_envio %}
+
+                    <div class="info">
+
+                        <span class="info-label">
+
+                            Solicitação enviada em
+
+                        </span>
+
+                        <span class="info-valor">
+
+                            {{ cliente.data_envio }}
+
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             FRASE FINAL
+        ======================================= -->
+
+        <footer class="final">
+
+
+            <div class="simbolo">
+
+                ✦
+
+            </div>
+
+
+            <p>
+
+                “Cada evento é único.
+                Por isso, cada detalhe também
+                é pensado exclusivamente para você.”
+
+            </p>
+
+
+            <small>
+
+                Sonhe.Detalhe.Realize
+
+            </small>
+
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         CONTADOR JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+
+        /*
+         * A data é recebida diretamente
+         * do Flask/Jinja.
+         */
+
+        const dataEventoTexto =
+            "{{ cliente.data_evento }}";
+
+
+        function atualizarContador() {
+
+
+            const contador =
+                document.getElementById(
+                    "contador"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                );
+
+
+            const statusTexto =
+                document.getElementById(
+                    "status-text"
+                );
+
+
+            if (
+                !dataEventoTexto ||
+                dataEventoTexto === "None"
+            ) {
+
+                contador.style.display =
+                    "none";
+
+                status.className =
+                    "status status-atencao";
+
+                statusTexto.innerText =
+                    "Data do evento não informada";
+
+                return;
+
+            }
+
+
+            /*
+             * MySQL normalmente envia:
+             *
+             * YYYY-MM-DD
+             *
+             * Transformamos para uma data
+             * segura no navegador.
+             */
+
+            const partes =
+                dataEventoTexto.split("-");
+
+
+            if (partes.length !== 3) {
+
+                contador.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            const ano =
+                Number(partes[0]);
+
+
+            const mes =
+                Number(partes[1]) - 1;
+
+
+            const dia =
+                Number(partes[2]);
+
+
+            /*
+             * Evento às 00:00.
+             */
+
+            const dataEvento =
+                new Date(
+                    ano,
+                    mes,
+                    dia,
+                    0,
+                    0,
+                    0
+                );
+
+
+            const agora =
+                new Date();
+
+
+            const diferenca =
+                dataEvento.getTime()
+                -
+                agora.getTime();
+
+
+            /*
+             * Evento já passou.
+             */
+
+            if (diferenca <= 0) {
+
+                document.getElementById(
+                    "dias"
+                ).innerText = "0";
+
+
+                document.getElementById(
+                    "horas"
+                ).innerText = "0";
+
+
+                document.getElementById(
+                    "minutos"
+                ).innerText = "0";
+
+
+                document.getElementById(
+                    "segundos"
+                ).innerText = "0";
+
+
+                status.className =
+                    "status status-concluido";
+
+
+                statusTexto.innerText =
+                    "Evento realizado ✨";
+
+
+                return;
+
+            }
+
+
+            /*
+             * Calcular tempo.
+             */
+
+            const dias =
+                Math.floor(
+                    diferenca /
+                    (
+                        1000 *
+                        60 *
+                        60 *
+                        24
+                    )
+                );
+
+
+            const horas =
+                Math.floor(
+                    (
+                        diferenca %
+                        (
+                            1000 *
+                            60 *
+                            60 *
+                            24
+                        )
+                    )
+                    /
+                    (
+                        1000 *
+                        60 *
+                        60
+                    )
+                );
+
+
+            const minutos =
+                Math.floor(
+                    (
+                        diferenca %
+                        (
+                            1000 *
+                            60 *
+                            60
+                        )
+                    )
+                    /
+                    (
+                        1000 *
+                        60
+                    )
+                );
+
+
+            const segundos =
+                Math.floor(
+                    (
+                        diferenca %
+                        (
+                            1000 *
+                            60
+                        )
+                    )
+                    /
+                    1000
+                );
+
+
+            /*
+             * Mostrar.
+             */
+
+            document.getElementById(
+                "dias"
+            ).innerText = dias;
+
+
+            document.getElementById(
+                "horas"
+            ).innerText =
+                String(horas)
+                .padStart(2, "0");
+
+
+            document.getElementById(
+                "minutos"
+            ).innerText =
+                String(minutos)
+                .padStart(2, "0");
+
+
+            document.getElementById(
+                "segundos"
+            ).innerText =
+                String(segundos)
+                .padStart(2, "0");
+
+
+            /*
+             * Status de urgência.
+             */
+
+            if (dias <= 7) {
+
+                status.className =
+                    "status status-urgente";
+
+                statusTexto.innerText =
+                    "Faltam poucos dias! 💚";
+
+            }
+
+            else if (dias <= 30) {
+
+                status.className =
+                    "status status-atencao";
+
+                statusTexto.innerText =
+                    "O grande dia está chegando! ✨";
+
+            }
+
+            else {
+
+                status.className =
+                    "status status-normal";
+
+                statusTexto.innerText =
+                    "Contagem regressiva para o seu grande dia";
+
+            }
+
+        }
+
+
+        /*
+         * Executar imediatamente.
+         */
+
+        atualizarContador();
+
+
+        /*
+         * Atualizar a cada segundo.
+         */
+
+        setInterval(
+            atualizarContador,
+            1000
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
