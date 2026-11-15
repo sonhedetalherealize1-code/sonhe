@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import abort, Flask, render_template, request, redirect, url_for, session
 import os
+import secrets
+import hmac
 import mysql.connector
 from functools import wraps
 from datetime import date
 
 
 app = Flask(__name__)
+app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax", SESSION_COOKIE_SECURE=bool(os.getenv("RAILWAY_ENVIRONMENT")))
 
 
 # ============================================================
@@ -14,7 +17,7 @@ app = Flask(__name__)
 
 app.secret_key = os.getenv(
     "SECRET_KEY",
-    "chave-temporaria-apenas-local"
+    secrets.token_hex(32)
 )
 
 
@@ -32,6 +35,23 @@ def conectar_banco():
         database=os.getenv("MYSQLDATABASE")
     )
 
+    try:
+        cursor = conexao.cursor()
+        try:
+            cursor.execute("""CREATE TABLE IF NOT EXISTS orcamentos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nome VARCHAR(255) NOT NULL, whatsapp VARCHAR(40) NOT NULL,
+                evento VARCHAR(255), data_evento DATE, cidade VARCHAR(255),
+                local_evento VARCHAR(255), convidados VARCHAR(100),
+                servico VARCHAR(255), conheceu VARCHAR(255), sonho TEXT,
+                data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ) CHARACTER SET utf8mb4""")
+            conexao.commit()
+        finally:
+            cursor.close()
+    except Exception:
+        conexao.close()
+        raise
     return conexao
 
 
@@ -140,6 +160,11 @@ def convite():
 # ============================================================
 # APRESENTAÇÃO
 # ============================================================
+
+@app.route("/health")
+def health():
+    return {"status": "ok"}
+
 
 @app.route("/apresentacao")
 def apresentacao():
@@ -341,14 +366,15 @@ def admin_login():
         )
 
         if (
-            usuario == usuario_correto
-            and
-            senha == senha_correta
+            usuario_correto and senha_correta and usuario and senha
+            and hmac.compare_digest(usuario.encode(), usuario_correto.encode())
+            and hmac.compare_digest(senha.encode(), senha_correta.encode())
         ):
 
             session.clear()
 
             session["admin_logado"] = True
+            session["csrf_token"] = secrets.token_urlsafe(32)
 
             return redirect(
                 url_for("admin_painel")
@@ -642,10 +668,13 @@ def admin_cliente(id):
 
 @app.route(
     "/admin/excluir/<int:id>",
-    methods=["GET", "POST"]
+    methods=["POST"]
 )
 @admin_required
 def excluir_cliente(id):
+
+    if not session.get("csrf_token") or not hmac.compare_digest(request.form.get("csrf_token", ""), session["csrf_token"]):
+        abort(403)
 
     conexao = None
     cursor = None
@@ -721,7 +750,7 @@ def excluir_cliente(id):
 
 @app.route(
     "/admin/excluir-cliente/<int:id>",
-    methods=["GET", "POST"]
+    methods=["POST"]
 )
 @admin_required
 def admin_excluir(id):
@@ -1129,5 +1158,5 @@ def cliente_logout():
 if __name__ == "__main__":
 
     app.run(
-        debug=True
+        host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=False
     )

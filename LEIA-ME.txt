@@ -1,0 +1,17 @@
+RAILWAY - CONFIGURAÇÃO
+1. Envie os arquivos desta pasta para a raiz do repositório (app.py, requirements.txt, railway.toml, static, templates).
+2. No projeto Railway, adicione um serviço MySQL ou conecte o banco anterior se quiser recuperar os dados.
+3. No serviço do site (não MySQL), configure Variables:
+MYSQLHOST=${{MySQL.MYSQLHOST}}
+MYSQLPORT=${{MySQL.MYSQLPORT}}
+MYSQLUSER=${{MySQL.MYSQLUSER}}
+MYSQLPASSWORD=${{MySQL.MYSQLPASSWORD}}
+MYSQLDATABASE=${{MySQL.MYSQLDATABASE}}
+ADMIN_USER=admin
+ADMIN_PASSWORD=escolha uma senha forte e exclusiva
+SECRET_KEY=gere uma chave aleatória exclusiva (python -c "import secrets; print(secrets.token_hex(32))")
+Se o serviço do banco tiver outro nome, ajuste MySQL nas referências.
+4. Settings: Root Directory deve apontar para a pasta que contém app.py. Start Command: gunicorn --bind 0.0.0.0:$PORT app:app (ou deixe railway.toml definir).
+5. Deploy e Networking > Generate Domain. Acesse /admin. A tabela orcamentos é criada automaticamente na primeira conexão; tabela existente não é alterada.
+6. Teste com dados fictícios: orçamento, painel, detalhes e exclusão. /health verifica apenas o processo web.
+ATENÇÃO: área do cliente original usa somente WhatsApp como autenticação, insuficiente para dados reais; implemente senha/OTP antes de uso público. Não há backup do banco no ZIP original. Não publique credenciais no GitHub. Se a chave antiga era usada em produção, troque-a.

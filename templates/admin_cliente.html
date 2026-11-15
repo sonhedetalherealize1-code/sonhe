@@ -573,13 +573,9 @@
 
         {% if cliente.id %}
 
-        <a
-            href="{{ url_for('excluir_cliente', id=cliente.id) }}"
-            class="btn btn-excluir"
-            onclick="return confirm('Tem certeza que deseja excluir este orçamento? Esta ação não pode ser desfeita.')"
-        >
-            Excluir orçamento
-        </a>
+        <form method="post" action="{{ url_for('excluir_cliente', id=cliente.id) }}" onsubmit="return confirm('Tem certeza que deseja excluir este orçamento?')">
+<input type="hidden" name="csrf_token" value="{{ session.get('csrf_token', '') }}">
+<button type="submit" class="btn btn-excluir">Excluir orçamento</button></form>
 
         {% endif %}
 
