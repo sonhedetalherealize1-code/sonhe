@@ -27,36 +27,18 @@ body {
 
 
 .hero {
-
     min-height: 75vh;
-
     display: flex;
-
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
-    text-align: center;
-
-    padding: 60px 25px;
-
-    background:
-        linear-gradient(
-            rgba(62,71,51,.68),
-            rgba(62,71,51,.78)
-        ),
-        url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80");
-
-    background-size: cover;
-
-    background-position: center;
-
+    padding: 75px 6%;
+    background: linear-gradient(115deg, rgba(44,55,39,.9), rgba(78,88,67,.84)), url("../img/sobre/foto_11.jpg") center/cover;
     color: white;
-
 }
-
+.hero-conteudo { width: min(1180px,100%); display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: clamp(25px,5vw,85px); }
+.hero-texto { text-align: left; }
+.hero-retrato { width: 100%; max-width: 385px; justify-self: center; }
+.hero-retrato img { display: block; width: 100%; max-height: 570px; aspect-ratio: 4/5; object-fit: cover; object-position: center 24%; border-radius: 180px 180px 8px 8px; box-shadow: 0 24px 55px rgba(0,0,0,.24); }
 
 .hero span,
 .missao span,
@@ -226,6 +208,7 @@ body {
     height: 350px;
 
     overflow: hidden;
+    position: relative;
 
 }
 
@@ -240,24 +223,16 @@ body {
 
 
 .imagem img {
-
+    position: absolute;
+    inset: 0;
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
-    transition: transform .7s ease;
-
+    opacity: 0;
+    transition: opacity 1s ease, transform .7s ease;
 }
-
-
-.imagem:hover img {
-
-    transform: scale(1.05);
-
-}
-
+.imagem img.ativa { opacity: 1; }
+.imagem:hover img.ativa { transform: scale(1.035); }
 
 /* DIFERENCIAIS */
 
@@ -418,3 +393,12 @@ body {
     }
 
 }
+@media(max-width: 700px) {
+    .hero { padding: 65px 22px; }
+    .hero-conteudo { grid-template-columns: 1fr; gap: 30px; }
+    .hero-texto { text-align: center; }
+    .hero h1 { font-size: clamp(55px, 12vw, 82px); }
+    .hero-retrato { max-width: 290px; }
+    .hero-retrato img { max-height: 390px; }
+}
+@media(prefers-reduced-motion: reduce) { .imagem img { transition: none; } }

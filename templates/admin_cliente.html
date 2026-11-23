@@ -217,6 +217,9 @@
             }
         }
 
+        .link-whatsapp { color: #147d45; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+        .link-whatsapp:hover { color: #0b5930; }
+
     </style>
 
 </head>
@@ -312,7 +315,14 @@
 
                 <div class="valor">
 
+                    {% set numero_whatsapp = cliente.whatsapp | whatsapp_numero %}
+                    {% if numero_whatsapp %}
+                    <a href="https://wa.me/{{ numero_whatsapp }}" target="_blank" rel="noopener noreferrer" class="link-whatsapp" aria-label="Conversar com {{ cliente.nome }} pelo WhatsApp">
+                        {{ cliente.whatsapp }} ↗
+                    </a>
+                    {% else %}
                     {{ cliente.whatsapp }}
+                    {% endif %}
 
                 </div>
 

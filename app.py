@@ -9,6 +9,17 @@ from datetime import date
 
 
 app = Flask(__name__)
+
+@app.template_filter("whatsapp_numero")
+def whatsapp_numero(valor):
+    """Normaliza números brasileiros para links wa.me, sem inventar DDD."""
+    numero = "".join(c for c in str(valor or "") if c.isdigit())
+    if len(numero) in (10, 11):
+        numero = "55" + numero
+    if len(numero) in (12, 13) and numero.startswith("55"):
+        return numero
+    return ""
+
 app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax", SESSION_COOKIE_SECURE=bool(os.getenv("RAILWAY_ENVIRONMENT")))
 
 
