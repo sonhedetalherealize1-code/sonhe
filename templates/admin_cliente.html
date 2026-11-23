@@ -220,6 +220,11 @@
         .link-whatsapp { color: #147d45; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
         .link-whatsapp:hover { color: #0b5930; }
 
+        .link-whatsapp { display:inline-flex;align-items:center;gap:9px;text-decoration:none!important;color:#167447!important;background:#e9f8ee;border:1px solid #b8e5c9;padding:10px 14px;border-radius:12px;transition:transform .2s,box-shadow .2s; }
+        .link-whatsapp:hover { transform:translateY(-2px);box-shadow:0 7px 18px #174b3222; }
+        .container { max-width:1180px; }
+        .topo { background:linear-gradient(120deg,#364b3a,#69775b); }
+        .voltar { border-radius:999px; }
     </style>
 
 </head>
@@ -318,7 +323,7 @@
                     {% set numero_whatsapp = cliente.whatsapp | whatsapp_numero %}
                     {% if numero_whatsapp %}
                     <a href="https://wa.me/{{ numero_whatsapp }}" target="_blank" rel="noopener noreferrer" class="link-whatsapp" aria-label="Conversar com {{ cliente.nome }} pelo WhatsApp">
-                        {{ cliente.whatsapp }} ↗
+                        <svg class="wa-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 9 9 0 0 1-4-.9L3 21l1.9-5.3a9 9 0 0 1-.9-4.2A8.5 8.5 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5Z"/><path d="M9 8.5c.2 3 3.5 6.2 6.5 6.5l1.2-1.4-2.2-1.2-1.2 1c-1.2-.6-2.1-1.5-2.7-2.7l1-1.2L10.4 8Z"/></svg><span>{{ cliente.whatsapp }}</span>
                     </a>
                     {% else %}
                     {{ cliente.whatsapp }}

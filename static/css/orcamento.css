@@ -254,3 +254,11 @@ button:hover {
     }
 
 }
+/* Refinamento visual do formulário */
+body { background:radial-gradient(ellipse at 12% 0%,#e4eadb 0%,transparent 40%),radial-gradient(ellipse at 100% 95%,#e9e1d5 0%,transparent 38%),#f5f2eb; }
+form { background:#fffdf9; border:1px solid #e7e7db; border-radius:24px; box-shadow:0 25px 70px #34482d1c,0 3px 12px #34482d0b; }
+.campo input,.campo select,.campo textarea { transition:border-color .2s,box-shadow .2s,background-color .2s; }
+.campo input:focus,.campo select:focus,.campo textarea:focus { outline:2px solid #a3b598;outline-offset:2px; border-color:#65795b; background:#fff; }
+button[type="submit"] { box-shadow:0 10px 24px #34482d28; font-weight:600; letter-spacing:.09em; }
+button[type="submit"]:focus-visible { outline:3px solid #a3b598;outline-offset:4px; }
+@media(max-width:600px){form{border-radius:20px;padding:28px 22px;}}
