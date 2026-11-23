@@ -88,7 +88,7 @@
 <img src="{{ url_for('static', filename='img/sobre/foto_09.jpg') }}" alt="Momento especial de evento" loading="lazy" class="slide">
 <img src="{{ url_for('static', filename='img/sobre/foto_14.jpg') }}" alt="Momento especial de evento" loading="lazy" class="slide">
 <img src="{{ url_for('static', filename='img/sobre/foto_15.jpg') }}" alt="Momento especial de evento" loading="lazy" class="slide">
-<img src="{{ url_for('static', filename='img/sobre/foto_01.jpg') }}" alt="Momento especial de evento" loading="lazy" class="slide"></div>
+<img src="{{ url_for('static', filename='img/sobre/foto_05.jpg') }}" alt="Momento especial de evento" loading="lazy" class="slide"></div>
 </section>
 
 <section class="diferenciais">
@@ -198,14 +198,10 @@
       let timer;
       function start() {
         clearInterval(timer);
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          timer = setInterval(() => { if (!document.hidden) show(index + 1); }, 5000);
-        }
+        timer = setInterval(() => { if (!document.hidden) show(index + 1); }, 5000);
       }
       controls.querySelector('.galeria-prev').addEventListener('click', () => { show(index - 1); start(); });
       controls.querySelector('.galeria-next').addEventListener('click', () => { show(index + 1); start(); });
-      gallery.addEventListener('mouseenter', () => clearInterval(timer));
-      gallery.addEventListener('mouseleave', start);
       start();
     });
   }

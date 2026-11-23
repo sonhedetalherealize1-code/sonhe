@@ -1392,6 +1392,21 @@
          FUNDO
     ====================================================== -->
 
+    <style>
+      /* Foto suave no fundo do convite; envelope e texto permanecem legíveis. */
+      .fundo::before {
+        content: ""; position: absolute; inset: 0;
+        background-image: url("{{ url_for('static', filename='img/sobre/foto_09.jpg') }}");
+        background-size: cover; background-position: center 40%;
+        opacity: .19; filter: grayscale(18%) saturate(.65);
+      }
+      .fundo::after {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(244,239,229,.48);
+      }
+      .fundo .luz { z-index: 1; }
+    </style>
+
     <div class="fundo">
 
         <div class="luz luz-1"></div>

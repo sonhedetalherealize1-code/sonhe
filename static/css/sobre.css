@@ -426,3 +426,7 @@ body {
 .galeria-controles button:hover, .galeria-controles button:focus-visible { background: rgba(255,255,255,.4); }
 .galeria-contador { min-width: 34px; text-align: center; }
 @media(prefers-reduced-motion: reduce) { .galeria .imagem img.slide { transition: none; } }
+
+/* Dissolve suave entre fotos, sem esconder a camada antes do fade */
+.galeria .imagem img.slide { visibility: visible; opacity: 0; transition: opacity 1.2s ease-in-out; pointer-events: none; }
+.galeria .imagem img.slide.ativa { visibility: visible; opacity: 1; }
