@@ -171,16 +171,46 @@
 
 <script>
 (() => {
-  const galleries = document.querySelectorAll('[data-slideshow]');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  window.setInterval(() => {
-    galleries.forEach((gallery) => {
-      const slides = gallery.querySelectorAll('.slide');
-      const current = Array.from(slides).findIndex(slide => slide.classList.contains('ativa'));
-      if (current >= 0) slides[current].classList.remove('ativa');
-      slides[(current + 1) % slides.length].classList.add('ativa');
+  function initSlideshows() {
+    document.querySelectorAll('[data-slideshow]').forEach((gallery, groupIndex) => {
+      const slides = [...gallery.querySelectorAll('img.slide')];
+      if (slides.length < 2) return;
+      let index = 0;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('ativa', i === 0);
+        slide.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+        if (i > 0) slide.loading = 'eager';
+      });
+      const controls = document.createElement('div');
+      controls.className = 'galeria-controles';
+      controls.innerHTML = '<button type="button" class="galeria-prev" aria-label="Foto anterior">&#10094;</button><span class="galeria-contador" aria-live="off"></span><button type="button" class="galeria-next" aria-label="Próxima foto">&#10095;</button>';
+      gallery.appendChild(controls);
+      const counter = controls.querySelector('.galeria-contador');
+      function show(next) {
+        slides[index].classList.remove('ativa');
+        slides[index].setAttribute('aria-hidden','true');
+        index = (next + slides.length) % slides.length;
+        slides[index].classList.add('ativa');
+        slides[index].setAttribute('aria-hidden','false');
+        counter.textContent = `${index + 1} / ${slides.length}`;
+      }
+      show(0);
+      let timer;
+      function start() {
+        clearInterval(timer);
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          timer = setInterval(() => { if (!document.hidden) show(index + 1); }, 5000);
+        }
+      }
+      controls.querySelector('.galeria-prev').addEventListener('click', () => { show(index - 1); start(); });
+      controls.querySelector('.galeria-next').addEventListener('click', () => { show(index + 1); start(); });
+      gallery.addEventListener('mouseenter', () => clearInterval(timer));
+      gallery.addEventListener('mouseleave', start);
+      start();
     });
-  }, 5000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSlideshows);
+  else initSlideshows();
 })();
 </script>
 </body>
