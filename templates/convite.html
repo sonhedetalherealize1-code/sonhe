@@ -1396,13 +1396,13 @@
       /* Foto suave no fundo do convite; envelope e texto permanecem legíveis. */
       .fundo::before {
         content: ""; position: absolute; inset: 0;
-        background-image: url("{{ url_for('static', filename='img/sobre/foto_09.jpg') }}");
+        background-image: url("{{ url_for('static', filename='img/convite/fundo_yasmini_noiva.jpg') }}");
         background-size: cover; background-position: center 40%;
-        opacity: .19; filter: grayscale(18%) saturate(.65);
+        opacity: .36; filter: grayscale(18%) saturate(.65);
       }
       .fundo::after {
         content: ""; position: absolute; inset: 0;
-        background: rgba(244,239,229,.48);
+        background: rgba(244,239,229,.32);
       }
       .fundo .luz { z-index: 1; }
     </style>
