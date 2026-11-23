@@ -1,17 +1,22 @@
-RAILWAY - CONFIGURAÇÃO
-1. Envie os arquivos desta pasta para a raiz do repositório (app.py, requirements.txt, railway.toml, static, templates).
-2. No projeto Railway, adicione um serviço MySQL ou conecte o banco anterior se quiser recuperar os dados.
-3. No serviço do site (não MySQL), configure Variables:
-MYSQLHOST=${{MySQL.MYSQLHOST}}
-MYSQLPORT=${{MySQL.MYSQLPORT}}
-MYSQLUSER=${{MySQL.MYSQLUSER}}
-MYSQLPASSWORD=${{MySQL.MYSQLPASSWORD}}
-MYSQLDATABASE=${{MySQL.MYSQLDATABASE}}
-ADMIN_USER=admin
-ADMIN_PASSWORD=escolha uma senha forte e exclusiva
-SECRET_KEY=gere uma chave aleatória exclusiva (python -c "import secrets; print(secrets.token_hex(32))")
-Se o serviço do banco tiver outro nome, ajuste MySQL nas referências.
-4. Settings: Root Directory deve apontar para a pasta que contém app.py. Start Command: gunicorn --bind 0.0.0.0:$PORT app:app (ou deixe railway.toml definir).
-5. Deploy e Networking > Generate Domain. Acesse /admin. A tabela orcamentos é criada automaticamente na primeira conexão; tabela existente não é alterada.
-6. Teste com dados fictícios: orçamento, painel, detalhes e exclusão. /health verifica apenas o processo web.
-ATENÇÃO: área do cliente original usa somente WhatsApp como autenticação, insuficiente para dados reais; implemente senha/OTP antes de uso público. Não há backup do banco no ZIP original. Não publique credenciais no GitHub. Se a chave antiga era usada em produção, troque-a.
+SONHE, DETALHE E REALIZE — POSTGRESQL NO RAILWAY
+
+1. Envie todos os arquivos deste ZIP para a raiz do repositório GitHub do site.
+2. Railway > projeto > + New > Database > PostgreSQL. Aguarde ficar Online.
+3. Não altere as variáveis do serviço PostgreSQL geradas pelo Railway.
+4. No serviço do site (filho/sonhe) > Variables > Raw Editor, configure:
+   DATABASE_URL=${{Postgres.DATABASE_URL}}
+   ADMIN_USER=admin
+   ADMIN_PASSWORD=<senha forte e exclusiva>
+   SECRET_KEY=<gere usando python -c "import secrets; print(secrets.token_hex(32))">
+   Se o serviço PostgreSQL tiver outro nome, substitua Postgres pelo nome exato.
+   Remova apenas as variáveis MYSQLHOST, MYSQLPORT, MYSQLUSER, MYSQLPASSWORD, MYSQLDATABASE antigas do serviço do site.
+5. Settings: Root Directory deve ser a pasta que contém app.py.
+   Start Command: gunicorn --bind 0.0.0.0:$PORT app:app
+6. Faça deploy do PostgreSQL primeiro, depois do site. Acesse /health e /admin.
+7. Envie um formulário fictício e confira os registros no painel /admin/painel.
+   A tabela orcamentos será criada automaticamente na primeira conexão.
+
+IMPORTANTE: PostgreSQL é um banco novo, dados do MySQL antigo NÃO são transferidos automaticamente.
+A área do cliente original autentica somente por WhatsApp e precisa de autenticação mais forte antes de expor dados reais.
+Não publique credenciais no GitHub. Troque as senhas anteriormente expostas.
+O vídeo da atualização anterior está integrado; coloque o arquivo em static/videos/video.mp4.
