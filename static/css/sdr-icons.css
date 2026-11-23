@@ -1,0 +1,8 @@
+/* Sonhe.Detalhe.Realize — ícones editoriais em verde-sálvia */
+.sdr-line-icon{display:inline-block;width:1.35em;height:1.35em;flex:none;vertical-align:-.24em;color:inherit;stroke:currentColor;overflow:visible}
+.icone .sdr-line-icon{width:30px;height:30px;color:#596b50}
+.card-titulo .icone .sdr-line-icon{width:25px;height:25px;color:#596b50}
+button .sdr-line-icon,a .sdr-line-icon{width:1.25em;height:1.25em}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #74876b;outline-offset:3px}
+button,a{transition:background-color .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease}
+@media(prefers-reduced-motion:reduce){button,a{transition:none}}
